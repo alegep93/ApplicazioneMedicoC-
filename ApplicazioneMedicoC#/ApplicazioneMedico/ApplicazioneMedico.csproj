@@ -33,8 +33,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>packages\Newtonsoft.Json.10.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -46,21 +51,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DAO\BaseDAO.cs" />
+    <Compile Include="DAO\CertificatiDAO.cs" />
+    <Compile Include="DAO\PatologieDAO.cs" />
+    <Compile Include="DAO\PazientiDAO.cs" />
     <Compile Include="Data\Certificato.cs" />
     <Compile Include="Data\Medico.cs" />
     <Compile Include="Data\Patologia.cs" />
     <Compile Include="Data\Paziente.cs" />
-    <Compile Include="DbEntity.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DbEntity.xsd</DependentUpon>
-    </Compile>
+    <Compile Include="Data\PazienteJSON.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="JSONReader.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">
@@ -74,18 +80,9 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
-    <None Include="DbEntity.xsc">
-      <DependentUpon>DbEntity.xsd</DependentUpon>
-    </None>
-    <None Include="DbEntity.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>DbEntity.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="DbEntity.xss">
-      <DependentUpon>DbEntity.xsd</DependentUpon>
-    </None>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -101,7 +98,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Images\1494273978_pharmacy.ico" />
+    <Content Include="Images\Background.jpg" />
+    <Content Include="Images\info.png" />
     <Content Include="Images\loader.gif" />
+    <None Include="Resources\Background1.jpg" />
+    <None Include="Resources\Background.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

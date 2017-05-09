@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ApplicazioneMedico.Data
 {
-    class Certificato
+    public class Certificato
     {
         int id;
         string codPaziente, codMedico, codPatologia, note;

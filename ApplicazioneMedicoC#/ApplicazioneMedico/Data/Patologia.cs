@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ApplicazioneMedico.Data
 {
-    class Patologia
+    public class Patologia
     {
         string codicePatologia, nome, descrizione;
 

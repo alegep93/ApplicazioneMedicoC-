@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ApplicazioneMedico.Data
 {
-    class Medico
+    public class Medico
     {
         int id;
         string nome, cognome, luogoNascita, codiceFiscale, residenza;

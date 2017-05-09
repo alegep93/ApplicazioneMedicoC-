@@ -7,3 +7,5 @@ C:\Users\admin\Documents\Alessandro\ProjectWork\ApplicazioneMedicoC#\Applicazion
 C:\Users\admin\Documents\Alessandro\ProjectWork\ApplicazioneMedicoC#\ApplicazioneMedico\bin\Debug\ApplicazioneMedico.pdb
 C:\Users\admin\Documents\Alessandro\ProjectWork\ApplicazioneMedicoC#\ApplicazioneMedico\obj\Debug\ApplicazioneMedico.exe
 C:\Users\admin\Documents\Alessandro\ProjectWork\ApplicazioneMedicoC#\ApplicazioneMedico\obj\Debug\ApplicazioneMedico.pdb
+C:\Users\admin\Documents\Alessandro\ProjectWork\ApplicazioneMedicoC#\ApplicazioneMedico\bin\Debug\Newtonsoft.Json.dll
+C:\Users\admin\Documents\Alessandro\ProjectWork\ApplicazioneMedicoC#\ApplicazioneMedico\bin\Debug\Newtonsoft.Json.xml
