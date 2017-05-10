@@ -13,22 +13,20 @@ namespace ApplicazioneMedico
     public class JSONReader
     {
 
-        public static void GetJsonString()
+        public static Paziente GetJsonString()
         {
-            /*string text = "";
-            text += File.ReadAllText(@"C:\Users\admin\Documents\Alessandro\ProjectWork\JsonPaziente.txt");
+            string text = "";
+            Paziente p = new Paziente();
 
-            DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(PazienteJSON));
+            text = File.ReadAllText(@"C:\Users\admin\Documents\Alessandro\ProjectWork\JsonPaziente.json");
+
+            DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(Paziente));
             using (MemoryStream ms = new MemoryStream(Encoding.Unicode.GetBytes(text)))
             {
-                PazienteJSON p = (PazienteJSON)serializer.ReadObject(ms);
-            }*/
-
-            using (StreamReader r = new StreamReader(@"C:\Users\admin\Documents\Alessandro\ProjectWork\JsonPaziente.txt"))
-            {
-                string json = r.ReadToEnd();
-                List<PazienteJSON> items = JsonConvert.DeserializeObject<List<PazienteJSON>>(json);
+                p = (Paziente)serializer.ReadObject(ms);
             }
+
+            return p;
         }
     }
 }

@@ -8,12 +8,14 @@ using System.Threading.Tasks;
 namespace ApplicazioneMedico.Data
 {
     [DataContract]
-    class PazienteJSON
+    public class PazienteJSON
     {
         [DataMember]
         public string nome { get; set; }
         [DataMember]
         public string cognome { get; set; }
+        [DataMember]
+        public string sesso { get; set; }
         [DataMember]
         public string data_nascita { get; set; }
         [DataMember]
@@ -27,6 +29,8 @@ namespace ApplicazioneMedico.Data
         [DataMember]
         public string indirizzo { get; set; }
         [DataMember]
+        public string cap { get; set; }
+        [DataMember]
         public string telefono { get; set; }
         [DataMember]
         public string mobile { get; set; }
@@ -36,5 +40,9 @@ namespace ApplicazioneMedico.Data
         public string cod_sanitario { get; set; }
         [DataMember]
         public string cod_medico { get; set; }
+        [DataMember]
+        public string data_update { get; set; }
+        [DataMember]
+        public string data_inserimento { get; set; }
     }
 }

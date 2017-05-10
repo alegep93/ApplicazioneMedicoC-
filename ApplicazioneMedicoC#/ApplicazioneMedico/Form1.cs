@@ -16,41 +16,41 @@ namespace ApplicazioneMedico
 {
     public partial class ApplicazioneMedico : Form
     {
-        Timer timer = new Timer();
+        Timer t = new Timer();
+        Paziente p = JSONReader.GetJsonString();
 
         public ApplicazioneMedico()
         {
             InitializeComponent();
 
-            //Regolo la grandezza dei panel
-            setItemsWidthAndHeight();
-            setItemsPosition();
+            SetFont();
 
-            //Rimane 2 secondi e si chiude simulando l'aggiornamento dei dati
+            //TODO - Da implemetare la ricerca per colonna se c'è tempo
+            //lblCerca e cmbColumn Visible = true
+
+            //Aggiornamento iniziale
             pnlAggiornamento.Visible = true;
             pnlAggiornamento.BringToFront();
-            timer.Interval = 2000;
-            timer.Tick += new EventHandler(timer_Tick);
-            timer.Start();
+            PazientiDAO.InsertOrUpdatePaziente(p);
 
-            //Mostro il pannello dei pazienti e compilo la griglia
-            BringPanelToFront(true, false, false);
+            //Mostro per 2 secondi il caricamento e poi passo al pannello dei pazienti
+            Wait2Seconds();
+
+            //Mostro il pannello dei pazienti
+            BringPanelToFront(true, false, false, false, false);
             CreateInfoColumn();
             BindGridPazienti();
+            FillComboBox();
 
-            JSONReader.GetJsonString();
-        }
-
-        /* Metodo che viene richiamato alla fine del timer */
-        void timer_Tick(object sender, EventArgs e)
-        {
-            pnlAggiornamento.Visible = false;
+            //Regolo la grandezza dei panel
+            SetItemsWidthAndHeight();
+            SetItemsPosition();
         }
 
         /* Eventi Click */
         private void menuPazienti_Click(object sender, EventArgs e)
         {
-            BringPanelToFront(true, false, false);
+            BringPanelToFront(true, false, false, false, false);
             BindGridPazienti();
         }
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -60,12 +60,16 @@ namespace ApplicazioneMedico
         private void menuCertificati_Click(object sender, EventArgs e)
         {
             BindGridCertificati();
-            BringPanelToFront(false, true, false);
+            BringPanelToFront(false, true, false, false, false);
         }
         private void menuPatologie_Click(object sender, EventArgs e)
         {
             BindGridPatologie();
-            BringPanelToFront(false, false, true);
+            BringPanelToFront(false, false, true, false, false);
+        }
+        private void btnPazientiSearch_Click(object sender, EventArgs e)
+        {
+            BindGridPazientiWithSearch();
         }
 
         /* HELPERS */
@@ -75,9 +79,20 @@ namespace ApplicazioneMedico
             bs.DataSource = PazientiDAO.GetDataTablePazienti();
             grdPazienti.DataSource = bs;
             grdPazienti.Columns[1].Visible = false;
-            grdPazienti.Columns[14].Visible = false;
-            grdPazienti.Columns[15].Visible = false;
             grdPazienti.Columns[16].Visible = false;
+            grdPazienti.Columns[17].Visible = false;
+            grdPazienti.Columns[18].Visible = false;
+            grdPazienti.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+        }
+        protected void BindGridPazientiWithSearch()
+        {
+            BindingSource bs = new BindingSource();
+            bs.DataSource = PazientiDAO.SearchPazienti(cmbPazientiColumns.Text, txtPazientiSearch.Text);
+            grdPazienti.DataSource = bs;
+            grdPazienti.Columns[1].Visible = false;
+            grdPazienti.Columns[16].Visible = false;
+            grdPazienti.Columns[17].Visible = false;
+            grdPazienti.Columns[18].Visible = false;
             grdPazienti.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
         protected void BindGridCertificati()
@@ -107,41 +122,137 @@ namespace ApplicazioneMedico
             iconColumn.HeaderText = "";
             grdPazienti.Columns.Insert(0, iconColumn);
         }
-        protected void BringPanelToFront(bool bringPnlPazienti, bool bringPnlCertificati, bool bringPnlPatologie)
+        protected void BringPanelToFront(bool bringPnlPazienti, bool bringPnlCertificati, bool bringPnlPatologie, bool bringPnlSingoloPaziente, bool bringPnlNuovoCertificato)
         {
             pnlPazienti.Visible = bringPnlPazienti;
             pnlCertificati.Visible = bringPnlCertificati;
             pnlPatologie.Visible = bringPnlPatologie;
+            pnlSingoloPaziente.Visible = bringPnlSingoloPaziente;
+            pnlNuovoCertificato.Visible = bringPnlNuovoCertificato;
         }
-        protected void setItemsWidthAndHeight()
+        protected void SetItemsWidthAndHeight()
         {
-            //Larghezza
-            pnlAggiornamento.Width = pnlPazienti.Width = pnlCertificati.Width = pnlPatologie.Width = pnlAggiornamento.Parent.ClientSize.Width;
+            //Larghezza Pannelli Container
+            pnlAggiornamento.Width = pnlPazienti.Width = pnlCertificati.Width = pnlPatologie.Width = 
+                pnlSingoloPaziente.Width = pnlNuovoCertificato.Width = pnlAggiornamento.Parent.ClientSize.Width;
 
-            //Altezza
+            //Altezza Pannelli Container
             pnlAggiornamento.Height = pnlAggiornamento.Parent.ClientSize.Height;
-            pnlPazienti.Height = pnlCertificati.Height = pnlPatologie.Height = (pnlAggiornamento.Parent.ClientSize.Height - mainNav.Height);
+            pnlPazienti.Height = pnlCertificati.Height = pnlPatologie.Height = 
+                pnlSingoloPaziente.Height = pnlNuovoCertificato.Height = (pnlAggiornamento.Parent.ClientSize.Height - mainNav.Height);
 
-            //TopLeft
-            pnlAggiornamento.Left = pnlPazienti.Left = pnlCertificati.Left = pnlPatologie.Left = 0;
-            pnlAggiornamento.Top = 0;
-            pnlPazienti.Top = pnlCertificati.Top = pnlPatologie.Top = mainNav.Height;
+            //Larghezza Pannelli Filtri
+            pnlPazientiFiltri.Width = grdPazienti.Width;
+
+            //Griglia Pazienti
+            grdPazienti.Height = (pnlPazienti.Height - pnlPazientiFiltri.Bottom - 50);
+
+            //Larghezza Main Navigation
+            mainNav.Width = pnlAggiornamento.Parent.ClientSize.Width - 20;
+
+            //ContenitoreSchedaPazienti
+            pnlSchedaPazCont.Width = grdCertificatiPaziente.Width;
+
+            //Tabella scheda paziente
+            tblSchedaPaziente.Width = pnlSchedaPazCont.Width / 2;
+            tblSchedaPaziente.Height = pnlSchedaPazCont.Height - 20;
+
+            //Colonne Scheda paziente
+            for (int i = 0; i < tblSchedaPaziente.RowCount; i++)
+                tblSchedaPaziente.RowStyles[i].Height = tblSchedaPaziente.Height / tblSchedaPaziente.RowCount;
+
+            //Righe Scheda paziente
+            for (int i = 0; i < tblSchedaPaziente.ColumnCount; i++)
+                tblSchedaPaziente.ColumnStyles[i].Width = tblSchedaPaziente.Width / tblSchedaPaziente.ColumnCount;
+
+            //Larghezza campi di testo all'interno della scheda del singolo paziente
+            foreach (Control c in tblSchedaPaziente.Controls)
+                if (c.GetType().Equals(txtNomePaziente))
+                    c.Width = 200;
         }
-        protected void setItemsPosition()
+        protected void SetItemsPosition()
         {
-            picBox.Left = (pnlAggiornamento.Width - picBox.Width) / 2;
+            int rientroLeft = 20;
+
+            //Immagine e label di caricamento
             picBox.Top = (pnlAggiornamento.Height - picBox.Height) / 3;
-
-            lblAggiornamento.Text = "Aggiornamento in corso...";
-            lblAggiornamento.Left = (picBox.Parent.ClientSize.Width - lblAggiornamento.Width) / 2;
-            lblAggiornamento.Top = (picBox.Top + 250);
-
+            picBox.Left = (pnlAggiornamento.Width - picBox.Width) / 2;
             picBox.Refresh();
+            lblAggiornamento.Text = "Aggiornamento in corso...";
+            lblAggiornamento.Top = (picBox.Top + 250);
+            lblAggiornamento.Left = (picBox.Parent.ClientSize.Width - lblAggiornamento.Width) / 2;
             lblAggiornamento.Refresh();
 
-            //Centratura dei pulsanti mostra filtri
-            btnPazientiMostraFiltri.Left = btnCertificatiMostraFiltri.Left = btnPatologieMostraFiltri.Left = (pnlPatologie.ClientSize.Width - btnPatologieMostraFiltri.Width) / 2;
-            btnPazientiMostraFiltri.Top = btnCertificatiMostraFiltri.Top = btnPatologieMostraFiltri.Top = 50;
+            //Pannelli Container
+            pnlAggiornamento.Left = pnlPazienti.Left = pnlCertificati.Left = pnlPatologie.Left = pnlSingoloPaziente.Left = pnlNuovoCertificato.Left = 0;
+            pnlAggiornamento.Top = 0;
+            pnlPazienti.Top = pnlCertificati.Top = pnlPatologie.Top = pnlSingoloPaziente.Top = pnlNuovoCertificato.Top = mainNav.Height;
+
+            //Pannelli Filtri
+            pnlPazientiFiltri.Top = 50;
+            pnlPazientiFiltri.Left = rientroLeft;
+
+            //GridView
+            grdPazienti.Top = pnlPazientiFiltri.Bottom + 5;
+            grdPazienti.Left = rientroLeft;
+            grdCertificatiPaziente.Top = pnlSchedaPazCont.Bottom + 10;
+            btnNuovoCertificato.Top = grdCertificatiPaziente.Bottom + 10;
+
+            //Main Navigation
+            mainNav.Left = rientroLeft;
+
+            //Tabella scheda paziente
+            tblSchedaPaziente.Left = (pnlSchedaPazCont.Width - tblSchedaPaziente.Width) / 2;
+        }
+        protected void Wait2Seconds()
+        {
+            t.Interval = 2000;
+            t.Tick += new EventHandler(Timer_Tick);
+            t.Start();
+        }
+        protected void Timer_Tick(object sender, EventArgs e)
+        {
+            pnlAggiornamento.Visible = false;
+        }
+        protected void FillComboBox()
+        {
+            List<string> colList = new List<string>();
+            foreach (DataGridViewColumn c in grdPazienti.Columns)
+            {
+                if (c.Visible == true)
+                    colList.Add(c.HeaderText.ToString());
+            }
+
+            cmbPazientiColumns.Items.Clear();
+
+            foreach (string colName in colList)
+            {
+                cmbPazientiColumns.Items.Add(colName);
+            }
+        }
+        protected void FillSchedaPaziente(Paziente p)
+        {
+            txtNomePaziente.Text = p.nome;
+            txtCognomePaziente.Text = p.cognome;
+            txtSessoPaziente.Text = p.sesso;
+            txtDataNascitaPaziente.Text = p.data_nascita;
+            txtLuogoNascitaPaziente.Text = p.luogo;
+            txtCodiceFiscalePaziente.Text = p.cod_fis;
+            txtComunePaziente.Text = p.residenza;
+            txtProvinciaPaziente.Text = p.provincia;
+            txtIndirizzoPaziente.Text = p.indirizzo;
+            txtCapPaziente.Text = p.cap;
+            txtTelefonoPaziente.Text = p.telefono;
+            txtCellularePaziente.Text = p.mobile;
+            txtEmailPaziente.Text = p.email;
+            txtCodiceSanitarioPaziente.Text = p.cod_sanitario;
+        }
+        protected void SetFont()
+        {
+            foreach(Control c in this.Controls)
+            {
+                c.Font = new Font("Segoe UI", 12, FontStyle.Regular);
+            }
         }
 
         /* Metodi per il Menù */
@@ -186,10 +297,35 @@ namespace ApplicazioneMedico
             menuHelp.ForeColor = Color.White;
         }
 
+        /* Azioni al resize della window */
         private void ApplicazioneMedico_SizeChanged(object sender, EventArgs e)
         {
-            setItemsWidthAndHeight();
-            setItemsPosition();
+            SetItemsWidthAndHeight();
+            SetItemsPosition();
+        }
+
+        private void grdPazienti_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            Paziente p = new Paziente();
+
+            if (e.ColumnIndex == 0)
+            {
+                BringPanelToFront(false, false, false, true, false);
+                string codPaz = grdPazienti.Rows[e.RowIndex].Cells[15].Value.ToString();
+                p = PazientiDAO.GetPaziente(codPaz);
+
+                FillSchedaPaziente(p);
+            }
+        }
+
+        private void grdPazienti_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void btnNuovoCertificato_Click(object sender, EventArgs e)
+        {
+            BringPanelToFront(false, false, false, false, true);
         }
     }
 }

@@ -1,1 +1,0 @@
-{"paziente":{"nome":"Lorenzo","cognome":"kasdjgf","data_nascita":"1993-02-20","luogo":"Firenze","cod_fis":"KSDLRN","residenza":"Firenze","provincia":"","indirizzo":"","telefono":"","mobile":"","email":"","cod_sanitario":"2","cod_medico":"001"}}

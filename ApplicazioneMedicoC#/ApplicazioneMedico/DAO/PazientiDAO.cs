@@ -18,12 +18,201 @@ namespace ApplicazioneMedico.DAO
 
             try
             {
-                sql.Append("SELECT id,nome AS Nome,cognome AS Cognome,data_nascita AS 'Data Nascita',luogo AS 'Luogo di nascita',cod_fis AS 'Codice Fiscale', ");
-                sql.Append("residenza AS Residenza,provincia AS Provincia,indirizzo AS Indirizzo,telefono AS Telefono,mobile AS Cellulare, ");
+                sql.Append("SELECT id,nome AS Nome,cognome AS Cognome,sesso AS Sesso,data_nascita AS 'Data Nascita',luogo AS 'Luogo di nascita',cod_fis AS 'Codice Fiscale', ");
+                sql.Append("residenza AS Residenza,provincia AS Provincia,indirizzo AS Indirizzo, cap AS Cap, telefono AS Telefono,mobile AS Cellulare, ");
                 sql.Append("email AS Email, cod_sanitario AS 'Codice Sanitario', cod_medico, data_update, data_inserimento ");
                 sql.Append("FROM paziente ");
 
                 SqlCommand cmd = new SqlCommand(sql.ToString(), cn);
+                SqlDataAdapter adapter = new SqlDataAdapter();
+                adapter.SelectCommand = cmd;
+
+                DataTable table = new DataTable();
+                table.Locale = System.Globalization.CultureInfo.InvariantCulture;
+                adapter.Fill(table);
+
+                return table;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Impossibile recuperare i pazienti", ex);
+            }
+            finally { cn.Close(); }
+        }
+        public static Paziente GetPaziente(string codSan)
+        {
+            SqlConnection cn = GetConnection();
+            StringBuilder sql = new StringBuilder();
+            SqlDataReader dr = null;
+            Paziente p = new Paziente();
+
+            try
+            {
+                sql.Append("SELECT * FROM paziente WHERE cod_sanitario = @pCodSan ");
+
+                SqlCommand cmd = new SqlCommand(sql.ToString(), cn);
+                cmd.Parameters.Add(new SqlParameter("pCodSan", codSan));
+
+                dr = cmd.ExecuteReader();
+
+                if (dr.Read())
+                {
+                    p.nome = dr.GetString(1);
+                    p.cognome = dr.GetString(2);
+                    p.sesso = dr.GetString(3);
+                    p.data_nascita = dr.GetDateTime(4).ToString();
+                    p.luogo = dr.GetString(5);
+                    p.cod_fis = dr.GetString(6);
+                    p.residenza = dr.GetString(7);
+                    p.provincia = dr.GetString(8);
+                    p.indirizzo = dr.GetString(9);
+                    p.cap = dr.GetString(10);
+                    p.telefono = dr.GetString(11);
+                    p.mobile = dr.GetString(12);
+                    p.email = dr.GetString(13);
+                    p.cod_sanitario = dr.GetString(14);
+                    p.cod_medico = dr.GetString(15);
+                    p.data_update = dr.GetDateTime(16).ToString();
+                    p.data_inserimento = dr.GetDateTime(17).ToString();
+                }
+
+                return p;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Impossibile recuperare i pazienti", ex);
+            }
+            finally { cn.Close(); }
+        }
+        public static void InsertPaziente(Paziente p)
+        {
+            SqlConnection cn = GetConnection();
+            StringBuilder sql = new StringBuilder();
+
+            try
+            {
+                sql.Append("INSERT INTO paziente (nome, cognome, sesso, data_nascita, luogo, cod_fis, ");
+                sql.Append("residenza, provincia, indirizzo, cap, telefono, mobile, ");
+                sql.Append("email, cod_sanitario, cod_medico, data_update, data_inserimento) ");
+                sql.Append("VALUES (@pNome, @pCognome, @pSesso @pDataNascita, @pLuogo, @pCodFis, @pResidenza, @pProvincia, ");
+                sql.Append("@pIndirizzo, @pCap, @pTelefono, @pMobile, @pEmail, @pCodSan, @pCodMed, @pDataUpdate, @pDataInserimento) ");
+
+                SqlCommand cmd = new SqlCommand(sql.ToString(), cn);
+                cmd.Parameters.Add(new SqlParameter("pNome", p.nome));
+                cmd.Parameters.Add(new SqlParameter("pCognome", p.cognome));
+                cmd.Parameters.Add(new SqlParameter("pSesso", p.sesso));
+                cmd.Parameters.Add(new SqlParameter("pDataNascita", p.data_nascita));
+                cmd.Parameters.Add(new SqlParameter("pLuogo", p.luogo));
+                cmd.Parameters.Add(new SqlParameter("pCodFis", p.cod_fis));
+                cmd.Parameters.Add(new SqlParameter("pResidenza", p.residenza));
+                cmd.Parameters.Add(new SqlParameter("pProvincia", p.provincia));
+                cmd.Parameters.Add(new SqlParameter("pIndirizzo", p.indirizzo));
+                cmd.Parameters.Add(new SqlParameter("pCap", p.cap));
+                cmd.Parameters.Add(new SqlParameter("pTelefono", p.telefono));
+                cmd.Parameters.Add(new SqlParameter("pMobile", p.mobile));
+                cmd.Parameters.Add(new SqlParameter("pEmail", p.email));
+                cmd.Parameters.Add(new SqlParameter("pCodSan", p.cod_sanitario));
+                cmd.Parameters.Add(new SqlParameter("pCodMed", p.cod_medico));
+                cmd.Parameters.Add(new SqlParameter("pDataUpdate", p.data_update));
+                cmd.Parameters.Add(new SqlParameter("pDataInserimento", p.data_inserimento));
+
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Impossibile inserire il paziente", ex);
+            }
+        }
+        public static void UpdatePaziente(Paziente p)
+        {
+            SqlConnection cn = GetConnection();
+            StringBuilder sql = new StringBuilder();
+
+            try
+            {
+                sql.Append("UPDATE paziente SET nome = @pNome, cognome = @pCognome, sesso = @pSesso, data_nascita = @pDataNascita, ");
+                sql.Append("luogo = @pLuogo, cod_fis = @pCodFis, residenza = @pResidenza, provincia = @pProvincia, ");
+                sql.Append("indirizzo = @pIndirizzo, cap = @pCap, telefono = @pTelefono, mobile = @pMobile, email = @pEmail, ");
+                sql.Append("cod_sanitario = @pCodSan, cod_medico = @pCodMed, data_update = @pDataUpdate, data_inserimento = @pDataInserimento ");
+                sql.Append("WHERE cod_sanitario = @pCodSan AND data_update < @pDataUpdate ");
+
+                SqlCommand cmd = new SqlCommand(sql.ToString(), cn);
+                cmd.Parameters.Add(new SqlParameter("pNome", p.nome));
+                cmd.Parameters.Add(new SqlParameter("pCognome", p.cognome));
+                cmd.Parameters.Add(new SqlParameter("pSesso", p.sesso));
+                cmd.Parameters.Add(new SqlParameter("pDataNascita", p.data_nascita));
+                cmd.Parameters.Add(new SqlParameter("pLuogo", p.luogo));
+                cmd.Parameters.Add(new SqlParameter("pCodFis", p.cod_fis));
+                cmd.Parameters.Add(new SqlParameter("pResidenza", p.residenza));
+                cmd.Parameters.Add(new SqlParameter("pProvincia", p.provincia));
+                cmd.Parameters.Add(new SqlParameter("pIndirizzo", p.indirizzo));
+                cmd.Parameters.Add(new SqlParameter("pCap", p.cap));
+                cmd.Parameters.Add(new SqlParameter("pTelefono", p.telefono));
+                cmd.Parameters.Add(new SqlParameter("pMobile", p.mobile));
+                cmd.Parameters.Add(new SqlParameter("pEmail", p.email));
+                cmd.Parameters.Add(new SqlParameter("pCodSan", p.cod_sanitario));
+                cmd.Parameters.Add(new SqlParameter("pCodMed", p.cod_medico));
+                cmd.Parameters.Add(new SqlParameter("pDataUpdate", p.data_update));
+                cmd.Parameters.Add(new SqlParameter("pDataInserimento", p.data_inserimento));
+
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Impossibile aggiornare il paziente", ex);
+            }
+        }
+        public static bool InsertOrUpdatePaziente(Paziente p)
+        {
+            SqlConnection cn = GetConnection();
+            StringBuilder sql = new StringBuilder();
+            Paziente pazExist = new Paziente();
+
+            try
+            {
+                pazExist = GetPaziente(p.cod_sanitario);
+
+                if (pazExist.cod_sanitario == null)
+                    InsertPaziente(p);
+                else
+                    UpdatePaziente(p);
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Impossibile eseguire l'aggiornamento della lista dei pazienti", ex);
+            }
+            finally { cn.Close(); }
+        }
+        public static DataTable SearchPazienti(string column, string filter)
+        {
+            SqlConnection cn = GetConnection();
+            StringBuilder sql = new StringBuilder();
+
+            filter = "%" + filter + "%";
+            column = column.ToLower();
+
+            try
+            {
+                sql.Append("SELECT id,nome AS Nome,cognome AS Cognome,sesso AS Sesso,data_nascita AS 'Data Nascita',luogo AS 'Luogo di nascita',cod_fis AS 'Codice Fiscale', ");
+                sql.Append("residenza AS Residenza,provincia AS Provincia,indirizzo AS Indirizzo,cap AS Cap, telefono AS Telefono,mobile AS Cellulare, ");
+                sql.Append("email AS Email, cod_sanitario AS 'Codice Sanitario', cod_medico, data_update, data_inserimento ");
+                sql.Append("FROM paziente ");
+
+                //if (column != "")
+                //    sql.Append("WHERE @pColumn LIKE @pFilter ");
+                //else
+                //{
+                    sql.Append("WHERE nome LIKE @pFilter OR cognome LIKE @pFilter OR sesso LIKE @pFiler OR data_nascita LIKE @pFilter OR luogo LIKE @pFilter OR cod_fis LIKE @pFilter ");
+                    sql.Append("OR residenza LIKE @pFilter OR provincia LIKE @pFilter OR indirizzo LIKE @pFilter OR cap LIKE @pFilter OR telefono LIKE @pFilter OR mobile LIKE @pFilter ");
+                    sql.Append("OR email LIKE @pFilter OR cod_sanitario LIKE @pFilter ");
+                //}
+
+                SqlCommand cmd = new SqlCommand(sql.ToString(), cn);
+                cmd.Parameters.Add(new SqlParameter("pColumn", column));
+                cmd.Parameters.Add(new SqlParameter("pFilter", filter));
+
                 SqlDataAdapter adapter = new SqlDataAdapter();
                 adapter.SelectCommand = cmd;
 

@@ -1,0 +1,19 @@
+{
+  "nome": "Francesco",
+  "cognome": "asdfgkjasdf",
+  "sesso":  "M",
+  "data_nascita": "1993-02-20",
+  "luogo": "Firenze",
+  "cod_fis": "KSDLRN",
+  "residenza": "Firenze",
+  "provincia": "Fi",
+  "indirizzo": "Via fasulla 21489218934",
+  "cap":  "50100",
+  "telefono": "35035643025",
+  "mobile": "343431321",
+  "email": "sgalactic@gmail.com",
+  "cod_sanitario": "4",
+  "cod_medico": "001",
+  "data_update": "2017-05-12",
+  "data_inserimento": "2017-05-10"
+}
