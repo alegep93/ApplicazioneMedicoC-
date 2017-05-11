@@ -1,4 +1,5 @@
-﻿using ApplicazioneMedico.DAO;
+﻿using ApplicazioneMedico.API;
+using ApplicazioneMedico.DAO;
 using ApplicazioneMedico.Data;
 using ApplicazioneMedico.Properties;
 using System;
@@ -17,13 +18,13 @@ namespace ApplicazioneMedico
     public partial class ApplicazioneMedico : Form
     {
         Timer t = new Timer();
-        Paziente p = JSONReader.GetJsonString();
 
         public ApplicazioneMedico()
         {
             InitializeComponent();
 
             SetFont();
+            SetDate();
 
             //TODO - Da implemetare la ricerca per colonna se c'è tempo
             //lblCerca e cmbColumn Visible = true
@@ -31,7 +32,7 @@ namespace ApplicazioneMedico
             //Aggiornamento iniziale
             pnlAggiornamento.Visible = true;
             pnlAggiornamento.BringToFront();
-            PazientiDAO.InsertOrUpdatePaziente(p);
+            SyncPazientiFromServer.Synchronize();
 
             //Mostro per 2 secondi il caricamento e poi passo al pannello dei pazienti
             Wait2Seconds();
@@ -70,6 +71,23 @@ namespace ApplicazioneMedico
         private void btnPazientiSearch_Click(object sender, EventArgs e)
         {
             BindGridPazientiWithSearch();
+        }
+        private void btnNuovoCertificato_Click(object sender, EventArgs e)
+        {
+            BringPanelToFront(false, false, false, false, true);
+        }
+        private void grdPazienti_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            Paziente p = new Paziente();
+
+            if (e.ColumnIndex == 0)
+            {
+                BringPanelToFront(false, false, false, true, false);
+                string codPaz = grdPazienti.Rows[e.RowIndex].Cells[15].Value.ToString();
+                p = PazientiDAO.GetPaziente(codPaz);
+
+                FillSchedaPaziente(p);
+            }
         }
 
         /* HELPERS */
@@ -143,7 +161,9 @@ namespace ApplicazioneMedico
 
             //Larghezza Pannelli Filtri
             pnlPazientiFiltri.Width = grdPazienti.Width;
-
+            txtPazientiSearch.Height = 14;
+            btnPazientiSearch.Height = txtPazientiSearch.Height;
+            
             //Griglia Pazienti
             grdPazienti.Height = (pnlPazienti.Height - pnlPazientiFiltri.Bottom - 50);
 
@@ -200,9 +220,16 @@ namespace ApplicazioneMedico
 
             //Main Navigation
             mainNav.Left = rientroLeft;
+            lblServerDate.Left = mainNav.Width - (lblServerDate.Width + rientroLeft);
 
             //Tabella scheda paziente
             tblSchedaPaziente.Left = (pnlSchedaPazCont.Width - tblSchedaPaziente.Width) / 2;
+
+            //Titoli
+            lblTitleCertificati.Left = (pnlCertificati.Width - lblTitleCertificati.Width) / 2;
+            lblTitlePazienti.Left = (pnlPazienti.Width - lblTitlePazienti.Width) / 2;
+
+            lblTitlePazienti.Top = lblTitleCertificati.Top = mainNav.Bottom + 10;
         }
         protected void Wait2Seconds()
         {
@@ -234,7 +261,7 @@ namespace ApplicazioneMedico
         {
             txtNomePaziente.Text = p.nome;
             txtCognomePaziente.Text = p.cognome;
-            txtSessoPaziente.Text = p.sesso;
+            txtSessoPaziente.Text = p.Sesso;
             txtDataNascitaPaziente.Text = p.data_nascita;
             txtLuogoNascitaPaziente.Text = p.luogo;
             txtCodiceFiscalePaziente.Text = p.cod_fis;
@@ -251,8 +278,19 @@ namespace ApplicazioneMedico
         {
             foreach(Control c in this.Controls)
             {
-                c.Font = new Font("Segoe UI", 12, FontStyle.Regular);
+                c.Font = new Font("Segoe UI", 8, FontStyle.Regular);
             }
+
+            //Titoli
+            lblTitleCertificati.Font = lblTitlePazienti.Font = new Font("Segoe UI", 40, FontStyle.Bold);
+            lblTitleCertificati.ForeColor = lblTitlePazienti.ForeColor = Color.White;
+
+
+        }
+        protected void SetDate()
+        {
+            lblServerDate.Text = "Data ultimo aggiornamento: " + ApiRestClient.GetServerDate();
+            lblServerDate.ForeColor = Color.White;
         }
 
         /* Metodi per il Menù */
@@ -302,30 +340,6 @@ namespace ApplicazioneMedico
         {
             SetItemsWidthAndHeight();
             SetItemsPosition();
-        }
-
-        private void grdPazienti_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
-            Paziente p = new Paziente();
-
-            if (e.ColumnIndex == 0)
-            {
-                BringPanelToFront(false, false, false, true, false);
-                string codPaz = grdPazienti.Rows[e.RowIndex].Cells[15].Value.ToString();
-                p = PazientiDAO.GetPaziente(codPaz);
-
-                FillSchedaPaziente(p);
-            }
-        }
-
-        private void grdPazienti_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
-        private void btnNuovoCertificato_Click(object sender, EventArgs e)
-        {
-            BringPanelToFront(false, false, false, false, true);
         }
     }
 }

@@ -59,7 +59,7 @@ namespace ApplicazioneMedico.DAO
                 {
                     p.nome = dr.GetString(1);
                     p.cognome = dr.GetString(2);
-                    p.sesso = dr.GetString(3);
+                    p.Sesso = dr.GetString(3);
                     p.data_nascita = dr.GetDateTime(4).ToString();
                     p.luogo = dr.GetString(5);
                     p.cod_fis = dr.GetString(6);
@@ -84,6 +84,32 @@ namespace ApplicazioneMedico.DAO
             }
             finally { cn.Close(); }
         }
+        public static bool PazienteExist(string codSan)
+        {
+            SqlConnection cn = GetConnection();
+            StringBuilder sql = new StringBuilder();
+            SqlDataReader dr = null;
+
+            try
+            {
+                sql.Append("SELECT * FROM paziente WHERE cod_sanitario = @pCodSan ");
+
+                SqlCommand cmd = new SqlCommand(sql.ToString(), cn);
+                cmd.Parameters.Add(new SqlParameter("pCodSan", codSan));
+
+                dr = cmd.ExecuteReader();
+
+                if (dr.Read())
+                    return true;
+
+                return false;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Impossibile recuperare i pazienti", ex);
+            }
+            finally { cn.Close(); }
+        }
         public static void InsertPaziente(Paziente p)
         {
             SqlConnection cn = GetConnection();
@@ -94,13 +120,13 @@ namespace ApplicazioneMedico.DAO
                 sql.Append("INSERT INTO paziente (nome, cognome, sesso, data_nascita, luogo, cod_fis, ");
                 sql.Append("residenza, provincia, indirizzo, cap, telefono, mobile, ");
                 sql.Append("email, cod_sanitario, cod_medico, data_update, data_inserimento) ");
-                sql.Append("VALUES (@pNome, @pCognome, @pSesso @pDataNascita, @pLuogo, @pCodFis, @pResidenza, @pProvincia, ");
+                sql.Append("VALUES (@pNome, @pCognome, @pSesso, @pDataNascita, @pLuogo, @pCodFis, @pResidenza, @pProvincia, ");
                 sql.Append("@pIndirizzo, @pCap, @pTelefono, @pMobile, @pEmail, @pCodSan, @pCodMed, @pDataUpdate, @pDataInserimento) ");
 
                 SqlCommand cmd = new SqlCommand(sql.ToString(), cn);
                 cmd.Parameters.Add(new SqlParameter("pNome", p.nome));
                 cmd.Parameters.Add(new SqlParameter("pCognome", p.cognome));
-                cmd.Parameters.Add(new SqlParameter("pSesso", p.sesso));
+                cmd.Parameters.Add(new SqlParameter("pSesso", p.Sesso));
                 cmd.Parameters.Add(new SqlParameter("pDataNascita", p.data_nascita));
                 cmd.Parameters.Add(new SqlParameter("pLuogo", p.luogo));
                 cmd.Parameters.Add(new SqlParameter("pCodFis", p.cod_fis));
@@ -139,7 +165,7 @@ namespace ApplicazioneMedico.DAO
                 SqlCommand cmd = new SqlCommand(sql.ToString(), cn);
                 cmd.Parameters.Add(new SqlParameter("pNome", p.nome));
                 cmd.Parameters.Add(new SqlParameter("pCognome", p.cognome));
-                cmd.Parameters.Add(new SqlParameter("pSesso", p.sesso));
+                cmd.Parameters.Add(new SqlParameter("pSesso", p.Sesso));
                 cmd.Parameters.Add(new SqlParameter("pDataNascita", p.data_nascita));
                 cmd.Parameters.Add(new SqlParameter("pLuogo", p.luogo));
                 cmd.Parameters.Add(new SqlParameter("pCodFis", p.cod_fis));
@@ -162,29 +188,6 @@ namespace ApplicazioneMedico.DAO
                 throw new Exception("Impossibile aggiornare il paziente", ex);
             }
         }
-        public static bool InsertOrUpdatePaziente(Paziente p)
-        {
-            SqlConnection cn = GetConnection();
-            StringBuilder sql = new StringBuilder();
-            Paziente pazExist = new Paziente();
-
-            try
-            {
-                pazExist = GetPaziente(p.cod_sanitario);
-
-                if (pazExist.cod_sanitario == null)
-                    InsertPaziente(p);
-                else
-                    UpdatePaziente(p);
-
-                return true;
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Impossibile eseguire l'aggiornamento della lista dei pazienti", ex);
-            }
-            finally { cn.Close(); }
-        }
         public static DataTable SearchPazienti(string column, string filter)
         {
             SqlConnection cn = GetConnection();
@@ -204,9 +207,9 @@ namespace ApplicazioneMedico.DAO
                 //    sql.Append("WHERE @pColumn LIKE @pFilter ");
                 //else
                 //{
-                    sql.Append("WHERE nome LIKE @pFilter OR cognome LIKE @pFilter OR sesso LIKE @pFiler OR data_nascita LIKE @pFilter OR luogo LIKE @pFilter OR cod_fis LIKE @pFilter ");
-                    sql.Append("OR residenza LIKE @pFilter OR provincia LIKE @pFilter OR indirizzo LIKE @pFilter OR cap LIKE @pFilter OR telefono LIKE @pFilter OR mobile LIKE @pFilter ");
-                    sql.Append("OR email LIKE @pFilter OR cod_sanitario LIKE @pFilter ");
+                sql.Append("WHERE nome LIKE @pFilter OR cognome LIKE @pFilter OR sesso LIKE @pFilter OR data_nascita LIKE @pFilter OR luogo LIKE @pFilter OR cod_fis LIKE @pFilter ");
+                sql.Append("OR residenza LIKE @pFilter OR provincia LIKE @pFilter OR indirizzo LIKE @pFilter OR cap LIKE @pFilter OR telefono LIKE @pFilter OR mobile LIKE @pFilter ");
+                sql.Append("OR email LIKE @pFilter OR cod_sanitario LIKE @pFilter ");
                 //}
 
                 SqlCommand cmd = new SqlCommand(sql.ToString(), cn);

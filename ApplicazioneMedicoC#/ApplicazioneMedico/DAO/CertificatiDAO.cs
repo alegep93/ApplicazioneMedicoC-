@@ -18,8 +18,9 @@ namespace ApplicazioneMedico.DAO
             try
             {
                 sql.Append("SELECT c.id,p.nome + ' ' + p.cognome AS 'Nominativo Paziente',c.cod_medico AS 'Codice Medico',c.data_emissione AS 'Data Emissione', ");
-                sql.Append("c.cod_patologia AS 'Codice Patologia', c.data_inizio AS 'Data Inizio', c.data_fine AS 'Data Fine', c.note AS Note ");
+                sql.Append("pat.nome AS 'Patologia', c.data_inizio AS 'Data Inizio', c.data_fine AS 'Data Fine', c.note AS Note ");
                 sql.Append("FROM certificato AS c JOIN Paziente AS p ON (c.cod_paziente = p.cod_sanitario) ");
+                sql.Append("JOIN patologia AS pat ON (c.cod_patologia = pat.cod_patologia) ");
 
                 SqlCommand cmd = new SqlCommand(sql.ToString(), cn);
                 SqlDataAdapter adapter = new SqlDataAdapter();

@@ -15,7 +15,7 @@ namespace ApplicazioneMedico.Data
         [DataMember]
         public string cognome { get; set; }
         [DataMember]
-        public string sesso { get; set; }
+        public string Sesso { get; set; }
         [DataMember]
         public string data_nascita { get; set; }
         [DataMember]
