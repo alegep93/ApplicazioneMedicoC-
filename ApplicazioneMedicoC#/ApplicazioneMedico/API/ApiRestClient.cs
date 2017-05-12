@@ -13,23 +13,25 @@ namespace ApplicazioneMedico.API
     {
         private static WebClient syncClient = new WebClient();
 
-        public static List<Paziente> GetListPazienti()
+        public static RootObject GetDataFromServer()
         {
-            string url = "http://192.168.4.159:8080/ApiServer/Paziente/all/1";
+            string url = "http://192.168.4.159:8080/ApiServer2/Paziente/all/1";
             string jsonPazienti = syncClient.DownloadString(url);
 
-            List<Paziente> listaPaz = DeserializeJson<List<Paziente>>(jsonPazienti);
+            RootObject json = DeserializeJson<RootObject>(jsonPazienti);
 
-            return listaPaz;
+            return json;
         }
-        public static string GetServerDate()
-        {
-            string url = "http://192.168.4.159:8080/ApiServer/getTime";
-            string sDate = syncClient.DownloadString(url);
 
-            ServerDate date = DeserializeJson<ServerDate>(sDate);
+        //Sostituito perchè la data ora viene passata ad ogni chiamata al server
+        //public static string GetServerDate()
+        //{
+        //    string url = "http://192.168.4.159:8080/ApiServer2/getTime";
+        //    string sDate = syncClient.DownloadString(url);
 
-            return date.now;
-        }
+        //    ServerDate date = DeserializeJson<ServerDate>(sDate);
+
+        //    return date.now;
+        //}
     }
 }

@@ -165,7 +165,8 @@ namespace ApplicazioneMedico
             btnPazientiSearch.Height = txtPazientiSearch.Height;
             
             //Griglia Pazienti
-            grdPazienti.Height = (pnlPazienti.Height - pnlPazientiFiltri.Bottom - 50);
+            grdPazienti.Width = grdCertificati.Width;
+            grdPazienti.Height = grdCertificati.Height;
 
             //Larghezza Main Navigation
             mainNav.Width = pnlAggiornamento.Parent.ClientSize.Width - 20;
@@ -208,16 +209,6 @@ namespace ApplicazioneMedico
             pnlAggiornamento.Top = 0;
             pnlPazienti.Top = pnlCertificati.Top = pnlPatologie.Top = pnlSingoloPaziente.Top = pnlNuovoCertificato.Top = mainNav.Height;
 
-            //Pannelli Filtri
-            pnlPazientiFiltri.Top = 50;
-            pnlPazientiFiltri.Left = rientroLeft;
-
-            //GridView
-            grdPazienti.Top = pnlPazientiFiltri.Bottom + 5;
-            grdPazienti.Left = rientroLeft;
-            grdCertificatiPaziente.Top = pnlSchedaPazCont.Bottom + 10;
-            btnNuovoCertificato.Top = grdCertificatiPaziente.Bottom + 10;
-
             //Main Navigation
             mainNav.Left = rientroLeft;
             lblServerDate.Left = mainNav.Width - (lblServerDate.Width + rientroLeft);
@@ -228,8 +219,17 @@ namespace ApplicazioneMedico
             //Titoli
             lblTitleCertificati.Left = (pnlCertificati.Width - lblTitleCertificati.Width) / 2;
             lblTitlePazienti.Left = (pnlPazienti.Width - lblTitlePazienti.Width) / 2;
-
             lblTitlePazienti.Top = lblTitleCertificati.Top = mainNav.Bottom + 10;
+
+            //Pannelli Filtri
+            pnlPazientiFiltri.Top = lblTitlePazienti.Bottom + 10;
+            pnlPazientiFiltri.Left = rientroLeft;
+
+            //GridView
+            grdPazienti.Top = pnlPazientiFiltri.Bottom + 5;
+            grdPazienti.Left = rientroLeft;
+            grdCertificatiPaziente.Top = pnlCertificatiSearchContainer.Bottom + 5;
+            btnNuovoCertificato.Top = grdCertificatiPaziente.Bottom + 10;
         }
         protected void Wait2Seconds()
         {
@@ -289,7 +289,7 @@ namespace ApplicazioneMedico
         }
         protected void SetDate()
         {
-            lblServerDate.Text = "Data ultimo aggiornamento: " + ApiRestClient.GetServerDate();
+            lblServerDate.Text = "Data ultimo aggiornamento: " + ApiRestClient.GetDataFromServer().datetime;
             lblServerDate.ForeColor = Color.White;
         }
 

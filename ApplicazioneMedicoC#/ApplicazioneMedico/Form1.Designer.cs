@@ -40,12 +40,13 @@
             this.picBox = new System.Windows.Forms.PictureBox();
             this.pnlAggiornamento = new System.Windows.Forms.Panel();
             this.pnlPazienti = new System.Windows.Forms.Panel();
+            this.grdPazienti = new System.Windows.Forms.DataGridView();
             this.pnlPazientiFiltri = new System.Windows.Forms.Panel();
+            this.lblTitlePazienti = new System.Windows.Forms.Label();
             this.btnPazientiSearch = new System.Windows.Forms.Button();
             this.lblCercaPazienti = new System.Windows.Forms.Label();
             this.txtPazientiSearch = new System.Windows.Forms.TextBox();
             this.cmbPazientiColumns = new System.Windows.Forms.ComboBox();
-            this.grdPazienti = new System.Windows.Forms.DataGridView();
             this.pnlCertificati = new System.Windows.Forms.Panel();
             this.lblTitleCertificati = new System.Windows.Forms.Label();
             this.pnlCertificatiSearchContainer = new System.Windows.Forms.Panel();
@@ -118,13 +119,12 @@
             this.txtIndirizzoNuovoCert = new System.Windows.Forms.TextBox();
             this.lblCertCodSan = new System.Windows.Forms.Label();
             this.lblServerDate = new System.Windows.Forms.Label();
-            this.lblTitlePazienti = new System.Windows.Forms.Label();
             this.mainNav.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picBox)).BeginInit();
             this.pnlAggiornamento.SuspendLayout();
             this.pnlPazienti.SuspendLayout();
-            this.pnlPazientiFiltri.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grdPazienti)).BeginInit();
+            this.pnlPazientiFiltri.SuspendLayout();
             this.pnlCertificati.SuspendLayout();
             this.pnlCertificatiSearchContainer.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grdCertificati)).BeginInit();
@@ -252,24 +252,45 @@
             // pnlPazienti
             // 
             this.pnlPazienti.BackColor = System.Drawing.Color.Transparent;
-            this.pnlPazienti.Controls.Add(this.pnlPazientiFiltri);
+            this.pnlPazienti.Controls.Add(this.lblTitlePazienti);
             this.pnlPazienti.Controls.Add(this.grdPazienti);
+            this.pnlPazienti.Controls.Add(this.pnlPazientiFiltri);
             this.pnlPazienti.Location = new System.Drawing.Point(-1, 56);
             this.pnlPazienti.Name = "pnlPazienti";
             this.pnlPazienti.Size = new System.Drawing.Size(1495, 716);
             this.pnlPazienti.TabIndex = 8;
             // 
+            // grdPazienti
+            // 
+            this.grdPazienti.AllowUserToAddRows = false;
+            this.grdPazienti.AllowUserToDeleteRows = false;
+            this.grdPazienti.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.grdPazienti.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.grdPazienti.Location = new System.Drawing.Point(17, 144);
+            this.grdPazienti.Name = "grdPazienti";
+            this.grdPazienti.ReadOnly = true;
+            this.grdPazienti.Size = new System.Drawing.Size(1460, 428);
+            this.grdPazienti.TabIndex = 3;
+            // 
             // pnlPazientiFiltri
             // 
-            this.pnlPazientiFiltri.Controls.Add(this.lblTitlePazienti);
             this.pnlPazientiFiltri.Controls.Add(this.btnPazientiSearch);
             this.pnlPazientiFiltri.Controls.Add(this.lblCercaPazienti);
             this.pnlPazientiFiltri.Controls.Add(this.txtPazientiSearch);
             this.pnlPazientiFiltri.Controls.Add(this.cmbPazientiColumns);
-            this.pnlPazientiFiltri.Location = new System.Drawing.Point(13, 10);
+            this.pnlPazientiFiltri.Location = new System.Drawing.Point(13, 37);
             this.pnlPazientiFiltri.Name = "pnlPazientiFiltri";
             this.pnlPazientiFiltri.Size = new System.Drawing.Size(1460, 99);
             this.pnlPazientiFiltri.TabIndex = 2;
+            // 
+            // lblTitlePazienti
+            // 
+            this.lblTitlePazienti.AutoSize = true;
+            this.lblTitlePazienti.Location = new System.Drawing.Point(721, 5);
+            this.lblTitlePazienti.Name = "lblTitlePazienti";
+            this.lblTitlePazienti.Size = new System.Drawing.Size(53, 14);
+            this.lblTitlePazienti.TabIndex = 4;
+            this.lblTitlePazienti.Text = "Pazienti";
             // 
             // btnPazientiSearch
             // 
@@ -312,22 +333,6 @@
             this.cmbPazientiColumns.Size = new System.Drawing.Size(302, 22);
             this.cmbPazientiColumns.TabIndex = 0;
             this.cmbPazientiColumns.Visible = false;
-            // 
-            // grdPazienti
-            // 
-            this.grdPazienti.AllowUserToAddRows = false;
-            this.grdPazienti.AllowUserToDeleteRows = false;
-            this.grdPazienti.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.grdPazienti.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.grdPazienti.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.grdPazienti.Location = new System.Drawing.Point(13, 115);
-            this.grdPazienti.Name = "grdPazienti";
-            this.grdPazienti.ReadOnly = true;
-            this.grdPazienti.Size = new System.Drawing.Size(1460, 570);
-            this.grdPazienti.TabIndex = 1;
-            this.grdPazienti.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grdPazienti_CellDoubleClick);
             // 
             // pnlCertificati
             // 
@@ -1073,15 +1078,6 @@
             this.lblServerDate.TabIndex = 14;
             this.lblServerDate.Text = "00-00";
             // 
-            // lblTitlePazienti
-            // 
-            this.lblTitlePazienti.AutoSize = true;
-            this.lblTitlePazienti.Location = new System.Drawing.Point(709, 0);
-            this.lblTitlePazienti.Name = "lblTitlePazienti";
-            this.lblTitlePazienti.Size = new System.Drawing.Size(53, 14);
-            this.lblTitlePazienti.TabIndex = 4;
-            this.lblTitlePazienti.Text = "Pazienti";
-            // 
             // ApplicazioneMedico
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
@@ -1113,9 +1109,10 @@
             this.pnlAggiornamento.ResumeLayout(false);
             this.pnlAggiornamento.PerformLayout();
             this.pnlPazienti.ResumeLayout(false);
+            this.pnlPazienti.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.grdPazienti)).EndInit();
             this.pnlPazientiFiltri.ResumeLayout(false);
             this.pnlPazientiFiltri.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.grdPazienti)).EndInit();
             this.pnlCertificati.ResumeLayout(false);
             this.pnlCertificati.PerformLayout();
             this.pnlCertificatiSearchContainer.ResumeLayout(false);
@@ -1158,7 +1155,6 @@
         private System.Windows.Forms.TextBox txtPazientiSearch;
         private System.Windows.Forms.ComboBox cmbPazientiColumns;
         private System.Windows.Forms.Button btnPazientiSearch;
-        private System.Windows.Forms.DataGridView grdPazienti;
         private System.Windows.Forms.Panel pnlSingoloPaziente;
         private System.Windows.Forms.Panel pnlSchedaPazCont;
         private System.Windows.Forms.TextBox txtCodiceSanitarioPaziente;
@@ -1227,6 +1223,7 @@
         private System.Windows.Forms.TextBox txtCercaCertificati;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Label lblTitlePazienti;
+        private System.Windows.Forms.DataGridView grdPazienti;
     }
 }
 

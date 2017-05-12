@@ -12,7 +12,7 @@ namespace ApplicazioneMedico.API
     {
         public static bool Synchronize()
         {
-            List<Paziente> pList = GetListPazienti();
+            List<Paziente> pList = GetDataFromServer().data;
 
             try
             {
