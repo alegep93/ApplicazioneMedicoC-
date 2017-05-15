@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace ApplicazioneMedico.Data
 {
     [DataContract]
-    public class Paziente : RootObject
+    public class Paziente : RootObject<Paziente>
     {
         [DataMember]
         public string nome { get; set; }

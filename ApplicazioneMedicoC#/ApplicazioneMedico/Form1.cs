@@ -18,21 +18,16 @@ namespace ApplicazioneMedico
     public partial class ApplicazioneMedico : Form
     {
         Timer t = new Timer();
+        RootObject<Paziente> roPaz = ApiRestClient.GetPazientiDataFromServer();
+        RootObject<Patologia> roPat = ApiRestClient.GetPatologieDataFromServer();
+        RootObject<Certificato> roCert = ApiRestClient.GetCertificatiDataFromServer();
 
         public ApplicazioneMedico()
         {
             InitializeComponent();
 
             SetFont();
-            SetDate();
-
-            //TODO - Da implemetare la ricerca per colonna se c'è tempo
-            //lblCerca e cmbColumn Visible = true
-
-            //Aggiornamento iniziale
-            pnlAggiornamento.Visible = true;
-            pnlAggiornamento.BringToFront();
-            SyncPazientiFromServer.Synchronize();
+            Sync();
 
             //Mostro per 2 secondi il caricamento e poi passo al pannello dei pazienti
             Wait2Seconds();
@@ -75,6 +70,7 @@ namespace ApplicazioneMedico
         private void btnNuovoCertificato_Click(object sender, EventArgs e)
         {
             BringPanelToFront(false, false, false, false, true);
+            popolaCampiNuovoCertificato();
         }
         private void grdPazienti_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -88,6 +84,20 @@ namespace ApplicazioneMedico
 
                 FillSchedaPaziente(p);
             }
+        }
+        private void subMenuSincronizza_Click(object sender, EventArgs e)
+        {
+            Sync();
+        }
+        private void btnInsNuovoCert_Click(object sender, EventArgs e)
+        {
+            Certificato c = new Certificato();
+            popolaCertificato(c);
+            CertificatiDAO.InsertCertificato(c);
+        }
+        private void btnAnnullaNuovoCert_Click(object sender, EventArgs e)
+        {
+            BringPanelToFront(false, false, false, true, false);
         }
 
         /* HELPERS */
@@ -105,7 +115,7 @@ namespace ApplicazioneMedico
         protected void BindGridPazientiWithSearch()
         {
             BindingSource bs = new BindingSource();
-            bs.DataSource = PazientiDAO.SearchPazienti(cmbPazientiColumns.Text, txtPazientiSearch.Text);
+            bs.DataSource = PazientiDAO.SearchPazienti(txtPazientiSearch.Text);
             grdPazienti.DataSource = bs;
             grdPazienti.Columns[1].Visible = false;
             grdPazienti.Columns[16].Visible = false;
@@ -151,22 +161,23 @@ namespace ApplicazioneMedico
         protected void SetItemsWidthAndHeight()
         {
             //Larghezza Pannelli Container
-            pnlAggiornamento.Width = pnlPazienti.Width = pnlCertificati.Width = pnlPatologie.Width = 
+            pnlAggiornamento.Width = pnlPazienti.Width = pnlCertificati.Width = pnlPatologie.Width =
                 pnlSingoloPaziente.Width = pnlNuovoCertificato.Width = pnlAggiornamento.Parent.ClientSize.Width;
 
             //Altezza Pannelli Container
             pnlAggiornamento.Height = pnlAggiornamento.Parent.ClientSize.Height;
-            pnlPazienti.Height = pnlCertificati.Height = pnlPatologie.Height = 
+            pnlPazienti.Height = pnlCertificati.Height = pnlPatologie.Height =
                 pnlSingoloPaziente.Height = pnlNuovoCertificato.Height = (pnlAggiornamento.Parent.ClientSize.Height - mainNav.Height);
 
             //Larghezza Pannelli Filtri
             pnlPazientiFiltri.Width = grdPazienti.Width;
-            txtPazientiSearch.Height = 14;
-            btnPazientiSearch.Height = txtPazientiSearch.Height;
-            
+            pnlCertificatiSearchContainer.Height = pnlPatologieSearchContainer.Height = pnlPazientiFiltri.Height;
+            txtPazientiSearch.Height = txtCercaCertificati.Height = txtCercaPatologie.Height = 14;
+            btnPazientiSearch.Height = btnCercaCertificati.Height = btnCercaPatologie.Height = txtPazientiSearch.Height;
+
             //Griglia Pazienti
-            grdPazienti.Width = grdCertificati.Width;
-            grdPazienti.Height = grdCertificati.Height;
+            grdCertificati.Width = grdPazienti.Width;
+            grdCertificati.Height = grdPazienti.Height;
 
             //Larghezza Main Navigation
             mainNav.Width = pnlAggiornamento.Parent.ClientSize.Width - 20;
@@ -217,18 +228,18 @@ namespace ApplicazioneMedico
             tblSchedaPaziente.Left = (pnlSchedaPazCont.Width - tblSchedaPaziente.Width) / 2;
 
             //Titoli
-            lblTitleCertificati.Left = (pnlCertificati.Width - lblTitleCertificati.Width) / 2;
             lblTitlePazienti.Left = (pnlPazienti.Width - lblTitlePazienti.Width) / 2;
-            lblTitlePazienti.Top = lblTitleCertificati.Top = mainNav.Bottom + 10;
+            lblTitleCertificati.Left = (pnlCertificati.Width - lblTitleCertificati.Width) / 2;
+            lblTitlePatologie.Left = (pnlPatologie.Width - lblTitlePatologie.Width) / 2;
+            lblTitlePazienti.Top = lblTitleCertificati.Top = lblTitlePatologie.Top = mainNav.Bottom + 10;
 
             //Pannelli Filtri
-            pnlPazientiFiltri.Top = lblTitlePazienti.Bottom + 10;
-            pnlPazientiFiltri.Left = rientroLeft;
+            pnlPazientiFiltri.Top = pnlCertificatiSearchContainer.Top = pnlPatologieSearchContainer.Top = lblTitlePazienti.Bottom + 10;
+            pnlPazientiFiltri.Left = pnlCertificatiSearchContainer.Left = pnlPatologieSearchContainer.Left = rientroLeft;
 
             //GridView
-            grdPazienti.Top = pnlPazientiFiltri.Bottom + 5;
-            grdPazienti.Left = rientroLeft;
-            grdCertificatiPaziente.Top = pnlCertificatiSearchContainer.Bottom + 5;
+            grdPazienti.Top = grdCertificati.Top = grdPatologie.Top = pnlPazientiFiltri.Bottom + 5;
+            grdPazienti.Left = grdCertificati.Left = grdPatologie.Left = rientroLeft;
             btnNuovoCertificato.Top = grdCertificatiPaziente.Bottom + 10;
         }
         protected void Wait2Seconds()
@@ -276,21 +287,78 @@ namespace ApplicazioneMedico
         }
         protected void SetFont()
         {
-            foreach(Control c in this.Controls)
+            foreach (Control c in this.Controls)
             {
                 c.Font = new Font("Segoe UI", 8, FontStyle.Regular);
             }
 
             //Titoli
-            lblTitleCertificati.Font = lblTitlePazienti.Font = new Font("Segoe UI", 40, FontStyle.Bold);
-            lblTitleCertificati.ForeColor = lblTitlePazienti.ForeColor = Color.White;
+            lblTitleCertificati.Font = lblTitlePazienti.Font = lblTitlePatologie.Font = new Font("Segoe UI", 40, FontStyle.Bold);
+            lblTitleCertificati.ForeColor = lblTitlePazienti.ForeColor = lblTitlePatologie.ForeColor = Color.White;
 
 
         }
         protected void SetDate()
         {
-            lblServerDate.Text = "Data ultimo aggiornamento: " + ApiRestClient.GetDataFromServer().datetime;
-            lblServerDate.ForeColor = Color.White;
+            if (roPaz != null)
+            {
+                lblServerDate.Text = "Data ultimo aggiornamento: " + roPaz.datetime;
+                lblServerDate.ForeColor = Color.White;
+            }
+            else
+            {
+                lblServerDate.Text = "Ora non disponibile. Server non raggiungibile.";
+            }
+        }
+        protected void Sync()
+        {
+            bool isSynchronized = SyncDataFromServer.Synchronize(roPaz, roPat, roCert);
+
+            if (!isSynchronized)
+            {
+                MessageBox.Show("Impossibile raggiungere l'host del servizio remoto. \r\nIl servizio di aggiornamento non sarà disponibile.");
+                pnlAggiornamento.Visible = false;
+            }
+            else
+            {
+                //Aggiornamento iniziale
+                pnlAggiornamento.Visible = true;
+                pnlAggiornamento.BringToFront();
+            }
+
+            SetDate();
+        }
+        protected Certificato popolaCertificato(Certificato c)
+        {
+            c.codPaziente = txtCodSanNuovoCert.Text;
+            c.dataEmissione = new DateTime();
+            c.codPatologia = txtCodPatNuovoCert.Text;
+            c.dataInizio = dtpDataInizioNuovoCert.Value;
+            c.dataFine = dtpDataFineNuovoCert.Value;
+            c.tipologia = cmbTipologia.Text;
+            c.comune = txtComuneNuovoCert.Text;
+            c.provincia = txtProvinciaNuovoCert.Text;
+            c.cap = txtCapNuovoCert.Text;
+            c.note = txtNoteNuovoCert.Text;
+
+            if (c.domicilio != "")
+                c.domicilio = txtDomicilioNuovoCert.Text;
+            else
+                c.domicilio = txtIndirizzoNuovoCert.Text;
+
+            return c;
+        }
+        protected void popolaCampiNuovoCertificato()
+        {
+            txtCodSanNuovoCert.Text = txtCodiceSanitarioPaziente.Text;
+            txtComuneNuovoCert.Text = txtComunePaziente.Text;
+            txtProvinciaNuovoCert.Text = txtProvinciaPaziente.Text;
+            txtIndirizzoNuovoCert.Text = txtIndirizzoPaziente.Text;
+            txtCapNuovoCert.Text = txtCapPaziente.Text;
+
+            cmbTipologia.Items.Add("Inizio");
+            cmbTipologia.Items.Add("Continuazione");
+            cmbTipologia.Items.Add("Ricaduta");
         }
 
         /* Metodi per il Menù */

@@ -188,13 +188,12 @@ namespace ApplicazioneMedico.DAO
                 throw new Exception("Impossibile aggiornare il paziente", ex);
             }
         }
-        public static DataTable SearchPazienti(string column, string filter)
+        public static DataTable SearchPazienti(string filter)
         {
             SqlConnection cn = GetConnection();
             StringBuilder sql = new StringBuilder();
 
             filter = "%" + filter + "%";
-            column = column.ToLower();
 
             try
             {
@@ -202,18 +201,11 @@ namespace ApplicazioneMedico.DAO
                 sql.Append("residenza AS Residenza,provincia AS Provincia,indirizzo AS Indirizzo,cap AS Cap, telefono AS Telefono,mobile AS Cellulare, ");
                 sql.Append("email AS Email, cod_sanitario AS 'Codice Sanitario', cod_medico, data_update, data_inserimento ");
                 sql.Append("FROM paziente ");
-
-                //if (column != "")
-                //    sql.Append("WHERE @pColumn LIKE @pFilter ");
-                //else
-                //{
                 sql.Append("WHERE nome LIKE @pFilter OR cognome LIKE @pFilter OR sesso LIKE @pFilter OR data_nascita LIKE @pFilter OR luogo LIKE @pFilter OR cod_fis LIKE @pFilter ");
                 sql.Append("OR residenza LIKE @pFilter OR provincia LIKE @pFilter OR indirizzo LIKE @pFilter OR cap LIKE @pFilter OR telefono LIKE @pFilter OR mobile LIKE @pFilter ");
                 sql.Append("OR email LIKE @pFilter OR cod_sanitario LIKE @pFilter ");
-                //}
 
                 SqlCommand cmd = new SqlCommand(sql.ToString(), cn);
-                cmd.Parameters.Add(new SqlParameter("pColumn", column));
                 cmd.Parameters.Add(new SqlParameter("pFilter", filter));
 
                 SqlDataAdapter adapter = new SqlDataAdapter();

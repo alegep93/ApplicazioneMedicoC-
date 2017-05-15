@@ -52,7 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="API\ApiRestClient.cs" />
-    <Compile Include="API\SyncPazientiFromServer.cs" />
+    <Compile Include="API\SyncDataFromServer.cs" />
     <Compile Include="DAO\BaseDAO.cs" />
     <Compile Include="DAO\CertificatiDAO.cs" />
     <Compile Include="DAO\PatologieDAO.cs" />
@@ -60,9 +60,8 @@
     <Compile Include="Data\Certificato.cs" />
     <Compile Include="Data\Medico.cs" />
     <Compile Include="Data\Patologia.cs" />
-    <Compile Include="Data\PazienteOld.cs" />
     <Compile Include="Data\Paziente.cs" />
-    <Compile Include="Data\PazienteJSON.cs" />
+    <Compile Include="Data\RootObject.cs" />
     <Compile Include="Data\ServerDate.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>

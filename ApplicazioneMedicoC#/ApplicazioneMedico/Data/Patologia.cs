@@ -1,64 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace ApplicazioneMedico.Data
 {
-    public class Patologia
+    [DataContract]
+    public class Patologia : RootObject<Patologia>
     {
-        string codicePatologia, nome, descrizione;
-
-        public Patologia()
-        {
-            this.codicePatologia = this.nome = this.descrizione = "";
-        }
-
-        public Patologia(string codicePatologia, string nome, string descrizione)
-        {
-            this.codicePatologia = codicePatologia;
-            this.nome = nome;
-            this.descrizione = descrizione;
-        }
-
-        public string CodicePatologia
-        {
-            get
-            {
-                return codicePatologia;
-            }
-
-            set
-            {
-                codicePatologia = value;
-            }
-        }
-
-        public string Descrizione
-        {
-            get
-            {
-                return descrizione;
-            }
-
-            set
-            {
-                descrizione = value;
-            }
-        }
-
-        public string Nome
-        {
-            get
-            {
-                return nome;
-            }
-
-            set
-            {
-                nome = value;
-            }
-        }
+        [DataMember]
+        public string codicePatologia { get; set; }
+        [DataMember]
+        public string nome { get; set; }
+        [DataMember]
+        public string descrizione { get; set; }
     }
 }

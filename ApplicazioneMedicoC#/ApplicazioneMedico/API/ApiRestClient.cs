@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace ApplicazioneMedico.API
 {
@@ -13,25 +14,56 @@ namespace ApplicazioneMedico.API
     {
         private static WebClient syncClient = new WebClient();
 
-        public static RootObject GetDataFromServer()
+        public static RootObject<Paziente> GetPazientiDataFromServer()
         {
-            string url = "http://192.168.4.159:8080/ApiServer2/Paziente/all/1";
-            string jsonPazienti = syncClient.DownloadString(url);
+            string url = "http://192.168.4.159:8080/ApiServer/Paziente/all/1";
+            string jsonPazienti = "";
 
-            RootObject json = DeserializeJson<RootObject>(jsonPazienti);
+            try
+            {
+                jsonPazienti = syncClient.DownloadString(url);
+                RootObject<Paziente> json = DeserializeJson<RootObject<Paziente>>(jsonPazienti);
 
-            return json;
+                return json;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
         }
+        public static RootObject<Patologia> GetPatologieDataFromServer()
+        {
+            string url = "http://192.168.4.159:8080/ApiServer/Patologie";
+            string jsonPatologie = "";
 
-        //Sostituito perchè la data ora viene passata ad ogni chiamata al server
-        //public static string GetServerDate()
-        //{
-        //    string url = "http://192.168.4.159:8080/ApiServer2/getTime";
-        //    string sDate = syncClient.DownloadString(url);
+            try
+            {
+                jsonPatologie = syncClient.DownloadString(url);
+                RootObject<Patologia> json = DeserializeJson<RootObject<Patologia>>(jsonPatologie);
 
-        //    ServerDate date = DeserializeJson<ServerDate>(sDate);
+                return json;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+        public static RootObject<Certificato> GetCertificatiDataFromServer()
+        {
+            string url = "http://192.168.4.159:8080/ApiServer/Certificati";
+            string jsonCertificati = "";
 
-        //    return date.now;
-        //}
+            try
+            {
+                jsonCertificati = syncClient.DownloadString(url);
+                RootObject<Certificato> json = DeserializeJson<RootObject<Certificato>>(jsonCertificati);
+
+                return json;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
     }
 }
