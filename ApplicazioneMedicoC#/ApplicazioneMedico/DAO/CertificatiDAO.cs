@@ -60,13 +60,13 @@ namespace ApplicazioneMedico.DAO
                 while (dr.Read())
                 {
                     Certificato c = new Certificato();
-                    c.idCertificato = dr.GetInt32(0);
+                    c.idCertificato = dr.GetString(0);
                     c.cod_sanitario = dr.GetString(1);
                     c.cod_medico = dr.GetString(2);
-                    c.data_emissione = dr.GetDateTime(3);
+                    c.data_emissione = dr.GetString(3);
                     c.cod_patologia = dr.GetString(4);
-                    c.data_inizio = dr.GetDateTime(5);
-                    c.data_fine = dr.GetDateTime(6);
+                    c.data_inizio = dr.GetString(5);
+                    c.data_fine = dr.GetString(6);
                     c.tipologia = dr.GetString(7);
                     c.comune = dr.GetString(8);
                     c.provincia = dr.GetString(9);
@@ -86,7 +86,54 @@ namespace ApplicazioneMedico.DAO
             }
             finally { cn.Close(); }
         }
-        public static bool CertificatoExist(int idCert)
+        public static List<Certificato> GetListCertificatiAfterSyncDate()
+        {
+            SqlConnection cn = GetConnection();
+            StringBuilder sql = new StringBuilder();
+            SqlDataReader dr;
+            List<Certificato> cList = new List<Certificato>();
+
+            try
+            {
+                sql.Append("SELECT [id], [cod_paziente], [cod_medico], [data_emissione], [cod_patologia], [data_inizio], [data_fine], ");
+                sql.Append("[tipologia], [comune], [provincia], [indirizzo], [cap], [domicilio], [note] ");
+                sql.Append("FROM certificato ");
+                sql.Append("WHERE data_emissione > @pLastSyncDate");
+
+                SqlCommand cmd = new SqlCommand(sql.ToString(), cn);
+                cmd.Parameters.Add(new SqlParameter("pLastSyncDate", MedicoDAO.GetLastSyncDate()));
+                dr = cmd.ExecuteReader();
+
+                while (dr.Read())
+                {
+                    Certificato c = new Certificato();
+                    c.idCertificato = dr.GetString(0);
+                    c.cod_sanitario = dr.GetString(1);
+                    c.cod_medico = dr.GetString(2);
+                    c.data_emissione = dr.GetString(3);
+                    c.cod_patologia = dr.GetString(4);
+                    c.data_inizio = dr.GetString(5);
+                    c.data_fine = dr.GetString(6);
+                    c.tipologia = dr.GetString(7);
+                    c.comune = dr.GetString(8);
+                    c.provincia = dr.GetString(9);
+                    c.indirizzo = dr.GetString(10);
+                    c.CAP = dr.GetString(11);
+                    c.domicilio = dr.GetString(12);
+                    c.note = dr.GetString(13);
+
+                    cList.Add(c);
+                }
+
+                return cList;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Impossibile recuperare i certificati", ex);
+            }
+            finally { cn.Close(); }
+        }
+        public static bool CertificatoExist(string idCert)
         {
             SqlConnection cn = GetConnection();
             StringBuilder sql = new StringBuilder();

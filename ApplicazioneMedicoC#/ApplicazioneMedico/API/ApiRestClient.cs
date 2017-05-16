@@ -75,9 +75,7 @@ namespace ApplicazioneMedico.API
             foreach (Certificato c in cList)
             {
                 string jsonCertificato = JSONManager.SerializeJson(c);
-
-                if(c.data_emissione > MedicoDAO.GetLastSyncDate())
-                    syncClient.UploadString(url, jsonCertificato);
+                syncClient.UploadString(url, jsonCertificato);
             }
 
             return true;

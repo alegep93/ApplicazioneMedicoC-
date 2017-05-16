@@ -333,10 +333,10 @@ namespace ApplicazioneMedico
         protected Certificato popolaCertificato(Certificato c)
         {
             c.cod_sanitario = txtCodSanNuovoCert.Text;
-            c.data_emissione = new DateTime();
+            c.data_emissione = DateTime.Now.ToString();
             c.cod_patologia = txtCodPatNuovoCert.Text;
-            c.data_inizio = dtpDataInizioNuovoCert.Value;
-            c.data_fine = dtpDataFineNuovoCert.Value;
+            c.data_inizio = dtpDataInizioNuovoCert.Value.ToString();
+            c.data_fine = dtpDataFineNuovoCert.Value.ToString();
             c.tipologia = cmbTipologia.Text;
             c.comune = txtComuneNuovoCert.Text;
             c.provincia = txtProvinciaNuovoCert.Text;
@@ -367,7 +367,7 @@ namespace ApplicazioneMedico
             roPaz = ApiRestClient.GetPazientiDataFromServer();
             roPat = ApiRestClient.GetPatologieDataFromServer();
             roCert = ApiRestClient.GetCertificatiDataFromServer();
-            response = ApiRestClient.SendCertificatiToServer(CertificatiDAO.GetListCertificati());
+            response = ApiRestClient.SendCertificatiToServer(CertificatiDAO.GetListCertificatiAfterSyncDate());
         }
 
         /* Metodi per il Menù */
