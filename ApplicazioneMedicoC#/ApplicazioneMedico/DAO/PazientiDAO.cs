@@ -66,7 +66,7 @@ namespace ApplicazioneMedico.DAO
                     p.residenza = dr.GetString(7);
                     p.provincia = dr.GetString(8);
                     p.indirizzo = dr.GetString(9);
-                    p.cap = dr.GetString(10);
+                    p.CAP = dr.GetString(10);
                     p.telefono = dr.GetString(11);
                     p.mobile = dr.GetString(12);
                     p.email = dr.GetString(13);
@@ -133,7 +133,7 @@ namespace ApplicazioneMedico.DAO
                 cmd.Parameters.Add(new SqlParameter("pResidenza", p.residenza));
                 cmd.Parameters.Add(new SqlParameter("pProvincia", p.provincia));
                 cmd.Parameters.Add(new SqlParameter("pIndirizzo", p.indirizzo));
-                cmd.Parameters.Add(new SqlParameter("pCap", p.cap));
+                cmd.Parameters.Add(new SqlParameter("pCap", p.CAP));
                 cmd.Parameters.Add(new SqlParameter("pTelefono", p.telefono));
                 cmd.Parameters.Add(new SqlParameter("pMobile", p.mobile));
                 cmd.Parameters.Add(new SqlParameter("pEmail", p.email));
@@ -172,7 +172,7 @@ namespace ApplicazioneMedico.DAO
                 cmd.Parameters.Add(new SqlParameter("pResidenza", p.residenza));
                 cmd.Parameters.Add(new SqlParameter("pProvincia", p.provincia));
                 cmd.Parameters.Add(new SqlParameter("pIndirizzo", p.indirizzo));
-                cmd.Parameters.Add(new SqlParameter("pCap", p.cap));
+                cmd.Parameters.Add(new SqlParameter("pCap", p.CAP));
                 cmd.Parameters.Add(new SqlParameter("pTelefono", p.telefono));
                 cmd.Parameters.Add(new SqlParameter("pMobile", p.mobile));
                 cmd.Parameters.Add(new SqlParameter("pEmail", p.email));

@@ -29,7 +29,7 @@ namespace ApplicazioneMedico.Data
         [DataMember]
         public string indirizzo { get; set; }
         [DataMember]
-        public string cap { get; set; }
+        public string CAP { get; set; }
         [DataMember]
         public string telefono { get; set; }
         [DataMember]

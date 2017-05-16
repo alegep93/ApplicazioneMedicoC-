@@ -11,19 +11,19 @@ namespace ApplicazioneMedico.Data
     public class Certificato : RootObject<Certificato>
     {
         [DataMember]
-        public int id { get; set; }
+        public int idCertificato { get; set; }
         [DataMember]
-        public string codPaziente { get; set; }
+        public string cod_sanitario { get; set; }
         [DataMember]
-        public string codMedico { get; set; }
+        public string cod_medico { get; set; }
         [DataMember]
-        public DateTime dataEmissione { get; set; }
+        public DateTime data_emissione { get; set; }
         [DataMember]
-        public string codPatologia { get; set; }
+        public string cod_patologia { get; set; }
         [DataMember]
-        public DateTime dataInizio { get; set; }
+        public DateTime data_inizio { get; set; }
         [DataMember]
-        public DateTime dataFine { get; set; }
+        public DateTime data_fine { get; set; }
         [DataMember]
         public string tipologia { get; set; }
         [DataMember]
@@ -33,7 +33,7 @@ namespace ApplicazioneMedico.Data
         [DataMember]
         public string indirizzo { get; set; }
         [DataMember]
-        public string cap { get; set; }
+        public string CAP { get; set; }
         [DataMember]
         public string domicilio { get; set; }
         [DataMember]

@@ -22,6 +22,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -55,6 +56,7 @@
     <Compile Include="API\SyncDataFromServer.cs" />
     <Compile Include="DAO\BaseDAO.cs" />
     <Compile Include="DAO\CertificatiDAO.cs" />
+    <Compile Include="DAO\MedicoDAO.cs" />
     <Compile Include="DAO\PatologieDAO.cs" />
     <Compile Include="DAO\PazientiDAO.cs" />
     <Compile Include="Data\Certificato.cs" />

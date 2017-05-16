@@ -11,7 +11,7 @@ namespace ApplicazioneMedico.Data
     public class Patologia : RootObject<Patologia>
     {
         [DataMember]
-        public string codicePatologia { get; set; }
+        public string cod_patologia { get; set; }
         [DataMember]
         public string nome { get; set; }
         [DataMember]

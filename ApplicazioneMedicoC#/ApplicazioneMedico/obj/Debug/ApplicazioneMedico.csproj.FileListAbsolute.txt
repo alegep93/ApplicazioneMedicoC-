@@ -1,11 +1,11 @@
-C:\Users\admin\Documents\Alessandro\ProjectWork\ApplicazioneMedicoC#\ApplicazioneMedico\bin\Debug\ApplicazioneMedico.exe.config
-C:\Users\admin\Documents\Alessandro\ProjectWork\ApplicazioneMedicoC#\ApplicazioneMedico\obj\Debug\ApplicazioneMedico.csprojResolveAssemblyReference.cache
 C:\Users\admin\Documents\Alessandro\ProjectWork\ApplicazioneMedicoC#\ApplicazioneMedico\obj\Debug\ApplicazioneMedico.ApplicazioneMedico.resources
 C:\Users\admin\Documents\Alessandro\ProjectWork\ApplicazioneMedicoC#\ApplicazioneMedico\obj\Debug\ApplicazioneMedico.Properties.Resources.resources
 C:\Users\admin\Documents\Alessandro\ProjectWork\ApplicazioneMedicoC#\ApplicazioneMedico\obj\Debug\ApplicazioneMedico.csproj.GenerateResource.Cache
+C:\Users\admin\Documents\Alessandro\ProjectWork\ApplicazioneMedicoC#\ApplicazioneMedico\bin\Debug\ApplicazioneMedico.exe.config
 C:\Users\admin\Documents\Alessandro\ProjectWork\ApplicazioneMedicoC#\ApplicazioneMedico\bin\Debug\ApplicazioneMedico.exe
 C:\Users\admin\Documents\Alessandro\ProjectWork\ApplicazioneMedicoC#\ApplicazioneMedico\bin\Debug\ApplicazioneMedico.pdb
-C:\Users\admin\Documents\Alessandro\ProjectWork\ApplicazioneMedicoC#\ApplicazioneMedico\obj\Debug\ApplicazioneMedico.exe
-C:\Users\admin\Documents\Alessandro\ProjectWork\ApplicazioneMedicoC#\ApplicazioneMedico\obj\Debug\ApplicazioneMedico.pdb
 C:\Users\admin\Documents\Alessandro\ProjectWork\ApplicazioneMedicoC#\ApplicazioneMedico\bin\Debug\Newtonsoft.Json.dll
 C:\Users\admin\Documents\Alessandro\ProjectWork\ApplicazioneMedicoC#\ApplicazioneMedico\bin\Debug\Newtonsoft.Json.xml
+C:\Users\admin\Documents\Alessandro\ProjectWork\ApplicazioneMedicoC#\ApplicazioneMedico\obj\Debug\ApplicazioneMedico.exe
+C:\Users\admin\Documents\Alessandro\ProjectWork\ApplicazioneMedicoC#\ApplicazioneMedico\obj\Debug\ApplicazioneMedico.pdb
+C:\Users\admin\Documents\Alessandro\ProjectWork\ApplicazioneMedicoC#\ApplicazioneMedico\obj\Debug\ApplicazioneMedico.csprojResolveAssemblyReference.cache

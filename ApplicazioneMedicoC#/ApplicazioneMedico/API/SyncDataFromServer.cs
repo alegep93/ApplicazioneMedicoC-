@@ -12,9 +12,12 @@ namespace ApplicazioneMedico.API
     {
         public static bool Synchronize(RootObject<Paziente> roPaz, RootObject<Patologia> roPat, RootObject<Certificato> roCert)
         {
+            DateTime syncDate = DateTime.Now;
             bool isSyncPazienti = SynchronizePazienti(roPaz);
             bool isSyncPatologie = SynchronizePatologie(roPat);
             bool isSyncCertificati = SynchronizeCertificati(roCert);
+
+            MedicoDAO.UpdateLastSyncDate(syncDate);
             return isSyncPazienti && isSyncPatologie && isSyncCertificati;
         }
         public static bool SynchronizePazienti(RootObject<Paziente> roPaz)
@@ -54,7 +57,7 @@ namespace ApplicazioneMedico.API
                 {
                     foreach (Patologia p in pList)
                     {
-                        if (!PatologieDAO.PatologiaExist(p.codicePatologia))
+                        if (!PatologieDAO.PatologiaExist(p.cod_patologia))
                             PatologieDAO.InsertPatologia(p);
                         else
                             PatologieDAO.UpdatePatologia(p);
@@ -81,7 +84,7 @@ namespace ApplicazioneMedico.API
                 {
                     foreach (Certificato c in cList)
                     {
-                        if (!CertificatiDAO.CertificatoExist(c.id))
+                        if (!CertificatiDAO.CertificatoExist(c.idCertificato))
                             CertificatiDAO.InsertCertificato(c);
                     }
                     return true;

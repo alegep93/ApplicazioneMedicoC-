@@ -55,7 +55,7 @@ namespace ApplicazioneMedico.DAO
 
                 if (dr.Read())
                 {
-                    p.codicePatologia = dr.GetString(1);
+                    p.cod_patologia = dr.GetString(1);
                     p.nome = dr.GetString(2);
                     p.descrizione = dr.GetString(3);
                 }
@@ -105,7 +105,7 @@ namespace ApplicazioneMedico.DAO
                 sql.Append("VALUES (@pCodPat, @pNome, @pDescrizione) ");
 
                 SqlCommand cmd = new SqlCommand(sql.ToString(), cn);
-                cmd.Parameters.Add(new SqlParameter("pCodPat", p.codicePatologia));
+                cmd.Parameters.Add(new SqlParameter("pCodPat", p.cod_patologia));
                 cmd.Parameters.Add(new SqlParameter("pNome", p.nome));
                 cmd.Parameters.Add(new SqlParameter("pDescrizione", p.descrizione));
 
@@ -127,7 +127,7 @@ namespace ApplicazioneMedico.DAO
                 sql.Append("WHERE cod_patologia = @pCodPat ");
 
                 SqlCommand cmd = new SqlCommand(sql.ToString(), cn);
-                cmd.Parameters.Add(new SqlParameter("pCodPat", p.codicePatologia));
+                cmd.Parameters.Add(new SqlParameter("pCodPat", p.cod_patologia));
                 cmd.Parameters.Add(new SqlParameter("pNome", p.nome));
                 cmd.Parameters.Add(new SqlParameter("pDescrizione", p.descrizione));
 

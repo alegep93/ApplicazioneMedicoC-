@@ -1,4 +1,5 @@
-﻿using ApplicazioneMedico.Data;
+﻿using ApplicazioneMedico.DAO;
+using ApplicazioneMedico.Data;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -33,7 +34,7 @@ namespace ApplicazioneMedico.API
         }
         public static RootObject<Patologia> GetPatologieDataFromServer()
         {
-            string url = "http://192.168.4.159:8080/ApiServer/Patologie";
+            string url = "http://192.168.4.159:8080/ApiServer/Patologia/all";
             string jsonPatologie = "";
 
             try
@@ -50,7 +51,7 @@ namespace ApplicazioneMedico.API
         }
         public static RootObject<Certificato> GetCertificatiDataFromServer()
         {
-            string url = "http://192.168.4.159:8080/ApiServer/Certificati";
+            string url = "http://192.168.4.159:8080/ApiServer/Certificato/get/1";
             string jsonCertificati = "";
 
             try
@@ -64,6 +65,31 @@ namespace ApplicazioneMedico.API
             {
                 return null;
             }
+        }
+
+        public static bool SendCertificatiToServer(List<Certificato> cList)
+        {
+            string url = "http://192.168.4.159:8080/ApiServer/Certificato/write";
+            syncClient.Headers.Add("Content-Type", "application/json");
+
+            foreach (Certificato c in cList)
+            {
+                string jsonCertificato = JSONManager.SerializeJson(c);
+
+                if(c.data_emissione > MedicoDAO.GetLastSyncDate())
+                    syncClient.UploadString(url, jsonCertificato);
+            }
+
+            return true;
+
+            /*HttpWebRequest httpWebRequest = (HttpWebRequest)WebRequest.Create("http://192.168.4.159:8080/ApiServer/Certificato/write");
+            httpWebRequest.ContentType = "application/json";
+            httpWebRequest.Method = "POST";
+            HttpWebResponse httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+            using (StreamReader streamReader = new StreamReader(httpResponse.GetResponseStream()))
+            {
+                result = streamReader.ReadToEnd();
+            }*/
         }
     }
 }

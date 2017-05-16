@@ -18,14 +18,16 @@ namespace ApplicazioneMedico
     public partial class ApplicazioneMedico : Form
     {
         Timer t = new Timer();
-        RootObject<Paziente> roPaz = ApiRestClient.GetPazientiDataFromServer();
-        RootObject<Patologia> roPat = ApiRestClient.GetPatologieDataFromServer();
-        RootObject<Certificato> roCert = ApiRestClient.GetCertificatiDataFromServer();
+        RootObject<Paziente> roPaz = null;
+        RootObject<Patologia> roPat = null;
+        RootObject<Certificato> roCert = null;
+        bool response = false;
 
         public ApplicazioneMedico()
         {
             InitializeComponent();
 
+            GetOrSendData();
             SetFont();
             Sync();
 
@@ -279,7 +281,7 @@ namespace ApplicazioneMedico
             txtComunePaziente.Text = p.residenza;
             txtProvinciaPaziente.Text = p.provincia;
             txtIndirizzoPaziente.Text = p.indirizzo;
-            txtCapPaziente.Text = p.cap;
+            txtCapPaziente.Text = p.CAP;
             txtTelefonoPaziente.Text = p.telefono;
             txtCellularePaziente.Text = p.mobile;
             txtEmailPaziente.Text = p.email;
@@ -330,15 +332,15 @@ namespace ApplicazioneMedico
         }
         protected Certificato popolaCertificato(Certificato c)
         {
-            c.codPaziente = txtCodSanNuovoCert.Text;
-            c.dataEmissione = new DateTime();
-            c.codPatologia = txtCodPatNuovoCert.Text;
-            c.dataInizio = dtpDataInizioNuovoCert.Value;
-            c.dataFine = dtpDataFineNuovoCert.Value;
+            c.cod_sanitario = txtCodSanNuovoCert.Text;
+            c.data_emissione = new DateTime();
+            c.cod_patologia = txtCodPatNuovoCert.Text;
+            c.data_inizio = dtpDataInizioNuovoCert.Value;
+            c.data_fine = dtpDataFineNuovoCert.Value;
             c.tipologia = cmbTipologia.Text;
             c.comune = txtComuneNuovoCert.Text;
             c.provincia = txtProvinciaNuovoCert.Text;
-            c.cap = txtCapNuovoCert.Text;
+            c.CAP = txtCapNuovoCert.Text;
             c.note = txtNoteNuovoCert.Text;
 
             if (c.domicilio != "")
@@ -359,6 +361,13 @@ namespace ApplicazioneMedico
             cmbTipologia.Items.Add("Inizio");
             cmbTipologia.Items.Add("Continuazione");
             cmbTipologia.Items.Add("Ricaduta");
+        }        
+        protected void GetOrSendData()
+        {
+            roPaz = ApiRestClient.GetPazientiDataFromServer();
+            roPat = ApiRestClient.GetPatologieDataFromServer();
+            roCert = ApiRestClient.GetCertificatiDataFromServer();
+            response = ApiRestClient.SendCertificatiToServer(CertificatiDAO.GetListCertificati());
         }
 
         /* Metodi per il Menù */
