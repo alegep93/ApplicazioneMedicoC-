@@ -228,7 +228,37 @@ namespace ApplicazioneMedico.DAO
             }
             finally { cn.Close(); }
         }
+        public static DataTable GetCertificatiSingoloPaziente(string codPaz)
+        {
+            SqlConnection cn = GetConnection();
+            StringBuilder sql = new StringBuilder();
 
+            try
+            {
+                sql.Append("SELECT C.id, P.nome + ' ' + P.cognome AS 'Nominativo Paziente', C.data_emissione AS 'Data Emissione', ");
+                sql.Append("pat.nome AS 'Patologia', C.data_inizio AS 'Data Inizio', C.data_fine AS 'Data Fine', C.tipologia AS Tipologia, C.comune AS Comune, ");
+                sql.Append("C.provincia AS Provincia, C.indirizzo AS Indirizzo, C.cap AS Cap, C.domicilio AS Domicilio, C.note AS Note ");
+                sql.Append("FROM certificato AS C JOIN paziente AS P ON (C.cod_paziente = P.cod_sanitario) ");
+                sql.Append("JOIN patologia AS Pat ON (C.cod_patologia = pat.cod_patologia) ");
+                sql.Append("WHERE cod_paziente = @pCodPaz ");
+
+                SqlCommand cmd = new SqlCommand(sql.ToString(), cn);
+                cmd.Parameters.Add(new SqlParameter("pCodPaz", codPaz));
+                SqlDataAdapter adapter = new SqlDataAdapter();
+                adapter.SelectCommand = cmd;
+
+                DataTable table = new DataTable();
+                table.Locale = System.Globalization.CultureInfo.InvariantCulture;
+                adapter.Fill(table);
+
+                return table;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Impossibile recuperare i certificati", ex);
+            }
+            finally { cn.Close(); }
+        }
         /*public static Certificato GetCertificato(string codPaz)
         {
             SqlConnection cn = GetConnection();

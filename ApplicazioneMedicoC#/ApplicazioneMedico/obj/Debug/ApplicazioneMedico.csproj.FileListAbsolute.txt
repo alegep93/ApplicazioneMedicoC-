@@ -9,3 +9,14 @@ C:\Users\admin\Documents\Alessandro\ProjectWork\ApplicazioneMedicoC#\Applicazion
 C:\Users\admin\Documents\Alessandro\ProjectWork\ApplicazioneMedicoC#\ApplicazioneMedico\obj\Debug\ApplicazioneMedico.exe
 C:\Users\admin\Documents\Alessandro\ProjectWork\ApplicazioneMedicoC#\ApplicazioneMedico\obj\Debug\ApplicazioneMedico.pdb
 C:\Users\admin\Documents\Alessandro\ProjectWork\ApplicazioneMedicoC#\ApplicazioneMedico\obj\Debug\ApplicazioneMedico.csprojResolveAssemblyReference.cache
+C:\Git Repository\ApplicazioneMedicoC#\ApplicazioneMedicoC#\ApplicazioneMedico\bin\Debug\ApplicazioneMedico.exe.config
+C:\Git Repository\ApplicazioneMedicoC#\ApplicazioneMedicoC#\ApplicazioneMedico\bin\Debug\ApplicazioneMedico.exe
+C:\Git Repository\ApplicazioneMedicoC#\ApplicazioneMedicoC#\ApplicazioneMedico\bin\Debug\ApplicazioneMedico.pdb
+C:\Git Repository\ApplicazioneMedicoC#\ApplicazioneMedicoC#\ApplicazioneMedico\bin\Debug\Newtonsoft.Json.dll
+C:\Git Repository\ApplicazioneMedicoC#\ApplicazioneMedicoC#\ApplicazioneMedico\bin\Debug\Newtonsoft.Json.xml
+C:\Git Repository\ApplicazioneMedicoC#\ApplicazioneMedicoC#\ApplicazioneMedico\obj\Debug\ApplicazioneMedico.csprojResolveAssemblyReference.cache
+C:\Git Repository\ApplicazioneMedicoC#\ApplicazioneMedicoC#\ApplicazioneMedico\obj\Debug\ApplicazioneMedico.ApplicazioneMedico.resources
+C:\Git Repository\ApplicazioneMedicoC#\ApplicazioneMedicoC#\ApplicazioneMedico\obj\Debug\ApplicazioneMedico.Properties.Resources.resources
+C:\Git Repository\ApplicazioneMedicoC#\ApplicazioneMedicoC#\ApplicazioneMedico\obj\Debug\ApplicazioneMedico.csproj.GenerateResource.Cache
+C:\Git Repository\ApplicazioneMedicoC#\ApplicazioneMedicoC#\ApplicazioneMedico\obj\Debug\ApplicazioneMedico.exe
+C:\Git Repository\ApplicazioneMedicoC#\ApplicazioneMedicoC#\ApplicazioneMedico\obj\Debug\ApplicazioneMedico.pdb

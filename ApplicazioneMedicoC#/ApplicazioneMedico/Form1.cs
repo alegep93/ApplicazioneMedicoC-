@@ -27,9 +27,9 @@ namespace ApplicazioneMedico
         {
             InitializeComponent();
 
-            GetOrSendData();
+            //GetOrSendData();
             SetFont();
-            Sync();
+            //Sync();
 
             //Mostro per 2 secondi il caricamento e poi passo al pannello dei pazienti
             Wait2Seconds();
@@ -85,6 +85,7 @@ namespace ApplicazioneMedico
                 p = PazientiDAO.GetPaziente(codPaz);
 
                 FillSchedaPaziente(p);
+                BindGridCertificatiSingoloPaziente();
             }
         }
         private void subMenuSincronizza_Click(object sender, EventArgs e)
@@ -142,9 +143,18 @@ namespace ApplicazioneMedico
             grdPatologie.Columns[0].Visible = false;
             grdPatologie.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
+        protected void BindGridCertificatiSingoloPaziente()
+        {
+            BindingSource bs = new BindingSource();
+            bs.DataSource = CertificatiDAO.GetCertificatiSingoloPaziente(txtCodiceSanitarioPaziente.Text);
+            grdCertificatiPaziente.DataSource = bs;
+            grdCertificatiPaziente.Columns[0].Visible = false;
+            grdCertificatiPaziente.Columns[2].Visible = false;
+            grdCertificatiPaziente.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+        }
         protected void CreateInfoColumn()
         {
-            Image myImage = Image.FromFile(@"C:\Users\admin\Documents\Alessandro\ProjectWork\ApplicazioneMedicoC#\ApplicazioneMedico\Images\info.png");
+            Image myImage = Image.FromFile(@"C:\Git Repository\ApplicazioneMedicoC#\ApplicazioneMedicoC#\ApplicazioneMedico\Images\info.png");
             Bitmap imgResized = new Bitmap(myImage, new Size(20, 20));
             DataGridViewImageColumn iconColumn = new DataGridViewImageColumn();
             iconColumn.Image = imgResized;

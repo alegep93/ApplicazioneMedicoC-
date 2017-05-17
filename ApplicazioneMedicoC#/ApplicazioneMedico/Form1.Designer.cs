@@ -179,7 +179,7 @@
             // 
             this.subMenuSincronizza.Image = ((System.Drawing.Image)(resources.GetObject("subMenuSincronizza.Image")));
             this.subMenuSincronizza.Name = "subMenuSincronizza";
-            this.subMenuSincronizza.Size = new System.Drawing.Size(190, 30);
+            this.subMenuSincronizza.Size = new System.Drawing.Size(189, 30);
             this.subMenuSincronizza.Text = "Sincronizza";
             this.subMenuSincronizza.Click += new System.EventHandler(this.subMenuSincronizza_Click);
             // 
@@ -189,7 +189,7 @@
             this.exitToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 12F);
             this.exitToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("exitToolStripMenuItem.Image")));
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(190, 30);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(189, 30);
             this.exitToolStripMenuItem.Text = "Exit     (ALT+F4)";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -198,7 +198,7 @@
             this.menuPazienti.Font = new System.Drawing.Font("Segoe UI", 14F);
             this.menuPazienti.ForeColor = System.Drawing.SystemColors.Control;
             this.menuPazienti.Name = "menuPazienti";
-            this.menuPazienti.Size = new System.Drawing.Size(91, 29);
+            this.menuPazienti.Size = new System.Drawing.Size(90, 29);
             this.menuPazienti.Text = "Pazienti";
             this.menuPazienti.Click += new System.EventHandler(this.menuPazienti_Click);
             // 
@@ -216,7 +216,7 @@
             this.menuPatologie.Font = new System.Drawing.Font("Segoe UI", 14F);
             this.menuPatologie.ForeColor = System.Drawing.SystemColors.Control;
             this.menuPatologie.Name = "menuPatologie";
-            this.menuPatologie.Size = new System.Drawing.Size(104, 29);
+            this.menuPatologie.Size = new System.Drawing.Size(103, 29);
             this.menuPatologie.Text = "Patologie";
             this.menuPatologie.Click += new System.EventHandler(this.menuPatologie_Click);
             // 
@@ -1139,10 +1139,10 @@
             this.lblServerDate.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.lblServerDate.AutoSize = true;
             this.lblServerDate.BackColor = System.Drawing.Color.Transparent;
-            this.lblServerDate.Font = new System.Drawing.Font("GothicI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblServerDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblServerDate.Location = new System.Drawing.Point(1418, 11);
             this.lblServerDate.Name = "lblServerDate";
-            this.lblServerDate.Size = new System.Drawing.Size(50, 17);
+            this.lblServerDate.Size = new System.Drawing.Size(34, 13);
             this.lblServerDate.TabIndex = 14;
             this.lblServerDate.Text = "00-00";
             // 
