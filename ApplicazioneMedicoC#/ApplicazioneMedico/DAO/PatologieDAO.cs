@@ -37,6 +37,37 @@ namespace ApplicazioneMedico.DAO
             }
             finally { cn.Close(); }
         }
+        public static List<Patologia> GetListPatologie()
+        {
+            SqlConnection cn = GetConnection();
+            StringBuilder sql = new StringBuilder();
+            SqlDataReader dr = null;
+
+            List<Patologia> patList = new List<Patologia>();
+
+            try
+            {
+                sql.Append("SELECT nome FROM patologia ");
+
+                SqlCommand cmd = new SqlCommand(sql.ToString(), cn);
+
+                dr = cmd.ExecuteReader();
+
+                while (dr.Read())
+                {
+                    Patologia p = new Patologia();
+                    p.nome = dr.GetString(0);
+                    patList.Add(p);
+                }
+
+                return patList;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Impossibile recuperare le patologie", ex);
+            }
+            finally { cn.Close(); }
+        }
         public static Patologia GetPatologia(string codPat)
         {
             SqlConnection cn = GetConnection();
@@ -65,6 +96,35 @@ namespace ApplicazioneMedico.DAO
             catch (Exception ex)
             {
                 throw new Exception("Impossibile recuperare la singola patologia", ex);
+            }
+            finally { cn.Close(); }
+        }
+        public static string GetPatologiaByName(string nome)
+        {
+            SqlConnection cn = GetConnection();
+            StringBuilder sql = new StringBuilder();
+            SqlDataReader dr = null;
+            string codPat = "";
+
+            try
+            {
+                sql.Append("SELECT cod_patologia FROM patologia WHERE nome = @pNome ");
+
+                SqlCommand cmd = new SqlCommand(sql.ToString(), cn);
+                cmd.Parameters.Add(new SqlParameter("pNome", nome));
+
+                dr = cmd.ExecuteReader();
+
+                if (dr.Read())
+                {
+                    codPat = dr.GetString(0);
+                }
+
+                return codPat;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Impossibile recuperare il codice della patologia a partire dal nome", ex);
             }
             finally { cn.Close(); }
         }

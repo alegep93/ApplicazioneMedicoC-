@@ -22,7 +22,7 @@ namespace ApplicazioneMedico.DAO
                 sql.Append("pat.nome AS 'Patologia', C.data_inizio AS 'Data Inizio', C.data_fine AS 'Data Fine', C.tipologia AS Tipologia, C.comune AS Comune, ");
                 sql.Append("C.provincia AS Provincia, C.indirizzo AS Indirizzo, C.cap AS Cap, C.domicilio AS Domicilio, C.note AS Note ");
                 sql.Append("FROM certificato AS C JOIN paziente AS P ON (C.cod_paziente = P.cod_sanitario) ");
-                sql.Append("JOIN patologia AS Pat ON (C.cod_patologia = pat.cod_patologia) ");
+                sql.Append("JOIN patologia AS Pat ON (C.cod_patologia = Pat.cod_patologia) ");
 
                 SqlCommand cmd = new SqlCommand(sql.ToString(), cn);
                 SqlDataAdapter adapter = new SqlDataAdapter();
@@ -107,13 +107,13 @@ namespace ApplicazioneMedico.DAO
                 while (dr.Read())
                 {
                     Certificato c = new Certificato();
-                    c.idCertificato = dr.GetString(0);
+                    c.idCertificato = dr.GetInt32(0).ToString();
                     c.cod_sanitario = dr.GetString(1);
                     c.cod_medico = dr.GetString(2);
-                    c.data_emissione = dr.GetString(3);
+                    c.data_emissione = dr.GetDateTime(3).ToString();
                     c.cod_patologia = dr.GetString(4);
-                    c.data_inizio = dr.GetString(5);
-                    c.data_fine = dr.GetString(6);
+                    c.data_inizio = dr.GetDateTime(5).ToString();
+                    c.data_fine = dr.GetDateTime(6).ToString();
                     c.tipologia = dr.GetString(7);
                     c.comune = dr.GetString(8);
                     c.provincia = dr.GetString(9);
@@ -159,7 +159,7 @@ namespace ApplicazioneMedico.DAO
             }
             finally { cn.Close(); }
         }
-        public static void InsertCertificato(Certificato c)
+        public static bool InsertCertificato(Certificato c)
         {
             SqlConnection cn = GetConnection();
             StringBuilder sql = new StringBuilder();
@@ -167,12 +167,12 @@ namespace ApplicazioneMedico.DAO
             try
             {
                 sql.Append("INSERT INTO certificato (cod_paziente, cod_medico, data_emissione, cod_patologia, data_inizio, data_fine, tipologia, comune, provincia, indirizzo, cap, domicilio, note) ");
-                sql.Append("VALUES (@pCodPaz, @pCodMed, @pDataEmis, @pCodPat, @pDataInizio, @pDataFine, @pTipologia, @pComune, @pProvincia, @pIndirizzo, @pCap, @pDomicilio, @pNote ");
+                sql.Append("VALUES (@pCodPaz, @pCodMed, @pDataEmis, @pCodPat, @pDataInizio, @pDataFine, @pTipologia, @pComune, @pProvincia, @pIndirizzo, @pCap, @pDomicilio, @pNote) ");
 
                 SqlCommand cmd = new SqlCommand(sql.ToString(), cn);
                 cmd.Parameters.Add(new SqlParameter("pCodPaz", c.cod_sanitario));
                 cmd.Parameters.Add(new SqlParameter("pCodMed", c.cod_medico));
-                cmd.Parameters.Add(new SqlParameter("pDataEmis", c.data_emissione));
+                cmd.Parameters.Add(new SqlParameter("pDataEmis", Convert.ToDateTime(c.data_emissione)));
                 cmd.Parameters.Add(new SqlParameter("pCodPat", c.cod_patologia));
                 cmd.Parameters.Add(new SqlParameter("pDataInizio", c.data_inizio));
                 cmd.Parameters.Add(new SqlParameter("pDataFine", c.data_fine));
@@ -184,7 +184,12 @@ namespace ApplicazioneMedico.DAO
                 cmd.Parameters.Add(new SqlParameter("pDomicilio", c.domicilio));
                 cmd.Parameters.Add(new SqlParameter("pNote", c.note));
 
-                cmd.ExecuteNonQuery();
+                int rows = cmd.ExecuteNonQuery();
+
+                if (rows > 0)
+                    return true;
+                else
+                    return false;
             }
             catch (Exception ex)
             {

@@ -108,7 +108,6 @@
             this.txtCodSanNuovoCert = new System.Windows.Forms.TextBox();
             this.lblCodSanNuovoCert = new System.Windows.Forms.Label();
             this.lblCodPatolNuovoCert = new System.Windows.Forms.Label();
-            this.txtCodPatNuovoCert = new System.Windows.Forms.TextBox();
             this.lblDataInizioNuovoCert = new System.Windows.Forms.Label();
             this.dtpDataInizioNuovoCert = new System.Windows.Forms.DateTimePicker();
             this.lblDataFineNuovoCert = new System.Windows.Forms.Label();
@@ -123,6 +122,7 @@
             this.txtCapNuovoCert = new System.Windows.Forms.TextBox();
             this.lblTipolnuovoCert = new System.Windows.Forms.Label();
             this.cmbTipologia = new System.Windows.Forms.ComboBox();
+            this.cmbPatologieNuovoCert = new System.Windows.Forms.ComboBox();
             this.lblCertCodSan = new System.Windows.Forms.Label();
             this.lblServerDate = new System.Windows.Forms.Label();
             this.mainNav.SuspendLayout();
@@ -179,7 +179,7 @@
             // 
             this.subMenuSincronizza.Image = ((System.Drawing.Image)(resources.GetObject("subMenuSincronizza.Image")));
             this.subMenuSincronizza.Name = "subMenuSincronizza";
-            this.subMenuSincronizza.Size = new System.Drawing.Size(189, 30);
+            this.subMenuSincronizza.Size = new System.Drawing.Size(190, 30);
             this.subMenuSincronizza.Text = "Sincronizza";
             this.subMenuSincronizza.Click += new System.EventHandler(this.subMenuSincronizza_Click);
             // 
@@ -189,7 +189,7 @@
             this.exitToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 12F);
             this.exitToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("exitToolStripMenuItem.Image")));
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(189, 30);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(190, 30);
             this.exitToolStripMenuItem.Text = "Exit     (ALT+F4)";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -198,7 +198,7 @@
             this.menuPazienti.Font = new System.Drawing.Font("Segoe UI", 14F);
             this.menuPazienti.ForeColor = System.Drawing.SystemColors.Control;
             this.menuPazienti.Name = "menuPazienti";
-            this.menuPazienti.Size = new System.Drawing.Size(90, 29);
+            this.menuPazienti.Size = new System.Drawing.Size(91, 29);
             this.menuPazienti.Text = "Pazienti";
             this.menuPazienti.Click += new System.EventHandler(this.menuPazienti_Click);
             // 
@@ -216,7 +216,7 @@
             this.menuPatologie.Font = new System.Drawing.Font("Segoe UI", 14F);
             this.menuPatologie.ForeColor = System.Drawing.SystemColors.Control;
             this.menuPatologie.Name = "menuPatologie";
-            this.menuPatologie.Size = new System.Drawing.Size(103, 29);
+            this.menuPatologie.Size = new System.Drawing.Size(104, 29);
             this.menuPatologie.Text = "Patologie";
             this.menuPatologie.Click += new System.EventHandler(this.menuPatologie_Click);
             // 
@@ -538,9 +538,11 @@
             // 
             // grdCertificatiPaziente
             // 
+            this.grdCertificatiPaziente.AllowUserToAddRows = false;
             this.grdCertificatiPaziente.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.grdCertificatiPaziente.Location = new System.Drawing.Point(16, 204);
             this.grdCertificatiPaziente.Name = "grdCertificatiPaziente";
+            this.grdCertificatiPaziente.ReadOnly = true;
             this.grdCertificatiPaziente.Size = new System.Drawing.Size(1464, 423);
             this.grdCertificatiPaziente.TabIndex = 29;
             // 
@@ -918,7 +920,6 @@
             this.tblNuovoCertificato.Controls.Add(this.txtCodSanNuovoCert, 1, 0);
             this.tblNuovoCertificato.Controls.Add(this.lblCodSanNuovoCert, 0, 0);
             this.tblNuovoCertificato.Controls.Add(this.lblCodPatolNuovoCert, 4, 0);
-            this.tblNuovoCertificato.Controls.Add(this.txtCodPatNuovoCert, 5, 0);
             this.tblNuovoCertificato.Controls.Add(this.lblDataInizioNuovoCert, 0, 1);
             this.tblNuovoCertificato.Controls.Add(this.dtpDataInizioNuovoCert, 1, 1);
             this.tblNuovoCertificato.Controls.Add(this.lblDataFineNuovoCert, 2, 1);
@@ -933,6 +934,7 @@
             this.tblNuovoCertificato.Controls.Add(this.txtCapNuovoCert, 5, 2);
             this.tblNuovoCertificato.Controls.Add(this.lblTipolnuovoCert, 2, 0);
             this.tblNuovoCertificato.Controls.Add(this.cmbTipologia, 3, 0);
+            this.tblNuovoCertificato.Controls.Add(this.cmbPatologieNuovoCert, 5, 0);
             this.tblNuovoCertificato.Location = new System.Drawing.Point(64, 52);
             this.tblNuovoCertificato.Name = "tblNuovoCertificato";
             this.tblNuovoCertificato.RowCount = 5;
@@ -981,6 +983,7 @@
             // 
             // txtCodSanNuovoCert
             // 
+            this.txtCodSanNuovoCert.Enabled = false;
             this.txtCodSanNuovoCert.Location = new System.Drawing.Point(234, 3);
             this.txtCodSanNuovoCert.Name = "txtCodSanNuovoCert";
             this.txtCodSanNuovoCert.Size = new System.Drawing.Size(100, 20);
@@ -1003,13 +1006,6 @@
             this.lblCodPatolNuovoCert.Size = new System.Drawing.Size(60, 14);
             this.lblCodPatolNuovoCert.TabIndex = 4;
             this.lblCodPatolNuovoCert.Text = "Patologia";
-            // 
-            // txtCodPatNuovoCert
-            // 
-            this.txtCodPatNuovoCert.Location = new System.Drawing.Point(1158, 3);
-            this.txtCodPatNuovoCert.Name = "txtCodPatNuovoCert";
-            this.txtCodPatNuovoCert.Size = new System.Drawing.Size(100, 20);
-            this.txtCodPatNuovoCert.TabIndex = 21;
             // 
             // lblDataInizioNuovoCert
             // 
@@ -1124,6 +1120,14 @@
             this.cmbTipologia.Size = new System.Drawing.Size(121, 22);
             this.cmbTipologia.TabIndex = 32;
             // 
+            // cmbPatologieNuovoCert
+            // 
+            this.cmbPatologieNuovoCert.FormattingEnabled = true;
+            this.cmbPatologieNuovoCert.Location = new System.Drawing.Point(1158, 3);
+            this.cmbPatologieNuovoCert.Name = "cmbPatologieNuovoCert";
+            this.cmbPatologieNuovoCert.Size = new System.Drawing.Size(121, 22);
+            this.cmbPatologieNuovoCert.TabIndex = 33;
+            // 
             // lblCertCodSan
             // 
             this.lblCertCodSan.Anchor = System.Windows.Forms.AnchorStyles.None;
@@ -1154,13 +1158,13 @@
             this.BackgroundImage = global::ApplicazioneMedico.Properties.Resources.Background1;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1506, 784);
-            this.Controls.Add(this.pnlNuovoCertificato);
+            this.Controls.Add(this.pnlSingoloPaziente);
             this.Controls.Add(this.pnlCertificati);
+            this.Controls.Add(this.pnlNuovoCertificato);
             this.Controls.Add(this.lblServerDate);
             this.Controls.Add(this.mainNav);
             this.Controls.Add(this.pnlPatologie);
             this.Controls.Add(this.pnlPazienti);
-            this.Controls.Add(this.pnlSingoloPaziente);
             this.Controls.Add(this.pnlAggiornamento);
             this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Georgia", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -1274,7 +1278,6 @@
         private System.Windows.Forms.Label lblTipolnuovoCert;
         private System.Windows.Forms.TextBox txtProvinciaNuovoCert;
         private System.Windows.Forms.TextBox txtComuneNuovoCert;
-        private System.Windows.Forms.TextBox txtCodPatNuovoCert;
         private System.Windows.Forms.TextBox txtIndirizzoNuovoCert;
         private System.Windows.Forms.Button btnAnnullaNuovoCert;
         private System.Windows.Forms.Button btnInsNuovoCert;
@@ -1301,6 +1304,7 @@
         public System.Windows.Forms.TextBox txtNoteNuovoCert;
         private System.Windows.Forms.Label lblNoteNuovoCert;
         private System.Windows.Forms.ComboBox cmbTipologia;
+        private System.Windows.Forms.ComboBox cmbPatologieNuovoCert;
     }
 }
 

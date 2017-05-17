@@ -17,17 +17,21 @@ namespace ApplicazioneMedico
         {
             T result;
             DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(T));
-            using (MemoryStream ms = new MemoryStream(Encoding.Unicode.GetBytes(json)))
+            using (MemoryStream ms = new MemoryStream(Encoding.UTF8.GetBytes(json)))
             {
                 result = (T)serializer.ReadObject(ms);
             }
             return result;
         }
-
-
         public static string SerializeJson(Certificato c)
         {
-            string json = "{\"idCertificato\":\"" + c.idCertificato + "\"," +
+            DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(Certificato));
+            MemoryStream ms = new MemoryStream();
+            serializer.WriteObject(ms, c);
+            return Encoding.UTF8.GetString(ms.ToArray());
+
+
+            /*string json = "{\"idCertificato\":\"" + c.idCertificato + "\"," +
                            "\"cod_sanitario\":\"" + c.cod_sanitario + "\"," +
                            "\"cod_medico\":\"" + c.cod_medico + "\"," +
                            "\"data_emissione\":\"" + c.data_emissione + "\"," +
@@ -40,8 +44,7 @@ namespace ApplicazioneMedico
                            "\"indirizzo\":\"" + c.indirizzo + "\"," +
                            "\"CAP\":\"" + c.CAP + "\"," +
                            "\"domicilio\":\"" + c.domicilio + "\"," +
-                           "\"note\":\"" + c.note + "\"}";
-            return json;
+                           "\"note\":\"" + c.note + "\"}";*/
         }
     }
 }

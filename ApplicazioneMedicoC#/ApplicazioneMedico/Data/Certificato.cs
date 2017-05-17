@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace ApplicazioneMedico.Data
 {
     [DataContract]
-    public class Certificato : RootObject<Certificato>
+    public class Certificato
     {
         [DataMember]
         public string idCertificato { get; set; }

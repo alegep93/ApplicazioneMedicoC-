@@ -139,8 +139,8 @@ namespace ApplicazioneMedico.DAO
                 cmd.Parameters.Add(new SqlParameter("pEmail", p.email));
                 cmd.Parameters.Add(new SqlParameter("pCodSan", p.cod_sanitario));
                 cmd.Parameters.Add(new SqlParameter("pCodMed", p.cod_medico));
-                cmd.Parameters.Add(new SqlParameter("pDataUpdate", p.data_update));
-                cmd.Parameters.Add(new SqlParameter("pDataInserimento", p.data_inserimento));
+                cmd.Parameters.Add(new SqlParameter("pDataUpdate", Convert.ToDateTime(p.data_update)));
+                cmd.Parameters.Add(new SqlParameter("pDataInserimento", Convert.ToDateTime(p.data_inserimento)));
 
                 cmd.ExecuteNonQuery();
             }
@@ -178,8 +178,8 @@ namespace ApplicazioneMedico.DAO
                 cmd.Parameters.Add(new SqlParameter("pEmail", p.email));
                 cmd.Parameters.Add(new SqlParameter("pCodSan", p.cod_sanitario));
                 cmd.Parameters.Add(new SqlParameter("pCodMed", p.cod_medico));
-                cmd.Parameters.Add(new SqlParameter("pDataUpdate", p.data_update));
-                cmd.Parameters.Add(new SqlParameter("pDataInserimento", p.data_inserimento));
+                cmd.Parameters.Add(new SqlParameter("pDataUpdate", Convert.ToDateTime(p.data_update)));
+                cmd.Parameters.Add(new SqlParameter("pDataInserimento", Convert.ToDateTime(p.data_inserimento)));
 
                 cmd.ExecuteNonQuery();
             }

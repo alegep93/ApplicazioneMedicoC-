@@ -14,14 +14,17 @@ namespace ApplicazioneMedico.API
     public class ApiRestClient : JSONManager
     {
         private static WebClient syncClient = new WebClient();
+        private static string codMed = ConfigurationManager.GetCodiceMedico();
+        private static string serverAddr = ConfigurationManager.GetServerAddress();
 
         public static RootObject<Paziente> GetPazientiDataFromServer()
         {
-            string url = "http://192.168.4.159:8080/ApiServer/Paziente/all/1";
+            string url = serverAddr + "/ApiServer/Paziente/all/" + codMed;
             string jsonPazienti = "";
 
             try
             {
+                syncClient.Encoding = Encoding.UTF8;
                 jsonPazienti = syncClient.DownloadString(url);
                 RootObject<Paziente> json = DeserializeJson<RootObject<Paziente>>(jsonPazienti);
 
@@ -34,11 +37,12 @@ namespace ApplicazioneMedico.API
         }
         public static RootObject<Patologia> GetPatologieDataFromServer()
         {
-            string url = "http://192.168.4.159:8080/ApiServer/Patologia/all";
+            string url = serverAddr + "/ApiServer2/Patologia/all";
             string jsonPatologie = "";
 
             try
             {
+                syncClient.Encoding = Encoding.UTF8;
                 jsonPatologie = syncClient.DownloadString(url);
                 RootObject<Patologia> json = DeserializeJson<RootObject<Patologia>>(jsonPatologie);
 
@@ -51,11 +55,12 @@ namespace ApplicazioneMedico.API
         }
         public static RootObject<Certificato> GetCertificatiDataFromServer()
         {
-            string url = "http://192.168.4.159:8080/ApiServer/Certificato/get/1";
+            string url = serverAddr + "/ApiServer/Certificato/get/" + codMed;
             string jsonCertificati = "";
 
             try
             {
+                syncClient.Encoding = Encoding.UTF8;
                 jsonCertificati = syncClient.DownloadString(url);
                 RootObject<Certificato> json = DeserializeJson<RootObject<Certificato>>(jsonCertificati);
 
@@ -69,25 +74,17 @@ namespace ApplicazioneMedico.API
 
         public static bool SendCertificatiToServer(List<Certificato> cList)
         {
-            string url = "http://192.168.4.159:8080/ApiServer/Certificato/write";
+            string url = serverAddr + "/ApiServer/Certificato/write";
             syncClient.Headers.Add("Content-Type", "application/json");
 
             foreach (Certificato c in cList)
             {
+                syncClient.Encoding = Encoding.UTF8;
                 string jsonCertificato = JSONManager.SerializeJson(c);
                 syncClient.UploadString(url, jsonCertificato);
             }
 
             return true;
-
-            /*HttpWebRequest httpWebRequest = (HttpWebRequest)WebRequest.Create("http://192.168.4.159:8080/ApiServer/Certificato/write");
-            httpWebRequest.ContentType = "application/json";
-            httpWebRequest.Method = "POST";
-            HttpWebResponse httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
-            using (StreamReader streamReader = new StreamReader(httpResponse.GetResponseStream()))
-            {
-                result = streamReader.ReadToEnd();
-            }*/
         }
     }
 }

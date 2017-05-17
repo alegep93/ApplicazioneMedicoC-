@@ -21,15 +21,17 @@ namespace ApplicazioneMedico
         RootObject<Paziente> roPaz = null;
         RootObject<Patologia> roPat = null;
         RootObject<Certificato> roCert = null;
+        DateTime syncDate = new DateTime();
         bool response = false;
 
         public ApplicazioneMedico()
         {
             InitializeComponent();
 
-            //GetOrSendData();
+            SetNewSyncDate();
+            GetOrSendData();
             SetFont();
-            //Sync();
+            Sync();
 
             //Mostro per 2 secondi il caricamento e poi passo al pannello dei pazienti
             Wait2Seconds();
@@ -38,7 +40,6 @@ namespace ApplicazioneMedico
             BringPanelToFront(true, false, false, false, false);
             CreateInfoColumn();
             BindGridPazienti();
-            FillComboBox();
 
             //Regolo la grandezza dei panel
             SetItemsWidthAndHeight();
@@ -91,12 +92,18 @@ namespace ApplicazioneMedico
         private void subMenuSincronizza_Click(object sender, EventArgs e)
         {
             Sync();
+            BindAllGrids();
         }
         private void btnInsNuovoCert_Click(object sender, EventArgs e)
         {
             Certificato c = new Certificato();
             popolaCertificato(c);
-            CertificatiDAO.InsertCertificato(c);
+            bool isInserito = CertificatiDAO.InsertCertificato(c);
+            BindGridCertificati();
+            BindGridCertificatiSingoloPaziente();
+
+            if (isInserito)
+                BringPanelToFront(false, true, false, false, false);
         }
         private void btnAnnullaNuovoCert_Click(object sender, EventArgs e)
         {
@@ -152,9 +159,17 @@ namespace ApplicazioneMedico
             grdCertificatiPaziente.Columns[2].Visible = false;
             grdCertificatiPaziente.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
+        protected void BindAllGrids()
+        {
+            BindGridPazienti();
+            BindGridPazientiWithSearch();
+            BindGridCertificati();
+            BindGridPatologie();
+            BindGridCertificatiSingoloPaziente();
+        }
         protected void CreateInfoColumn()
         {
-            Image myImage = Image.FromFile(@"C:\Git Repository\ApplicazioneMedicoC#\ApplicazioneMedicoC#\ApplicazioneMedico\Images\info.png");
+            Image myImage = Resources.info;
             Bitmap imgResized = new Bitmap(myImage, new Size(20, 20));
             DataGridViewImageColumn iconColumn = new DataGridViewImageColumn();
             iconColumn.Image = imgResized;
@@ -264,7 +279,7 @@ namespace ApplicazioneMedico
         {
             pnlAggiornamento.Visible = false;
         }
-        protected void FillComboBox()
+        /*protected void FillComboBox()
         {
             List<string> colList = new List<string>();
             foreach (DataGridViewColumn c in grdPazienti.Columns)
@@ -279,7 +294,7 @@ namespace ApplicazioneMedico
             {
                 cmbPazientiColumns.Items.Add(colName);
             }
-        }
+        }*/
         protected void FillSchedaPaziente(Paziente p)
         {
             txtNomePaziente.Text = p.nome;
@@ -296,6 +311,17 @@ namespace ApplicazioneMedico
             txtCellularePaziente.Text = p.mobile;
             txtEmailPaziente.Text = p.email;
             txtCodiceSanitarioPaziente.Text = p.cod_sanitario;
+        }
+        protected void FillComboBoxPatologie()
+        {
+            List<Patologia> patList = PatologieDAO.GetListPatologie();
+
+            cmbPatologieNuovoCert.Items.Clear();
+
+            foreach (Patologia p in patList)
+            {
+                cmbPatologieNuovoCert.Items.Add(p.nome);
+            }
         }
         protected void SetFont()
         {
@@ -336,22 +362,31 @@ namespace ApplicazioneMedico
                 //Aggiornamento iniziale
                 pnlAggiornamento.Visible = true;
                 pnlAggiornamento.BringToFront();
+
+                SetNewSyncDate();
             }
 
             SetDate();
         }
+        protected void SetNewSyncDate()
+        {
+            syncDate = DateTime.Now;
+            MedicoDAO.UpdateLastSyncDate(syncDate);
+        }
         protected Certificato popolaCertificato(Certificato c)
         {
             c.cod_sanitario = txtCodSanNuovoCert.Text;
+            c.cod_medico = ConfigurationManager.GetCodiceMedico();
             c.data_emissione = DateTime.Now.ToString();
-            c.cod_patologia = txtCodPatNuovoCert.Text;
             c.data_inizio = dtpDataInizioNuovoCert.Value.ToString();
             c.data_fine = dtpDataFineNuovoCert.Value.ToString();
             c.tipologia = cmbTipologia.Text;
             c.comune = txtComuneNuovoCert.Text;
+            c.indirizzo = txtIndirizzoNuovoCert.Text;
             c.provincia = txtProvinciaNuovoCert.Text;
             c.CAP = txtCapNuovoCert.Text;
             c.note = txtNoteNuovoCert.Text;
+            c.cod_patologia = PatologieDAO.GetPatologiaByName(cmbPatologieNuovoCert.SelectedItem.ToString());
 
             if (c.domicilio != "")
                 c.domicilio = txtDomicilioNuovoCert.Text;
@@ -371,6 +406,8 @@ namespace ApplicazioneMedico
             cmbTipologia.Items.Add("Inizio");
             cmbTipologia.Items.Add("Continuazione");
             cmbTipologia.Items.Add("Ricaduta");
+
+            FillComboBoxPatologie();
         }        
         protected void GetOrSendData()
         {

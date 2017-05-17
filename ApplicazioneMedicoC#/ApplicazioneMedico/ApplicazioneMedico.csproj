@@ -54,6 +54,7 @@
   <ItemGroup>
     <Compile Include="API\ApiRestClient.cs" />
     <Compile Include="API\SyncDataFromServer.cs" />
+    <Compile Include="ConfigurationManager.cs" />
     <Compile Include="DAO\BaseDAO.cs" />
     <Compile Include="DAO\CertificatiDAO.cs" />
     <Compile Include="DAO\MedicoDAO.cs" />
@@ -87,6 +88,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="config.ini" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

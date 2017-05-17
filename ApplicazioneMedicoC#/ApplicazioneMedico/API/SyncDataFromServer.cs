@@ -12,12 +12,10 @@ namespace ApplicazioneMedico.API
     {
         public static bool Synchronize(RootObject<Paziente> roPaz, RootObject<Patologia> roPat, RootObject<Certificato> roCert)
         {
-            DateTime syncDate = DateTime.Now;
             bool isSyncPazienti = SynchronizePazienti(roPaz);
             bool isSyncPatologie = SynchronizePatologie(roPat);
             bool isSyncCertificati = SynchronizeCertificati(roCert);
 
-            MedicoDAO.UpdateLastSyncDate(syncDate);
             return isSyncPazienti && isSyncPatologie && isSyncCertificati;
         }
         public static bool SynchronizePazienti(RootObject<Paziente> roPaz)
