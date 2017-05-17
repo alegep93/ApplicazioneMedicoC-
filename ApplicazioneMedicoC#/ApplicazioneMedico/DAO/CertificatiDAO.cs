@@ -264,6 +264,30 @@ namespace ApplicazioneMedico.DAO
             }
             finally { cn.Close(); }
         }
+        public static bool DeleteCertificatiNonInviati(string idCert)
+        {
+            SqlConnection cn = GetConnection();
+            StringBuilder sql = new StringBuilder();
+
+            try
+            {
+                sql.Append("DELETE certificato WHERE id = @pId");
+
+                SqlCommand cmd = new SqlCommand(sql.ToString(), cn);
+                cmd.Parameters.Add(new SqlParameter("pId", idCert));
+
+                int rows = cmd.ExecuteNonQuery();
+
+                if (rows > 0)
+                    return true;
+                else
+                    return false;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Impossibile eliminare il certificato non ancora inviato", ex);
+            }finally { cn.Close(); }
+        }
         /*public static Certificato GetCertificato(string codPaz)
         {
             SqlConnection cn = GetConnection();
