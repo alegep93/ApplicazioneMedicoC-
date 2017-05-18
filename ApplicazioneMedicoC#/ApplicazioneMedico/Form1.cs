@@ -238,7 +238,7 @@ namespace ApplicazioneMedico
                 if (c.GetType().Equals(txtNomePaziente))
                     c.Width = 200;
 
-            SetNuovoCertificatoTablePosition();
+            //SetNuovoCertificatoTablePosition();
         }
         protected void SetItemsPosition()
         {
@@ -269,8 +269,8 @@ namespace ApplicazioneMedico
             lblTitlePazienti.Left = (pnlPazienti.Width - lblTitlePazienti.Width) / 2;
             lblTitleCertificati.Left = (pnlCertificati.Width - lblTitleCertificati.Width) / 2;
             lblTitlePatologie.Left = (pnlPatologie.Width - lblTitlePatologie.Width) / 2;
-            lblTitleNuovoCert.Left = (pnlNuovoCertificato.Width - lblTitleNuovoCert.Width) / 2;
-            lblTitlePazienti.Top = lblTitleCertificati.Top = lblTitlePatologie.Top = lblTitleNuovoCert.Top = mainNav.Bottom + 10;
+            //lblTitleNuovoCert.Left = (pnlNuovoCertificato.Width - lblTitleNuovoCert.Width) / 2;
+            lblTitlePazienti.Top = lblTitleCertificati.Top = lblTitlePatologie.Top = mainNav.Bottom + 10;
 
             //Pannelli Filtri
             pnlPazientiFiltri.Top = pnlCertificatiSearchContainer.Top = pnlPatologieSearchContainer.Top = lblTitlePazienti.Bottom + 10;
@@ -281,7 +281,7 @@ namespace ApplicazioneMedico
             grdPazienti.Left = grdCertificati.Left = grdPatologie.Left = rientroLeft;
             btnNuovoCertificato.Top = grdCertificatiPaziente.Bottom + 10;
         }
-        protected void SetNuovoCertificatoTablePosition()
+        /*protected void SetNuovoCertificatoTablePosition()
         {
             tblNuovoCertificato.Top = lblTitleNuovoCert.Bottom + 30;
             tblNuovoCertificato.Left = (pnlNuovoCertificato.Width - tblNuovoCertificato.Width) / 2;
@@ -290,7 +290,7 @@ namespace ApplicazioneMedico
                 l.ForeColor = Color.White;
 
             tblNuovoCertificato.CellBorderStyle = TableLayoutPanelCellBorderStyle.Outset;
-        }
+        }*/
         protected void Wait2Seconds()
         {
             t.Interval = 2000;
@@ -309,8 +309,8 @@ namespace ApplicazioneMedico
             }
 
             //Titoli
-            lblTitleCertificati.Font = lblTitlePazienti.Font = lblTitlePatologie.Font = lblTitleNuovoCert.Font = new Font("Segoe UI", 40, FontStyle.Bold);
-            lblTitleCertificati.ForeColor = lblTitlePazienti.ForeColor = lblTitlePatologie.ForeColor = lblTitleNuovoCert.ForeColor = Color.White;
+            lblTitleCertificati.Font = lblTitlePazienti.Font = lblTitlePatologie.Font = new Font("Segoe UI", 40, FontStyle.Bold);
+            lblTitleCertificati.ForeColor = lblTitlePazienti.ForeColor = lblTitlePatologie.ForeColor = Color.White;
             lblServerDate.ForeColor = Color.White;
             lblServerDate.Text = "";
         }

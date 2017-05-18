@@ -98,34 +98,22 @@
             this.txtComunePaziente = new System.Windows.Forms.TextBox();
             this.lblProvinciaPaz = new System.Windows.Forms.Label();
             this.pnlNuovoCertificato = new System.Windows.Forms.Panel();
-            this.btnAnnullaNuovoCert = new System.Windows.Forms.Button();
-            this.btnInsNuovoCert = new System.Windows.Forms.Button();
-            this.tblNuovoCertificato = new System.Windows.Forms.TableLayoutPanel();
             this.txtNoteNuovoCert = new System.Windows.Forms.TextBox();
-            this.lblNoteNuovoCert = new System.Windows.Forms.Label();
             this.txtDomicilioNuovoCert = new System.Windows.Forms.TextBox();
-            this.lblDomicilioNuovoCert = new System.Windows.Forms.Label();
             this.txtCodSanNuovoCert = new System.Windows.Forms.TextBox();
-            this.lblCodSanNuovoCert = new System.Windows.Forms.Label();
-            this.lblCodPatolNuovoCert = new System.Windows.Forms.Label();
-            this.lblDataInizioNuovoCert = new System.Windows.Forms.Label();
             this.dtpDataInizioNuovoCert = new System.Windows.Forms.DateTimePicker();
-            this.lblDataFineNuovoCert = new System.Windows.Forms.Label();
             this.dtpDataFineNuovoCert = new System.Windows.Forms.DateTimePicker();
-            this.lblComuneNuovoCert = new System.Windows.Forms.Label();
             this.txtComuneNuovoCert = new System.Windows.Forms.TextBox();
-            this.lblProvinciaNuovoCert = new System.Windows.Forms.Label();
             this.txtProvinciaNuovoCert = new System.Windows.Forms.TextBox();
-            this.lblIndirizzoNuovoCert = new System.Windows.Forms.Label();
             this.txtIndirizzoNuovoCert = new System.Windows.Forms.TextBox();
-            this.lblCapNuovoCert = new System.Windows.Forms.Label();
             this.txtCapNuovoCert = new System.Windows.Forms.TextBox();
-            this.lblTipolnuovoCert = new System.Windows.Forms.Label();
             this.cmbTipologiaNuovoCert = new System.Windows.Forms.ComboBox();
             this.cmbPatologieNuovoCert = new System.Windows.Forms.ComboBox();
+            this.btnAnnullaNuovoCert = new System.Windows.Forms.Button();
+            this.btnInsNuovoCert = new System.Windows.Forms.Button();
             this.lblCertCodSan = new System.Windows.Forms.Label();
             this.lblServerDate = new System.Windows.Forms.Label();
-            this.lblTitleNuovoCert = new System.Windows.Forms.Label();
+            this.pnlImgCertificato = new System.Windows.Forms.Panel();
             this.mainNav.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picBox)).BeginInit();
             this.pnlAggiornamento.SuspendLayout();
@@ -143,7 +131,7 @@
             this.pnlSchedaPazCont.SuspendLayout();
             this.tblSchedaPaziente.SuspendLayout();
             this.pnlNuovoCertificato.SuspendLayout();
-            this.tblNuovoCertificato.SuspendLayout();
+            this.pnlImgCertificato.SuspendLayout();
             this.SuspendLayout();
             // 
             // mainNav
@@ -873,19 +861,110 @@
             // pnlNuovoCertificato
             // 
             this.pnlNuovoCertificato.BackColor = System.Drawing.Color.Transparent;
-            this.pnlNuovoCertificato.Controls.Add(this.lblTitleNuovoCert);
-            this.pnlNuovoCertificato.Controls.Add(this.tblNuovoCertificato);
-            this.pnlNuovoCertificato.Controls.Add(this.btnAnnullaNuovoCert);
-            this.pnlNuovoCertificato.Controls.Add(this.btnInsNuovoCert);
+            this.pnlNuovoCertificato.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.pnlNuovoCertificato.Controls.Add(this.pnlImgCertificato);
             this.pnlNuovoCertificato.Location = new System.Drawing.Point(6, 38);
             this.pnlNuovoCertificato.Name = "pnlNuovoCertificato";
             this.pnlNuovoCertificato.Size = new System.Drawing.Size(1495, 708);
             this.pnlNuovoCertificato.TabIndex = 13;
             // 
+            // txtNoteNuovoCert
+            // 
+            this.txtNoteNuovoCert.Location = new System.Drawing.Point(518, 137);
+            this.txtNoteNuovoCert.Multiline = true;
+            this.txtNoteNuovoCert.Name = "txtNoteNuovoCert";
+            this.txtNoteNuovoCert.Size = new System.Drawing.Size(441, 177);
+            this.txtNoteNuovoCert.TabIndex = 30;
+            // 
+            // txtDomicilioNuovoCert
+            // 
+            this.txtDomicilioNuovoCert.Font = new System.Drawing.Font("Georgia", 18.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtDomicilioNuovoCert.Location = new System.Drawing.Point(90, 560);
+            this.txtDomicilioNuovoCert.Name = "txtDomicilioNuovoCert";
+            this.txtDomicilioNuovoCert.Size = new System.Drawing.Size(280, 35);
+            this.txtDomicilioNuovoCert.TabIndex = 28;
+            // 
+            // txtCodSanNuovoCert
+            // 
+            this.txtCodSanNuovoCert.Enabled = false;
+            this.txtCodSanNuovoCert.Location = new System.Drawing.Point(130, 122);
+            this.txtCodSanNuovoCert.Name = "txtCodSanNuovoCert";
+            this.txtCodSanNuovoCert.Size = new System.Drawing.Size(280, 20);
+            this.txtCodSanNuovoCert.TabIndex = 2;
+            // 
+            // dtpDataInizioNuovoCert
+            // 
+            this.dtpDataInizioNuovoCert.Font = new System.Drawing.Font("Georgia", 18.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dtpDataInizioNuovoCert.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtpDataInizioNuovoCert.Location = new System.Drawing.Point(224, 209);
+            this.dtpDataInizioNuovoCert.Name = "dtpDataInizioNuovoCert";
+            this.dtpDataInizioNuovoCert.Size = new System.Drawing.Size(171, 35);
+            this.dtpDataInizioNuovoCert.TabIndex = 25;
+            // 
+            // dtpDataFineNuovoCert
+            // 
+            this.dtpDataFineNuovoCert.Font = new System.Drawing.Font("Georgia", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dtpDataFineNuovoCert.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtpDataFineNuovoCert.Location = new System.Drawing.Point(32, 209);
+            this.dtpDataFineNuovoCert.Name = "dtpDataFineNuovoCert";
+            this.dtpDataFineNuovoCert.Size = new System.Drawing.Size(170, 35);
+            this.dtpDataFineNuovoCert.TabIndex = 26;
+            // 
+            // txtComuneNuovoCert
+            // 
+            this.txtComuneNuovoCert.Font = new System.Drawing.Font("Georgia", 18.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtComuneNuovoCert.Location = new System.Drawing.Point(282, 507);
+            this.txtComuneNuovoCert.Name = "txtComuneNuovoCert";
+            this.txtComuneNuovoCert.Size = new System.Drawing.Size(579, 35);
+            this.txtComuneNuovoCert.TabIndex = 16;
+            // 
+            // txtProvinciaNuovoCert
+            // 
+            this.txtProvinciaNuovoCert.Font = new System.Drawing.Font("Georgia", 18.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtProvinciaNuovoCert.Location = new System.Drawing.Point(901, 508);
+            this.txtProvinciaNuovoCert.MaxLength = 2;
+            this.txtProvinciaNuovoCert.Name = "txtProvinciaNuovoCert";
+            this.txtProvinciaNuovoCert.Size = new System.Drawing.Size(56, 35);
+            this.txtProvinciaNuovoCert.TabIndex = 14;
+            // 
+            // txtIndirizzoNuovoCert
+            // 
+            this.txtIndirizzoNuovoCert.Font = new System.Drawing.Font("Georgia", 18.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtIndirizzoNuovoCert.Location = new System.Drawing.Point(90, 467);
+            this.txtIndirizzoNuovoCert.Name = "txtIndirizzoNuovoCert";
+            this.txtIndirizzoNuovoCert.Size = new System.Drawing.Size(867, 35);
+            this.txtIndirizzoNuovoCert.TabIndex = 23;
+            // 
+            // txtCapNuovoCert
+            // 
+            this.txtCapNuovoCert.Font = new System.Drawing.Font("Georgia", 18.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtCapNuovoCert.Location = new System.Drawing.Point(90, 506);
+            this.txtCapNuovoCert.MaxLength = 5;
+            this.txtCapNuovoCert.Name = "txtCapNuovoCert";
+            this.txtCapNuovoCert.Size = new System.Drawing.Size(121, 35);
+            this.txtCapNuovoCert.TabIndex = 24;
+            // 
+            // cmbTipologiaNuovoCert
+            // 
+            this.cmbTipologiaNuovoCert.FormattingEnabled = true;
+            this.cmbTipologiaNuovoCert.Location = new System.Drawing.Point(224, 279);
+            this.cmbTipologiaNuovoCert.Name = "cmbTipologiaNuovoCert";
+            this.cmbTipologiaNuovoCert.Size = new System.Drawing.Size(186, 22);
+            this.cmbTipologiaNuovoCert.TabIndex = 32;
+            // 
+            // cmbPatologieNuovoCert
+            // 
+            this.cmbPatologieNuovoCert.Font = new System.Drawing.Font("Georgia", 18.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbPatologieNuovoCert.FormattingEnabled = true;
+            this.cmbPatologieNuovoCert.Location = new System.Drawing.Point(677, 560);
+            this.cmbPatologieNuovoCert.Name = "cmbPatologieNuovoCert";
+            this.cmbPatologieNuovoCert.Size = new System.Drawing.Size(280, 37);
+            this.cmbPatologieNuovoCert.TabIndex = 33;
+            // 
             // btnAnnullaNuovoCert
             // 
             this.btnAnnullaNuovoCert.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.btnAnnullaNuovoCert.Location = new System.Drawing.Point(1063, 520);
+            this.btnAnnullaNuovoCert.Location = new System.Drawing.Point(90, 602);
             this.btnAnnullaNuovoCert.Name = "btnAnnullaNuovoCert";
             this.btnAnnullaNuovoCert.Size = new System.Drawing.Size(119, 36);
             this.btnAnnullaNuovoCert.TabIndex = 3;
@@ -896,260 +975,13 @@
             // btnInsNuovoCert
             // 
             this.btnInsNuovoCert.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.btnInsNuovoCert.Location = new System.Drawing.Point(1203, 520);
+            this.btnInsNuovoCert.Location = new System.Drawing.Point(838, 602);
             this.btnInsNuovoCert.Name = "btnInsNuovoCert";
             this.btnInsNuovoCert.Size = new System.Drawing.Size(119, 36);
             this.btnInsNuovoCert.TabIndex = 2;
             this.btnInsNuovoCert.Text = "Inserisci";
             this.btnInsNuovoCert.UseVisualStyleBackColor = true;
             this.btnInsNuovoCert.Click += new System.EventHandler(this.btnInsNuovoCert_Click);
-            // 
-            // tblNuovoCertificato
-            // 
-            this.tblNuovoCertificato.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.tblNuovoCertificato.BackColor = System.Drawing.Color.Transparent;
-            this.tblNuovoCertificato.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
-            this.tblNuovoCertificato.ColumnCount = 6;
-            this.tblNuovoCertificato.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 145F));
-            this.tblNuovoCertificato.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 300F));
-            this.tblNuovoCertificato.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 145F));
-            this.tblNuovoCertificato.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 300F));
-            this.tblNuovoCertificato.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 145F));
-            this.tblNuovoCertificato.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 300F));
-            this.tblNuovoCertificato.Controls.Add(this.txtNoteNuovoCert, 3, 3);
-            this.tblNuovoCertificato.Controls.Add(this.lblNoteNuovoCert, 2, 3);
-            this.tblNuovoCertificato.Controls.Add(this.txtDomicilioNuovoCert, 1, 3);
-            this.tblNuovoCertificato.Controls.Add(this.lblDomicilioNuovoCert, 0, 3);
-            this.tblNuovoCertificato.Controls.Add(this.txtCodSanNuovoCert, 1, 0);
-            this.tblNuovoCertificato.Controls.Add(this.lblCodSanNuovoCert, 0, 0);
-            this.tblNuovoCertificato.Controls.Add(this.lblCodPatolNuovoCert, 4, 0);
-            this.tblNuovoCertificato.Controls.Add(this.lblDataInizioNuovoCert, 0, 1);
-            this.tblNuovoCertificato.Controls.Add(this.dtpDataInizioNuovoCert, 1, 1);
-            this.tblNuovoCertificato.Controls.Add(this.lblDataFineNuovoCert, 2, 1);
-            this.tblNuovoCertificato.Controls.Add(this.dtpDataFineNuovoCert, 3, 1);
-            this.tblNuovoCertificato.Controls.Add(this.lblComuneNuovoCert, 4, 1);
-            this.tblNuovoCertificato.Controls.Add(this.txtComuneNuovoCert, 5, 1);
-            this.tblNuovoCertificato.Controls.Add(this.lblProvinciaNuovoCert, 0, 2);
-            this.tblNuovoCertificato.Controls.Add(this.txtProvinciaNuovoCert, 1, 2);
-            this.tblNuovoCertificato.Controls.Add(this.lblIndirizzoNuovoCert, 2, 2);
-            this.tblNuovoCertificato.Controls.Add(this.txtIndirizzoNuovoCert, 3, 2);
-            this.tblNuovoCertificato.Controls.Add(this.lblCapNuovoCert, 4, 2);
-            this.tblNuovoCertificato.Controls.Add(this.txtCapNuovoCert, 5, 2);
-            this.tblNuovoCertificato.Controls.Add(this.lblTipolnuovoCert, 2, 0);
-            this.tblNuovoCertificato.Controls.Add(this.cmbTipologiaNuovoCert, 3, 0);
-            this.tblNuovoCertificato.Controls.Add(this.cmbPatologieNuovoCert, 5, 0);
-            this.tblNuovoCertificato.Location = new System.Drawing.Point(64, 94);
-            this.tblNuovoCertificato.Name = "tblNuovoCertificato";
-            this.tblNuovoCertificato.RowCount = 4;
-            this.tblNuovoCertificato.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tblNuovoCertificato.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tblNuovoCertificato.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tblNuovoCertificato.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tblNuovoCertificato.Size = new System.Drawing.Size(1350, 404);
-            this.tblNuovoCertificato.TabIndex = 1;
-            // 
-            // txtNoteNuovoCert
-            // 
-            this.tblNuovoCertificato.SetColumnSpan(this.txtNoteNuovoCert, 3);
-            this.txtNoteNuovoCert.Location = new System.Drawing.Point(597, 304);
-            this.txtNoteNuovoCert.Multiline = true;
-            this.txtNoteNuovoCert.Name = "txtNoteNuovoCert";
-            this.txtNoteNuovoCert.Size = new System.Drawing.Size(730, 96);
-            this.txtNoteNuovoCert.TabIndex = 30;
-            // 
-            // lblNoteNuovoCert
-            // 
-            this.lblNoteNuovoCert.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblNoteNuovoCert.AutoSize = true;
-            this.lblNoteNuovoCert.Font = new System.Drawing.Font("Georgia", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNoteNuovoCert.Location = new System.Drawing.Point(553, 301);
-            this.lblNoteNuovoCert.Name = "lblNoteNuovoCert";
-            this.lblNoteNuovoCert.Size = new System.Drawing.Size(37, 14);
-            this.lblNoteNuovoCert.TabIndex = 29;
-            this.lblNoteNuovoCert.Text = "Note";
-            // 
-            // txtDomicilioNuovoCert
-            // 
-            this.txtDomicilioNuovoCert.Location = new System.Drawing.Point(150, 304);
-            this.txtDomicilioNuovoCert.Name = "txtDomicilioNuovoCert";
-            this.txtDomicilioNuovoCert.Size = new System.Drawing.Size(280, 20);
-            this.txtDomicilioNuovoCert.TabIndex = 28;
-            // 
-            // lblDomicilioNuovoCert
-            // 
-            this.lblDomicilioNuovoCert.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblDomicilioNuovoCert.AutoSize = true;
-            this.lblDomicilioNuovoCert.Font = new System.Drawing.Font("Georgia", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDomicilioNuovoCert.Location = new System.Drawing.Point(74, 301);
-            this.lblDomicilioNuovoCert.Name = "lblDomicilioNuovoCert";
-            this.lblDomicilioNuovoCert.Size = new System.Drawing.Size(69, 14);
-            this.lblDomicilioNuovoCert.TabIndex = 27;
-            this.lblDomicilioNuovoCert.Text = "Domicilio";
-            // 
-            // txtCodSanNuovoCert
-            // 
-            this.txtCodSanNuovoCert.Enabled = false;
-            this.txtCodSanNuovoCert.Location = new System.Drawing.Point(150, 4);
-            this.txtCodSanNuovoCert.Name = "txtCodSanNuovoCert";
-            this.txtCodSanNuovoCert.Size = new System.Drawing.Size(280, 20);
-            this.txtCodSanNuovoCert.TabIndex = 2;
-            // 
-            // lblCodSanNuovoCert
-            // 
-            this.lblCodSanNuovoCert.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblCodSanNuovoCert.AutoSize = true;
-            this.lblCodSanNuovoCert.Font = new System.Drawing.Font("Georgia", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCodSanNuovoCert.Location = new System.Drawing.Point(30, 1);
-            this.lblCodSanNuovoCert.Name = "lblCodSanNuovoCert";
-            this.lblCodSanNuovoCert.Size = new System.Drawing.Size(113, 14);
-            this.lblCodSanNuovoCert.TabIndex = 2;
-            this.lblCodSanNuovoCert.Text = "Codice Sanitario";
-            // 
-            // lblCodPatolNuovoCert
-            // 
-            this.lblCodPatolNuovoCert.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblCodPatolNuovoCert.AutoSize = true;
-            this.lblCodPatolNuovoCert.Font = new System.Drawing.Font("Georgia", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCodPatolNuovoCert.Location = new System.Drawing.Point(969, 1);
-            this.lblCodPatolNuovoCert.Name = "lblCodPatolNuovoCert";
-            this.lblCodPatolNuovoCert.Size = new System.Drawing.Size(68, 14);
-            this.lblCodPatolNuovoCert.TabIndex = 4;
-            this.lblCodPatolNuovoCert.Text = "Patologia";
-            // 
-            // lblDataInizioNuovoCert
-            // 
-            this.lblDataInizioNuovoCert.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblDataInizioNuovoCert.AutoSize = true;
-            this.lblDataInizioNuovoCert.Font = new System.Drawing.Font("Georgia", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDataInizioNuovoCert.Location = new System.Drawing.Point(65, 101);
-            this.lblDataInizioNuovoCert.Name = "lblDataInizioNuovoCert";
-            this.lblDataInizioNuovoCert.Size = new System.Drawing.Size(78, 14);
-            this.lblDataInizioNuovoCert.TabIndex = 6;
-            this.lblDataInizioNuovoCert.Text = "Data Inizio";
-            // 
-            // dtpDataInizioNuovoCert
-            // 
-            this.dtpDataInizioNuovoCert.Location = new System.Drawing.Point(150, 104);
-            this.dtpDataInizioNuovoCert.Name = "dtpDataInizioNuovoCert";
-            this.dtpDataInizioNuovoCert.Size = new System.Drawing.Size(280, 20);
-            this.dtpDataInizioNuovoCert.TabIndex = 25;
-            // 
-            // lblDataFineNuovoCert
-            // 
-            this.lblDataFineNuovoCert.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblDataFineNuovoCert.AutoSize = true;
-            this.lblDataFineNuovoCert.Font = new System.Drawing.Font("Georgia", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDataFineNuovoCert.Location = new System.Drawing.Point(520, 101);
-            this.lblDataFineNuovoCert.Name = "lblDataFineNuovoCert";
-            this.lblDataFineNuovoCert.Size = new System.Drawing.Size(70, 14);
-            this.lblDataFineNuovoCert.TabIndex = 7;
-            this.lblDataFineNuovoCert.Text = "Data Fine";
-            // 
-            // dtpDataFineNuovoCert
-            // 
-            this.dtpDataFineNuovoCert.Location = new System.Drawing.Point(597, 104);
-            this.dtpDataFineNuovoCert.Name = "dtpDataFineNuovoCert";
-            this.dtpDataFineNuovoCert.Size = new System.Drawing.Size(280, 20);
-            this.dtpDataFineNuovoCert.TabIndex = 26;
-            // 
-            // lblComuneNuovoCert
-            // 
-            this.lblComuneNuovoCert.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblComuneNuovoCert.AutoSize = true;
-            this.lblComuneNuovoCert.Font = new System.Drawing.Font("Georgia", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblComuneNuovoCert.Location = new System.Drawing.Point(977, 101);
-            this.lblComuneNuovoCert.Name = "lblComuneNuovoCert";
-            this.lblComuneNuovoCert.Size = new System.Drawing.Size(60, 14);
-            this.lblComuneNuovoCert.TabIndex = 8;
-            this.lblComuneNuovoCert.Text = "Comune";
-            // 
-            // txtComuneNuovoCert
-            // 
-            this.txtComuneNuovoCert.Location = new System.Drawing.Point(1044, 104);
-            this.txtComuneNuovoCert.Name = "txtComuneNuovoCert";
-            this.txtComuneNuovoCert.Size = new System.Drawing.Size(280, 20);
-            this.txtComuneNuovoCert.TabIndex = 16;
-            // 
-            // lblProvinciaNuovoCert
-            // 
-            this.lblProvinciaNuovoCert.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblProvinciaNuovoCert.AutoSize = true;
-            this.lblProvinciaNuovoCert.Font = new System.Drawing.Font("Georgia", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblProvinciaNuovoCert.Location = new System.Drawing.Point(73, 201);
-            this.lblProvinciaNuovoCert.Name = "lblProvinciaNuovoCert";
-            this.lblProvinciaNuovoCert.Size = new System.Drawing.Size(70, 14);
-            this.lblProvinciaNuovoCert.TabIndex = 9;
-            this.lblProvinciaNuovoCert.Text = "Provincia";
-            // 
-            // txtProvinciaNuovoCert
-            // 
-            this.txtProvinciaNuovoCert.Location = new System.Drawing.Point(150, 204);
-            this.txtProvinciaNuovoCert.Name = "txtProvinciaNuovoCert";
-            this.txtProvinciaNuovoCert.Size = new System.Drawing.Size(280, 20);
-            this.txtProvinciaNuovoCert.TabIndex = 14;
-            // 
-            // lblIndirizzoNuovoCert
-            // 
-            this.lblIndirizzoNuovoCert.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblIndirizzoNuovoCert.AutoSize = true;
-            this.lblIndirizzoNuovoCert.Font = new System.Drawing.Font("Georgia", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblIndirizzoNuovoCert.Location = new System.Drawing.Point(525, 201);
-            this.lblIndirizzoNuovoCert.Name = "lblIndirizzoNuovoCert";
-            this.lblIndirizzoNuovoCert.Size = new System.Drawing.Size(65, 14);
-            this.lblIndirizzoNuovoCert.TabIndex = 10;
-            this.lblIndirizzoNuovoCert.Text = "Indirizzo";
-            // 
-            // txtIndirizzoNuovoCert
-            // 
-            this.txtIndirizzoNuovoCert.Location = new System.Drawing.Point(597, 204);
-            this.txtIndirizzoNuovoCert.Name = "txtIndirizzoNuovoCert";
-            this.txtIndirizzoNuovoCert.Size = new System.Drawing.Size(280, 20);
-            this.txtIndirizzoNuovoCert.TabIndex = 23;
-            // 
-            // lblCapNuovoCert
-            // 
-            this.lblCapNuovoCert.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblCapNuovoCert.AutoSize = true;
-            this.lblCapNuovoCert.Font = new System.Drawing.Font("Georgia", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCapNuovoCert.Location = new System.Drawing.Point(1006, 201);
-            this.lblCapNuovoCert.Name = "lblCapNuovoCert";
-            this.lblCapNuovoCert.Size = new System.Drawing.Size(31, 14);
-            this.lblCapNuovoCert.TabIndex = 18;
-            this.lblCapNuovoCert.Text = "Cap";
-            // 
-            // txtCapNuovoCert
-            // 
-            this.txtCapNuovoCert.Location = new System.Drawing.Point(1044, 204);
-            this.txtCapNuovoCert.Name = "txtCapNuovoCert";
-            this.txtCapNuovoCert.Size = new System.Drawing.Size(280, 20);
-            this.txtCapNuovoCert.TabIndex = 24;
-            // 
-            // lblTipolnuovoCert
-            // 
-            this.lblTipolnuovoCert.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblTipolnuovoCert.AutoSize = true;
-            this.lblTipolnuovoCert.Font = new System.Drawing.Font("Georgia", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTipolnuovoCert.Location = new System.Drawing.Point(522, 1);
-            this.lblTipolnuovoCert.Name = "lblTipolnuovoCert";
-            this.lblTipolnuovoCert.Size = new System.Drawing.Size(68, 14);
-            this.lblTipolnuovoCert.TabIndex = 13;
-            this.lblTipolnuovoCert.Text = "Tipologia";
-            // 
-            // cmbTipologiaNuovoCert
-            // 
-            this.cmbTipologiaNuovoCert.FormattingEnabled = true;
-            this.cmbTipologiaNuovoCert.Location = new System.Drawing.Point(597, 4);
-            this.cmbTipologiaNuovoCert.Name = "cmbTipologiaNuovoCert";
-            this.cmbTipologiaNuovoCert.Size = new System.Drawing.Size(280, 22);
-            this.cmbTipologiaNuovoCert.TabIndex = 32;
-            // 
-            // cmbPatologieNuovoCert
-            // 
-            this.cmbPatologieNuovoCert.FormattingEnabled = true;
-            this.cmbPatologieNuovoCert.Location = new System.Drawing.Point(1044, 4);
-            this.cmbPatologieNuovoCert.Name = "cmbPatologieNuovoCert";
-            this.cmbPatologieNuovoCert.Size = new System.Drawing.Size(280, 22);
-            this.cmbPatologieNuovoCert.TabIndex = 33;
             // 
             // lblCertCodSan
             // 
@@ -1173,15 +1005,27 @@
             this.lblServerDate.TabIndex = 14;
             this.lblServerDate.Text = "00-00";
             // 
-            // lblTitleNuovoCert
+            // pnlImgCertificato
             // 
-            this.lblTitleNuovoCert.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.lblTitleNuovoCert.AutoSize = true;
-            this.lblTitleNuovoCert.Location = new System.Drawing.Point(721, 37);
-            this.lblTitleNuovoCert.Name = "lblTitleNuovoCert";
-            this.lblTitleNuovoCert.Size = new System.Drawing.Size(108, 14);
-            this.lblTitleNuovoCert.TabIndex = 7;
-            this.lblTitleNuovoCert.Text = "Nuovo Certificato";
+            this.pnlImgCertificato.BackgroundImage = global::ApplicazioneMedico.Properties.Resources.certificato_malattia;
+            this.pnlImgCertificato.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.pnlImgCertificato.Controls.Add(this.txtCapNuovoCert);
+            this.pnlImgCertificato.Controls.Add(this.txtIndirizzoNuovoCert);
+            this.pnlImgCertificato.Controls.Add(this.txtProvinciaNuovoCert);
+            this.pnlImgCertificato.Controls.Add(this.dtpDataFineNuovoCert);
+            this.pnlImgCertificato.Controls.Add(this.dtpDataInizioNuovoCert);
+            this.pnlImgCertificato.Controls.Add(this.txtComuneNuovoCert);
+            this.pnlImgCertificato.Controls.Add(this.cmbPatologieNuovoCert);
+            this.pnlImgCertificato.Controls.Add(this.cmbTipologiaNuovoCert);
+            this.pnlImgCertificato.Controls.Add(this.txtCodSanNuovoCert);
+            this.pnlImgCertificato.Controls.Add(this.btnInsNuovoCert);
+            this.pnlImgCertificato.Controls.Add(this.txtDomicilioNuovoCert);
+            this.pnlImgCertificato.Controls.Add(this.btnAnnullaNuovoCert);
+            this.pnlImgCertificato.Controls.Add(this.txtNoteNuovoCert);
+            this.pnlImgCertificato.Location = new System.Drawing.Point(252, -1);
+            this.pnlImgCertificato.Name = "pnlImgCertificato";
+            this.pnlImgCertificato.Size = new System.Drawing.Size(990, 710);
+            this.pnlImgCertificato.TabIndex = 35;
             // 
             // ApplicazioneMedico
             // 
@@ -1234,9 +1078,8 @@
             this.tblSchedaPaziente.ResumeLayout(false);
             this.tblSchedaPaziente.PerformLayout();
             this.pnlNuovoCertificato.ResumeLayout(false);
-            this.pnlNuovoCertificato.PerformLayout();
-            this.tblNuovoCertificato.ResumeLayout(false);
-            this.tblNuovoCertificato.PerformLayout();
+            this.pnlImgCertificato.ResumeLayout(false);
+            this.pnlImgCertificato.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1298,18 +1141,8 @@
         public System.Windows.Forms.TextBox txtNomePaziente;
         private System.Windows.Forms.Panel pnlNuovoCertificato;
         private System.Windows.Forms.Label lblCertCodSan;
-        private System.Windows.Forms.TableLayoutPanel tblNuovoCertificato;
         private System.Windows.Forms.TextBox txtCapNuovoCert;
-        private System.Windows.Forms.Label lblCapNuovoCert;
         private System.Windows.Forms.TextBox txtCodSanNuovoCert;
-        private System.Windows.Forms.Label lblCodSanNuovoCert;
-        private System.Windows.Forms.Label lblCodPatolNuovoCert;
-        private System.Windows.Forms.Label lblDataInizioNuovoCert;
-        private System.Windows.Forms.Label lblDataFineNuovoCert;
-        private System.Windows.Forms.Label lblComuneNuovoCert;
-        private System.Windows.Forms.Label lblIndirizzoNuovoCert;
-        private System.Windows.Forms.Label lblProvinciaNuovoCert;
-        private System.Windows.Forms.Label lblTipolnuovoCert;
         private System.Windows.Forms.TextBox txtProvinciaNuovoCert;
         private System.Windows.Forms.TextBox txtComuneNuovoCert;
         private System.Windows.Forms.TextBox txtIndirizzoNuovoCert;
@@ -1333,13 +1166,11 @@
         private System.Windows.Forms.ToolStripMenuItem subMenuSincronizza;
         private System.Windows.Forms.DateTimePicker dtpDataInizioNuovoCert;
         private System.Windows.Forms.DateTimePicker dtpDataFineNuovoCert;
-        private System.Windows.Forms.Label lblDomicilioNuovoCert;
         public System.Windows.Forms.TextBox txtDomicilioNuovoCert;
         public System.Windows.Forms.TextBox txtNoteNuovoCert;
-        private System.Windows.Forms.Label lblNoteNuovoCert;
         private System.Windows.Forms.ComboBox cmbTipologiaNuovoCert;
         private System.Windows.Forms.ComboBox cmbPatologieNuovoCert;
-        private System.Windows.Forms.Label lblTitleNuovoCert;
+        private System.Windows.Forms.Panel pnlImgCertificato;
     }
 }
 
