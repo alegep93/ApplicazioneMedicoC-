@@ -17,31 +17,32 @@ namespace ApplicazioneMedico
 {
     public partial class ApplicazioneMedico : Form
     {
-        Timer t = new Timer();
+        Timer t = new Timer();                  //Timer per l'aggiornamento/sincronizzazione
+        DateTime syncDate = new DateTime();     //Inizializza la variabile che conterrà e aggiornerà la data di ultima sincronizzazione
+        bool response = false;                  //Contiene la risposta dell'invio dei certificati al server remoto
+
+        //Istanze che verranno popolate con i dati provenienti dalle richieste al server remoto (Formato JSON)
         RootObject<Paziente> roPaz = null;
         RootObject<Patologia> roPat = null;
         RootObject<Certificato> roCert = null;
-        DateTime syncDate = new DateTime();
-        bool response = false;
 
         public ApplicazioneMedico()
         {
             InitializeComponent();
 
-            SetNewSyncDate();
-            GetOrSendData();
-            SetFont();
-            Sync();
+            SetNewSyncDate();   //Sincronizza la data di ultimo aggiornamento all'apertura dell'applicazione
+            //GetOrSendData();    //Riceve e/o invia i dati dal/al server remoto
+            SetFont();          //Consente di attribuire lo stesso font a tutti i controlli della Windows Form
+            //Sync();             //Sincronizza il db locale con i dati ricevuti dal server remoto
 
-            //Mostro per 2 secondi il caricamento e poi passo al pannello dei pazienti
-            Wait2Seconds();
+            Wait2Seconds();     //Mostro per 2 secondi il caricamento e poi passo al pannello dei pazienti
 
-            //Mostro il pannello dei pazienti
+            //Consente di mostrare il relativo pannello associato al valore booleano true
             BringPanelToFront(true, false, false, false, false);
-            CreateInfoColumn();
-            BindGridPazienti();
+            CreateInfoColumn();     //Crea la colonna delle "info" per la griglia dei pazienti
+            BindGridPazienti();     //Esegue la visualizzazione dei dati sulla griglia dei pazienti
 
-            //Regolo la grandezza dei panel
+            //I due metodi che seguono specificano rispettivamente la grandezza e la posizione dei controlli nella form
             SetItemsWidthAndHeight();
             SetItemsPosition();
         }
@@ -93,6 +94,8 @@ namespace ApplicazioneMedico
         {
             Sync();
             BindAllGrids();
+            SetItemsWidthAndHeight();
+            SetItemsPosition();
         }
         private void btnInsNuovoCert_Click(object sender, EventArgs e)
         {
@@ -103,14 +106,18 @@ namespace ApplicazioneMedico
             BindGridCertificatiSingoloPaziente();
 
             if (isInserito)
-                BringPanelToFront(false, true, false, false, false);
+                BringPanelToFront(false, false, false, true, false);
+
+            SvuotaTextBox();
         }
         private void btnAnnullaNuovoCert_Click(object sender, EventArgs e)
         {
             BringPanelToFront(false, false, false, true, false);
+            SvuotaTextBox();
         }
 
         /* HELPERS */
+        /* Inizio metodi per il bind delle gridview */
         protected void BindGridPazienti()
         {
             BindingSource bs = new BindingSource();
@@ -167,6 +174,8 @@ namespace ApplicazioneMedico
             BindGridPatologie();
             BindGridCertificatiSingoloPaziente();
         }
+        /* Fine metodi per il bind delle gridview */
+
         protected void CreateInfoColumn()
         {
             Image myImage = Resources.info;
@@ -228,6 +237,8 @@ namespace ApplicazioneMedico
             foreach (Control c in tblSchedaPaziente.Controls)
                 if (c.GetType().Equals(txtNomePaziente))
                     c.Width = 200;
+
+            SetNuovoCertificatoTablePosition();
         }
         protected void SetItemsPosition()
         {
@@ -258,7 +269,8 @@ namespace ApplicazioneMedico
             lblTitlePazienti.Left = (pnlPazienti.Width - lblTitlePazienti.Width) / 2;
             lblTitleCertificati.Left = (pnlCertificati.Width - lblTitleCertificati.Width) / 2;
             lblTitlePatologie.Left = (pnlPatologie.Width - lblTitlePatologie.Width) / 2;
-            lblTitlePazienti.Top = lblTitleCertificati.Top = lblTitlePatologie.Top = mainNav.Bottom + 10;
+            lblTitleNuovoCert.Left = (pnlNuovoCertificato.Width - lblTitleNuovoCert.Width) / 2;
+            lblTitlePazienti.Top = lblTitleCertificati.Top = lblTitlePatologie.Top = lblTitleNuovoCert.Top = mainNav.Bottom + 10;
 
             //Pannelli Filtri
             pnlPazientiFiltri.Top = pnlCertificatiSearchContainer.Top = pnlPatologieSearchContainer.Top = lblTitlePazienti.Bottom + 10;
@@ -268,6 +280,16 @@ namespace ApplicazioneMedico
             grdPazienti.Top = grdCertificati.Top = grdPatologie.Top = pnlPazientiFiltri.Bottom + 5;
             grdPazienti.Left = grdCertificati.Left = grdPatologie.Left = rientroLeft;
             btnNuovoCertificato.Top = grdCertificatiPaziente.Bottom + 10;
+        }
+        protected void SetNuovoCertificatoTablePosition()
+        {
+            tblNuovoCertificato.Top = lblTitleNuovoCert.Bottom + 30;
+            tblNuovoCertificato.Left = (pnlNuovoCertificato.Width - tblNuovoCertificato.Width) / 2;
+
+            foreach (Label l in tblNuovoCertificato.Controls.OfType<Label>().ToList())
+                l.ForeColor = Color.White;
+
+            tblNuovoCertificato.CellBorderStyle = TableLayoutPanelCellBorderStyle.Outset;
         }
         protected void Wait2Seconds()
         {
@@ -279,50 +301,6 @@ namespace ApplicazioneMedico
         {
             pnlAggiornamento.Visible = false;
         }
-        /*protected void FillComboBox()
-        {
-            List<string> colList = new List<string>();
-            foreach (DataGridViewColumn c in grdPazienti.Columns)
-            {
-                if (c.Visible == true)
-                    colList.Add(c.HeaderText.ToString());
-            }
-
-            cmbPazientiColumns.Items.Clear();
-
-            foreach (string colName in colList)
-            {
-                cmbPazientiColumns.Items.Add(colName);
-            }
-        }*/
-        protected void FillSchedaPaziente(Paziente p)
-        {
-            txtNomePaziente.Text = p.nome;
-            txtCognomePaziente.Text = p.cognome;
-            txtSessoPaziente.Text = p.Sesso;
-            txtDataNascitaPaziente.Text = p.data_nascita;
-            txtLuogoNascitaPaziente.Text = p.luogo;
-            txtCodiceFiscalePaziente.Text = p.cod_fis;
-            txtComunePaziente.Text = p.residenza;
-            txtProvinciaPaziente.Text = p.provincia;
-            txtIndirizzoPaziente.Text = p.indirizzo;
-            txtCapPaziente.Text = p.CAP;
-            txtTelefonoPaziente.Text = p.telefono;
-            txtCellularePaziente.Text = p.mobile;
-            txtEmailPaziente.Text = p.email;
-            txtCodiceSanitarioPaziente.Text = p.cod_sanitario;
-        }
-        protected void FillComboBoxPatologie()
-        {
-            List<Patologia> patList = PatologieDAO.GetListPatologie();
-
-            cmbPatologieNuovoCert.Items.Clear();
-
-            foreach (Patologia p in patList)
-            {
-                cmbPatologieNuovoCert.Items.Add(p.nome);
-            }
-        }
         protected void SetFont()
         {
             foreach (Control c in this.Controls)
@@ -331,10 +309,17 @@ namespace ApplicazioneMedico
             }
 
             //Titoli
-            lblTitleCertificati.Font = lblTitlePazienti.Font = lblTitlePatologie.Font = new Font("Segoe UI", 40, FontStyle.Bold);
-            lblTitleCertificati.ForeColor = lblTitlePazienti.ForeColor = lblTitlePatologie.ForeColor = Color.White;
-
-
+            lblTitleCertificati.Font = lblTitlePazienti.Font = lblTitlePatologie.Font = lblTitleNuovoCert.Font = new Font("Segoe UI", 40, FontStyle.Bold);
+            lblTitleCertificati.ForeColor = lblTitlePazienti.ForeColor = lblTitlePatologie.ForeColor = lblTitleNuovoCert.ForeColor = Color.White;
+            lblServerDate.ForeColor = Color.White;
+            lblServerDate.Text = "";
+        }
+        protected void GetOrSendData()
+        {
+            roPaz = ApiRestClient.GetPazientiDataFromServer();
+            roPat = ApiRestClient.GetPatologieDataFromServer();
+            roCert = ApiRestClient.GetCertificatiDataFromServer();
+            response = ApiRestClient.SendCertificatiToServer(CertificatiDAO.GetListCertificatiAfterSyncDate());
         }
         protected void SetDate()
         {
@@ -346,6 +331,7 @@ namespace ApplicazioneMedico
             else
             {
                 lblServerDate.Text = "Ora non disponibile. Server non raggiungibile.";
+                lblServerDate.ForeColor = Color.White;
             }
         }
         protected void Sync()
@@ -373,6 +359,45 @@ namespace ApplicazioneMedico
             syncDate = DateTime.Now;
             MedicoDAO.UpdateLastSyncDate(syncDate);
         }
+
+        //Metodo che consente di compilare i campi della scheda paziente a partire dal paziente selezionato sulla gridView
+        protected void FillSchedaPaziente(Paziente p)
+        {
+            txtNomePaziente.Text = p.nome;
+            txtCognomePaziente.Text = p.cognome;
+            txtSessoPaziente.Text = p.Sesso;
+            txtDataNascitaPaziente.Text = p.data_nascita;
+            txtLuogoNascitaPaziente.Text = p.luogo;
+            txtCodiceFiscalePaziente.Text = p.cod_fis;
+            txtComunePaziente.Text = p.residenza;
+            txtProvinciaPaziente.Text = p.provincia;
+            txtIndirizzoPaziente.Text = p.indirizzo;
+            txtCapPaziente.Text = p.CAP;
+            txtTelefonoPaziente.Text = p.telefono;
+            txtCellularePaziente.Text = p.mobile;
+            txtEmailPaziente.Text = p.email;
+            txtCodiceSanitarioPaziente.Text = p.cod_sanitario;
+        }
+
+        //Consente di popolare rispettivamente la comboBox delle patologie e quella delle tipologie per il nuovo certificato
+        protected void FillComboBoxPatologie()
+        {
+            List<Patologia> patList = PatologieDAO.GetListPatologie();
+            cmbPatologieNuovoCert.Items.Clear();
+
+            foreach (Patologia p in patList)
+                cmbPatologieNuovoCert.Items.Add(p.nome);
+        }
+        protected void FillComboBoxTipologiaCertificato()
+        {
+            cmbTipologiaNuovoCert.Items.Clear();
+            cmbTipologiaNuovoCert.Items.Add("Inizio");
+            cmbTipologiaNuovoCert.Items.Add("Continuazione");
+            cmbTipologiaNuovoCert.Items.Add("Ricaduta");
+        }
+
+        /* Popola i campi dell'istanza della classe Certificato, 
+         * a partire dai testi presenti nelle caselle del pannello nuovo Certificato */
         protected Certificato popolaCertificato(Certificato c)
         {
             c.cod_sanitario = txtCodSanNuovoCert.Text;
@@ -380,7 +405,7 @@ namespace ApplicazioneMedico
             c.data_emissione = DateTime.Now.ToString();
             c.data_inizio = dtpDataInizioNuovoCert.Value.ToString();
             c.data_fine = dtpDataFineNuovoCert.Value.ToString();
-            c.tipologia = cmbTipologia.Text;
+            c.tipologia = cmbTipologiaNuovoCert.Text;
             c.comune = txtComuneNuovoCert.Text;
             c.indirizzo = txtIndirizzoNuovoCert.Text;
             c.provincia = txtProvinciaNuovoCert.Text;
@@ -395,6 +420,8 @@ namespace ApplicazioneMedico
 
             return c;
         }
+
+        //Riempie le caselle di testo del pannello che consente l'inserimento di un nuovo certificato
         protected void popolaCampiNuovoCertificato()
         {
             txtCodSanNuovoCert.Text = txtCodiceSanitarioPaziente.Text;
@@ -403,63 +430,19 @@ namespace ApplicazioneMedico
             txtIndirizzoNuovoCert.Text = txtIndirizzoPaziente.Text;
             txtCapNuovoCert.Text = txtCapPaziente.Text;
 
-            cmbTipologia.Items.Add("Inizio");
-            cmbTipologia.Items.Add("Continuazione");
-            cmbTipologia.Items.Add("Ricaduta");
-
+            FillComboBoxTipologiaCertificato();
             FillComboBoxPatologie();
-        }        
-        protected void GetOrSendData()
-        {
-            roPaz = ApiRestClient.GetPazientiDataFromServer();
-            roPat = ApiRestClient.GetPatologieDataFromServer();
-            roCert = ApiRestClient.GetCertificatiDataFromServer();
-            response = ApiRestClient.SendCertificatiToServer(CertificatiDAO.GetListCertificatiAfterSyncDate());
         }
 
-        /* Metodi per il Menù */
-        private void menuFile_MouseEnter(object sender, EventArgs e)
+        //Svuota le caselle di testo non derivanti dal paziente all'inserimento di un nuovo certificato
+        protected void SvuotaTextBox()
         {
-            menuFile.ForeColor = Color.Black;
-        }
-        private void menuFile_DropDownClosed(object sender, EventArgs e)
-        {
-            menuFile.ForeColor = Color.White;
-        }
-        private void menuPazienti_MouseEnter(object sender, EventArgs e)
-        {
-            menuPazienti.ForeColor = Color.Black;
-        }
-        private void menuPazienti_DropDownClosed(object sender, EventArgs e)
-        {
-            menuPazienti.ForeColor = Color.White;
-        }
-        private void menuCertificati_MouseEnter(object sender, EventArgs e)
-        {
-            menuCertificati.ForeColor = Color.Black;
-        }
-        private void menuCertificati_DropDownClosed(object sender, EventArgs e)
-        {
-            menuCertificati.ForeColor = Color.White;
-        }
-        private void menuPatologie_MouseEnter(object sender, EventArgs e)
-        {
-            menuPatologie.ForeColor = Color.Black;
-        }
-        private void menuPatologie_DropDownClosed(object sender, EventArgs e)
-        {
-            menuPatologie.ForeColor = Color.White;
-        }
-        private void menuHelp_MouseEnter(object sender, EventArgs e)
-        {
-            menuHelp.ForeColor = Color.Black;
-        }
-        private void menuHelp_DropDownClosed(object sender, EventArgs e)
-        {
-            menuHelp.ForeColor = Color.White;
+            txtNoteNuovoCert.Text = txtDomicilioNuovoCert.Text = "";
+            cmbTipologiaNuovoCert.SelectedIndex = cmbPatologieNuovoCert.SelectedIndex = -1;
+            dtpDataInizioNuovoCert.Value = dtpDataFineNuovoCert.Value = DateTime.Now;
         }
 
-        /* Azioni al resize della window */
+        /* Riposiziona i controlli ad ogni resize della window */
         private void ApplicazioneMedico_SizeChanged(object sender, EventArgs e)
         {
             SetItemsWidthAndHeight();

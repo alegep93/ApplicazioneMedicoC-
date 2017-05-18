@@ -246,6 +246,7 @@ namespace ApplicazioneMedico.DAO
                 sql.Append("FROM certificato AS C JOIN paziente AS P ON (C.cod_paziente = P.cod_sanitario) ");
                 sql.Append("JOIN patologia AS Pat ON (C.cod_patologia = pat.cod_patologia) ");
                 sql.Append("WHERE cod_paziente = @pCodPaz ");
+                sql.Append("ORDER BY data_emissione DESC ");
 
                 SqlCommand cmd = new SqlCommand(sql.ToString(), cn);
                 cmd.Parameters.Add(new SqlParameter("pCodPaz", codPaz));

@@ -109,6 +109,8 @@
     <Content Include="Images\info.png" />
     <Content Include="Images\loader.gif" />
     <Content Include="Images\search-icon.png" />
+    <None Include="Resources\bgMinimalistBlu.jpg" />
+    <None Include="Resources\bgMarmo.JPG" />
     <None Include="Resources\search-icon.png" />
     <None Include="Resources\Background1.jpg" />
     <None Include="Resources\Background.jpg" />

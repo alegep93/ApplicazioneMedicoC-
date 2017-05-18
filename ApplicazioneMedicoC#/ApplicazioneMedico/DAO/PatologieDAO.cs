@@ -47,7 +47,7 @@ namespace ApplicazioneMedico.DAO
 
             try
             {
-                sql.Append("SELECT nome FROM patologia ");
+                sql.Append("SELECT nome FROM patologia ORDER BY nome ASC ");
 
                 SqlCommand cmd = new SqlCommand(sql.ToString(), cn);
 
