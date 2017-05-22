@@ -54,7 +54,7 @@
   <ItemGroup>
     <Compile Include="API\ApiRestClient.cs" />
     <Compile Include="API\SyncDataFromServer.cs" />
-    <Compile Include="ConfigurationManager.cs" />
+    <Compile Include="ConfigManager.cs" />
     <Compile Include="DAO\BaseDAO.cs" />
     <Compile Include="DAO\CertificatiDAO.cs" />
     <Compile Include="DAO\MedicoDAO.cs" />
@@ -109,6 +109,9 @@
     <Content Include="Images\info.png" />
     <Content Include="Images\loader.gif" />
     <Content Include="Images\search-icon.png" />
+    <None Include="Resources\certificato-malattia3.jpg" />
+    <None Include="Resources\certificato-malattia2.jpg" />
+    <None Include="Resources\certificato-malattia1.jpg" />
     <None Include="Resources\certificato-malattia.jpg" />
     <None Include="Resources\bgMinimalistBlu.jpg" />
     <None Include="Resources\bgMarmo.JPG" />

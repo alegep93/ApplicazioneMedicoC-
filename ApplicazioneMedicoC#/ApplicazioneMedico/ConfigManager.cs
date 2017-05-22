@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ApplicazioneMedico
 {
-    public class ConfigurationManager
+    public class ConfigManager
     {
         private static string fileName = "../../config.ini";
 

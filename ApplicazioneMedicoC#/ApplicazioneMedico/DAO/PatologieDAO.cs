@@ -20,6 +20,7 @@ namespace ApplicazioneMedico.DAO
             {
                 sql.Append("SELECT cod_patologia, nome AS Nome, descrizione AS Descrizione ");
                 sql.Append("FROM patologia ");
+                sql.Append("ORDER BY nome ASC ");
 
                 SqlCommand cmd = new SqlCommand(sql.ToString(), cn);
                 SqlDataAdapter adapter = new SqlDataAdapter();

@@ -31,9 +31,9 @@ namespace ApplicazioneMedico
             InitializeComponent();
 
             SetNewSyncDate();   //Sincronizza la data di ultimo aggiornamento all'apertura dell'applicazione
-            //GetOrSendData();    //Riceve e/o invia i dati dal/al server remoto
+            GetOrSendData();    //Riceve e/o invia i dati dal/al server remoto
             SetFont();          //Consente di attribuire lo stesso font a tutti i controlli della Windows Form
-            //Sync();             //Sincronizza il db locale con i dati ricevuti dal server remoto
+            Sync();             //Sincronizza il db locale con i dati ricevuti dal server remoto
 
             Wait2Seconds();     //Mostro per 2 secondi il caricamento e poi passo al pannello dei pazienti
 
@@ -43,8 +43,10 @@ namespace ApplicazioneMedico
             BindGridPazienti();     //Esegue la visualizzazione dei dati sulla griglia dei pazienti
 
             //I due metodi che seguono specificano rispettivamente la grandezza e la posizione dei controlli nella form
-            SetItemsWidthAndHeight();
-            SetItemsPosition();
+            this.Visible = false;
+            PlaceItems();
+
+            this.Visible = true;
         }
 
         /* Eventi Click */
@@ -92,10 +94,10 @@ namespace ApplicazioneMedico
         }
         private void subMenuSincronizza_Click(object sender, EventArgs e)
         {
+            GetOrSendData();
             Sync();
             BindAllGrids();
-            SetItemsWidthAndHeight();
-            SetItemsPosition();
+            PlaceItems();
         }
         private void btnInsNuovoCert_Click(object sender, EventArgs e)
         {
@@ -163,7 +165,7 @@ namespace ApplicazioneMedico
             bs.DataSource = CertificatiDAO.GetCertificatiSingoloPaziente(txtCodiceSanitarioPaziente.Text);
             grdCertificatiPaziente.DataSource = bs;
             grdCertificatiPaziente.Columns[0].Visible = false;
-            grdCertificatiPaziente.Columns[2].Visible = false;
+            //grdCertificatiPaziente.Columns[2].Visible = false;
             grdCertificatiPaziente.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
         protected void BindAllGrids()
@@ -194,32 +196,41 @@ namespace ApplicazioneMedico
             pnlSingoloPaziente.Visible = bringPnlSingoloPaziente;
             pnlNuovoCertificato.Visible = bringPnlNuovoCertificato;
         }
+        protected void SetBGColorGridView()
+        {
+            grdPazienti.BackgroundColor = SystemColors.ControlLightLight;
+            grdPatologie.BackgroundColor = SystemColors.ControlLightLight;
+            grdCertificati.BackgroundColor = SystemColors.ControlLightLight;
+            grdCertificatiPaziente.BackgroundColor = SystemColors.ControlLightLight;
+        }
         protected void SetItemsWidthAndHeight()
         {
             //Larghezza Pannelli Container
             pnlAggiornamento.Width = pnlPazienti.Width = pnlCertificati.Width = pnlPatologie.Width =
-                pnlSingoloPaziente.Width = pnlNuovoCertificato.Width = pnlAggiornamento.Parent.ClientSize.Width;
+                pnlSingoloPaziente.Width = pnlSchedaPazCont.Width = pnlNuovoCertificato.Width = ClientRectangle.Width;
 
             //Altezza Pannelli Container
             pnlAggiornamento.Height = pnlAggiornamento.Parent.ClientSize.Height;
             pnlPazienti.Height = pnlCertificati.Height = pnlPatologie.Height =
-                pnlSingoloPaziente.Height = pnlNuovoCertificato.Height = (pnlAggiornamento.Parent.ClientSize.Height - mainNav.Height);
+                pnlSingoloPaziente.Height = pnlNuovoCertificato.Height = (ClientRectangle.Height - mainNav.Height);
+
+            //Bottoni di ricerca
+            btnCercaCertificati.Height = btnPazientiSearch.Height = btnCercaPatologie.Height = txtCercaCertificati.Height + 2;
+
+            //Griglie
+            grdPazienti.Height = ClientRectangle.Height - (mainNav.Height + lblTitlePazienti.Height + pnlPazientiFiltri.Height) - 50;
+            grdPazienti.Width = ClientRectangle.Width - 40;
+
+            grdCertificati.Width = grdPatologie.Width = grdCertificatiPaziente.Width = grdPazienti.Width;
+            grdCertificati.Height = grdPatologie.Height = grdPazienti.Height;
+            grdCertificatiPaziente.Height = grdPazienti.Height - btnNuovoCertificato.Height;
 
             //Larghezza Pannelli Filtri
-            pnlPazientiFiltri.Width = grdPazienti.Width;
+            pnlPazientiFiltri.Width = pnlCertificatiSearchContainer.Width = pnlPatologieSearchContainer.Width = grdPazienti.Width;
             pnlCertificatiSearchContainer.Height = pnlPatologieSearchContainer.Height = pnlPazientiFiltri.Height;
-            txtPazientiSearch.Height = txtCercaCertificati.Height = txtCercaPatologie.Height = 14;
-            btnPazientiSearch.Height = btnCercaCertificati.Height = btnCercaPatologie.Height = txtPazientiSearch.Height;
-
-            //Griglia Pazienti
-            grdCertificati.Width = grdPazienti.Width;
-            grdCertificati.Height = grdPazienti.Height;
 
             //Larghezza Main Navigation
-            mainNav.Width = pnlAggiornamento.Parent.ClientSize.Width - 20;
-
-            //ContenitoreSchedaPazienti
-            pnlSchedaPazCont.Width = grdCertificatiPaziente.Width;
+            mainNav.Width = ClientRectangle.Width - 20;
 
             //Tabella scheda paziente
             tblSchedaPaziente.Width = pnlSchedaPazCont.Width / 2;
@@ -237,8 +248,6 @@ namespace ApplicazioneMedico
             foreach (Control c in tblSchedaPaziente.Controls)
                 if (c.GetType().Equals(txtNomePaziente))
                     c.Width = 200;
-
-            //SetNuovoCertificatoTablePosition();
         }
         protected void SetItemsPosition()
         {
@@ -263,34 +272,49 @@ namespace ApplicazioneMedico
             lblServerDate.Left = mainNav.Width - (lblServerDate.Width + rientroLeft);
 
             //Tabella scheda paziente
-            tblSchedaPaziente.Left = (pnlSchedaPazCont.Width - tblSchedaPaziente.Width) / 2;
+            tblSchedaPaziente.Left = (pnlSingoloPaziente.Width - tblSchedaPaziente.Width) / 2;
 
             //Titoli
             lblTitlePazienti.Left = (pnlPazienti.Width - lblTitlePazienti.Width) / 2;
             lblTitleCertificati.Left = (pnlCertificati.Width - lblTitleCertificati.Width) / 2;
             lblTitlePatologie.Left = (pnlPatologie.Width - lblTitlePatologie.Width) / 2;
-            //lblTitleNuovoCert.Left = (pnlNuovoCertificato.Width - lblTitleNuovoCert.Width) / 2;
-            lblTitlePazienti.Top = lblTitleCertificati.Top = lblTitlePatologie.Top = mainNav.Bottom + 10;
-
-            //Pannelli Filtri
-            pnlPazientiFiltri.Top = pnlCertificatiSearchContainer.Top = pnlPatologieSearchContainer.Top = lblTitlePazienti.Bottom + 10;
-            pnlPazientiFiltri.Left = pnlCertificatiSearchContainer.Left = pnlPatologieSearchContainer.Left = rientroLeft;
+            lblTitlePazienti.Top = lblTitleCertificati.Top = lblTitlePatologie.Top = lblTitleCertSingolopaziente.Top = mainNav.Bottom + 10;
+            lblTitleCertSingolopaziente.Left = (pnlSingoloPaziente.Width - lblTitleCertSingolopaziente.Width) / 2;
 
             //GridView
-            grdPazienti.Top = grdCertificati.Top = grdPatologie.Top = pnlPazientiFiltri.Bottom + 5;
-            grdPazienti.Left = grdCertificati.Left = grdPatologie.Left = rientroLeft;
+            grdPazienti.Top = grdCertificati.Top = grdPatologie.Top = mainNav.Height + lblTitlePazienti.Height + pnlPazientiFiltri.Height + 5;
+            grdCertificatiPaziente.Top = mainNav.Height + lblTitleCertSingolopaziente.Height + 5;
+            grdPazienti.Left = grdCertificati.Left = grdPatologie.Left = grdCertificatiPaziente.Left = (pnlPazienti.Width - grdPazienti.Width) / 2;
             btnNuovoCertificato.Top = grdCertificatiPaziente.Bottom + 10;
+            btnNuovoCertificato.Left = grdCertificatiPaziente.Right - btnNuovoCertificato.Width;
+
+            //Pannelli Filtri
+            pnlPazientiFiltri.Top = pnlCertificatiSearchContainer.Top = pnlPatologieSearchContainer.Top = mainNav.Height + lblTitlePazienti.Height;
+            pnlPazientiFiltri.Left = pnlCertificatiSearchContainer.Left = pnlPatologieSearchContainer.Left = grdPazienti.Left + 3;
+
+            //Contenuto pannelli filtri
+            //TextBox
+            txtCercaCertificati.Top = pnlCertificatiSearchContainer.Height - txtCercaCertificati.Height;
+            txtCercaPatologie.Top = pnlPatologieSearchContainer.Height - txtCercaPatologie.Height;
+            txtPazientiSearch.Top = pnlPazientiFiltri.Height - txtPazientiSearch.Height;
+            //Button
+            btnCercaCertificati.Top = btnCercaPatologie.Top = btnPazientiSearch.Top = pnlPazientiFiltri.Height - btnPazientiSearch.Height + 1;
+
+            //Data Server
+            lblServerDate.Top = mainNav.Height / 3;
+
+            //Pannello Immagine nuovo certificato
+            pnlImgCertificato.Left = (ClientRectangle.Width - pnlImgCertificato.Width) / 2;
+            pnlImgCertificato.Top = (ClientRectangle.Height - pnlImgCertificato.Height) / 2;
+
+            //
         }
-        /*protected void SetNuovoCertificatoTablePosition()
+        protected void PlaceItems()
         {
-            tblNuovoCertificato.Top = lblTitleNuovoCert.Bottom + 30;
-            tblNuovoCertificato.Left = (pnlNuovoCertificato.Width - tblNuovoCertificato.Width) / 2;
-
-            foreach (Label l in tblNuovoCertificato.Controls.OfType<Label>().ToList())
-                l.ForeColor = Color.White;
-
-            tblNuovoCertificato.CellBorderStyle = TableLayoutPanelCellBorderStyle.Outset;
-        }*/
+            SetItemsWidthAndHeight();
+            SetItemsPosition();
+            SetBGColorGridView();
+        }
         protected void Wait2Seconds()
         {
             t.Interval = 2000;
@@ -305,13 +329,21 @@ namespace ApplicazioneMedico
         {
             foreach (Control c in this.Controls)
             {
-                c.Font = new Font("Segoe UI", 8, FontStyle.Regular);
+                c.Font = new Font("Segoe UI", 10, FontStyle.Regular);
             }
 
+            foreach (Label l in tblSchedaPaziente.Controls.OfType<Label>().ToList())
+            {
+                l.Font = new Font("Segoe UI", 10, FontStyle.Bold);
+                l.ForeColor = Color.White;
+            }
+
+            //Bottoni di ricerca
+            btnPazientiSearch.Font = btnCercaPatologie.Font = btnCercaCertificati.Font = new Font("Segoe UI", 10, FontStyle.Regular);
+
             //Titoli
-            lblTitleCertificati.Font = lblTitlePazienti.Font = lblTitlePatologie.Font = new Font("Segoe UI", 40, FontStyle.Bold);
-            lblTitleCertificati.ForeColor = lblTitlePazienti.ForeColor = lblTitlePatologie.ForeColor = Color.White;
-            lblServerDate.ForeColor = Color.White;
+            lblTitleCertificati.Font = lblTitlePazienti.Font = lblTitlePatologie.Font = lblTitleCertSingolopaziente.Font = new Font("Segoe UI", 40, FontStyle.Bold);
+            lblServerDate.ForeColor = lblTitleCertificati.ForeColor = lblTitlePazienti.ForeColor = lblTitlePatologie.ForeColor = lblTitleCertSingolopaziente.ForeColor = Color.White;
             lblServerDate.Text = "";
         }
         protected void GetOrSendData()
@@ -363,10 +395,12 @@ namespace ApplicazioneMedico
         //Metodo che consente di compilare i campi della scheda paziente a partire dal paziente selezionato sulla gridView
         protected void FillSchedaPaziente(Paziente p)
         {
+            lblTitleCertSingolopaziente.Text += " " + p.nome + " " + p.cognome;
+
             txtNomePaziente.Text = p.nome;
             txtCognomePaziente.Text = p.cognome;
             txtSessoPaziente.Text = p.Sesso;
-            txtDataNascitaPaziente.Text = p.data_nascita;
+            txtDataNascitaPaziente.Text = p.data_nascita.Split(' ')[0];
             txtLuogoNascitaPaziente.Text = p.luogo;
             txtCodiceFiscalePaziente.Text = p.cod_fis;
             txtComunePaziente.Text = p.residenza;
@@ -377,6 +411,8 @@ namespace ApplicazioneMedico
             txtCellularePaziente.Text = p.mobile;
             txtEmailPaziente.Text = p.email;
             txtCodiceSanitarioPaziente.Text = p.cod_sanitario;
+
+            lblTitleCertSingolopaziente.Left = (pnlSingoloPaziente.Width - lblTitleCertSingolopaziente.Width) / 2;
         }
 
         //Consente di popolare rispettivamente la comboBox delle patologie e quella delle tipologie per il nuovo certificato
@@ -401,7 +437,7 @@ namespace ApplicazioneMedico
         protected Certificato popolaCertificato(Certificato c)
         {
             c.cod_sanitario = txtCodSanNuovoCert.Text;
-            c.cod_medico = ConfigurationManager.GetCodiceMedico();
+            c.cod_medico = ConfigManager.GetCodiceMedico();
             c.data_emissione = DateTime.Now.ToString();
             c.data_inizio = dtpDataInizioNuovoCert.Value.ToString();
             c.data_fine = dtpDataFineNuovoCert.Value.ToString();
@@ -429,6 +465,9 @@ namespace ApplicazioneMedico
             txtProvinciaNuovoCert.Text = txtProvinciaPaziente.Text;
             txtIndirizzoNuovoCert.Text = txtIndirizzoPaziente.Text;
             txtCapNuovoCert.Text = txtCapPaziente.Text;
+            txtNomeCognomeNuovoCert.Text = txtCognomePaziente.Text + " " + txtNomePaziente.Text;
+            txtDataEmissioneNuovoCert.Text = DateTime.Now.ToString().Split(' ')[0];
+            txtDataEmissioneNuovoCert.TextAlign = HorizontalAlignment.Center;
 
             FillComboBoxTipologiaCertificato();
             FillComboBoxPatologie();
@@ -445,8 +484,23 @@ namespace ApplicazioneMedico
         /* Riposiziona i controlli ad ogni resize della window */
         private void ApplicazioneMedico_SizeChanged(object sender, EventArgs e)
         {
-            SetItemsWidthAndHeight();
-            SetItemsPosition();
+            this.Visible = false;
+            PlaceItems();
+            this.Visible = true;
+        }
+
+        //Ricerca dinamica alla pressione di un pulsante
+        private void txtPazientiSearch_KeyUp(object sender, KeyEventArgs e)
+        {
+            BindGridPazientiWithSearch();
+        }
+
+        private void btnDettagliPazienti_Click(object sender, EventArgs e)
+        {
+            if (pnlSchedaPazCont.Visible)
+                pnlSchedaPazCont.Visible = false;
+            else
+                pnlSchedaPazCont.Visible = true;
         }
     }
 }

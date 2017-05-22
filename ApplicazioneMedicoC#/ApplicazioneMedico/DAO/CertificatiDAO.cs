@@ -23,6 +23,7 @@ namespace ApplicazioneMedico.DAO
                 sql.Append("C.provincia AS Provincia, C.indirizzo AS Indirizzo, C.cap AS Cap, C.domicilio AS Domicilio, C.note AS Note ");
                 sql.Append("FROM certificato AS C JOIN paziente AS P ON (C.cod_paziente = P.cod_sanitario) ");
                 sql.Append("JOIN patologia AS Pat ON (C.cod_patologia = Pat.cod_patologia) ");
+                sql.Append("ORDER BY data_emissione DESC ");
 
                 SqlCommand cmd = new SqlCommand(sql.ToString(), cn);
                 SqlDataAdapter adapter = new SqlDataAdapter();
@@ -141,10 +142,11 @@ namespace ApplicazioneMedico.DAO
 
             try
             {
-                sql.Append("SELECT * FROM certificato WHERE id = @pIdCert ");
+                sql.Append("SELECT * FROM certificato WHERE id = @pIdCert AND cod_medico = @pCodMed ");
 
                 SqlCommand cmd = new SqlCommand(sql.ToString(), cn);
                 cmd.Parameters.Add(new SqlParameter("pIdCert", idCert));
+                cmd.Parameters.Add(new SqlParameter("pCodMed", ConfigManager.GetCodiceMedico()));
 
                 dr = cmd.ExecuteReader();
 
@@ -240,7 +242,7 @@ namespace ApplicazioneMedico.DAO
 
             try
             {
-                sql.Append("SELECT C.id, P.nome + ' ' + P.cognome AS 'Nominativo Paziente', C.data_emissione AS 'Data Emissione', ");
+                sql.Append("SELECT C.id, C.data_emissione AS 'Data Emissione', ");
                 sql.Append("pat.nome AS 'Patologia', C.data_inizio AS 'Data Inizio', C.data_fine AS 'Data Fine', C.tipologia AS Tipologia, C.comune AS Comune, ");
                 sql.Append("C.provincia AS Provincia, C.indirizzo AS Indirizzo, C.cap AS Cap, C.domicilio AS Domicilio, C.note AS Note ");
                 sql.Append("FROM certificato AS C JOIN paziente AS P ON (C.cod_paziente = P.cod_sanitario) ");

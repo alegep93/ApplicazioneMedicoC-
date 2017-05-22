@@ -14,8 +14,8 @@ namespace ApplicazioneMedico.API
     public class ApiRestClient : JSONManager
     {
         private static WebClient syncClient = new WebClient();
-        private static string codMed = ConfigurationManager.GetCodiceMedico();
-        private static string serverAddr = ConfigurationManager.GetServerAddress();
+        private static string codMed = ConfigManager.GetCodiceMedico();
+        private static string serverAddr = ConfigManager.GetServerAddress();
 
         public static RootObject<Paziente> GetPazientiDataFromServer()
         {
@@ -37,7 +37,7 @@ namespace ApplicazioneMedico.API
         }
         public static RootObject<Patologia> GetPatologieDataFromServer()
         {
-            string url = serverAddr + "/ApiServer2/Patologia/all";
+            string url = serverAddr + "/ApiServer/Patologia/all";
             string jsonPatologie = "";
 
             try
