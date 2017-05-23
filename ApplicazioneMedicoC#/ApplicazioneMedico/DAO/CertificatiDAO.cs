@@ -198,43 +198,6 @@ namespace ApplicazioneMedico.DAO
                 throw new Exception("Impossibile inserire il certificato", ex);
             }
         }
-        public static DataTable SearchPazienti(string filter)
-        {
-            SqlConnection cn = GetConnection();
-            StringBuilder sql = new StringBuilder();
-
-            filter = "%" + filter + "%";
-
-            try
-            {
-                sql.Append("SELECT C.id, P.nome + ' ' + P.cognome AS 'Nominativo Paziente', C.data_emissione, Pat.nome, ");
-                sql.Append("C.data_inizio, C.data_fine, C.tipologia AS Tipologia, C.comune AS Comune, ");
-                sql.Append("C.provincia AS Provincia, C.indirizzo AS Indirizzo, C.cap AS Cap, C.domicilio AS Domicilio, C.note ");
-                sql.Append("FROM certificato AS C ");
-                sql.Append("JOIN paziente AS P ON (C.cod_paziente = P.cod_sanitario) ");
-                sql.Append("JOIN patologia AS Pat ON(C.cod_patologia = Pat.cod_patologia) ");
-                sql.Append("WHERE P.nome LIKE @pFilter OR P.cognome LIKE @pFilter OR C.data_emissione LIKE @pFilter OR ");
-                sql.Append("Pat.nome LIKE @pFilter OR C.data_inizio LIKE @pFilter OR C.data_fine LIKE @pFilter OR tipologia LIKE @pFilter OR ");
-                sql.Append("comune LIKE @pFilter OR provincia LIKE @pFilter OR indirizzo LIKE @pFilter OR cap LIKE @pFilter OR domicilio LIKE @pFilter OR C.note LIKE @pFilter ");
-
-                SqlCommand cmd = new SqlCommand(sql.ToString(), cn);
-                cmd.Parameters.Add(new SqlParameter("pFilter", filter));
-
-                SqlDataAdapter adapter = new SqlDataAdapter();
-                adapter.SelectCommand = cmd;
-
-                DataTable table = new DataTable();
-                table.Locale = System.Globalization.CultureInfo.InvariantCulture;
-                adapter.Fill(table);
-
-                return table;
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Impossibile recuperare i certificati", ex);
-            }
-            finally { cn.Close(); }
-        }
         public static DataTable GetCertificatiSingoloPaziente(string codPaz)
         {
             SqlConnection cn = GetConnection();
@@ -291,89 +254,78 @@ namespace ApplicazioneMedico.DAO
                 throw new Exception("Impossibile eliminare il certificato non ancora inviato", ex);
             }finally { cn.Close(); }
         }
-        /*public static Certificato GetCertificato(string codPaz)
+        public static DataTable SearchCertificati(string filter)
         {
             SqlConnection cn = GetConnection();
             StringBuilder sql = new StringBuilder();
-            SqlDataReader dr = null;
-            Certificato c = new Certificato();
+
+            filter = "%" + filter + "%";
 
             try
             {
-                sql.Append("SELECT * FROM certificato WHERE cod_sanitario = @pCodPaz ");
+                sql.Append("SELECT C.id, P.nome + ' ' + P.cognome AS 'Nominativo Paziente', C.data_emissione AS 'Data Emissione', ");
+                sql.Append("Pat.nome AS 'Patologia', C.data_inizio AS 'Data Inizio', C.data_fine AS 'Data Fine', C.tipologia AS Tipologia, C.comune AS Comune, ");
+                sql.Append("C.provincia AS Provincia, C.indirizzo AS Indirizzo, C.cap AS Cap, C.domicilio AS Domicilio, C.note AS Note ");
+                sql.Append("FROM certificato AS C JOIN paziente AS P ON (C.cod_paziente = P.cod_sanitario) ");
+                sql.Append("JOIN patologia AS Pat ON (C.cod_patologia = Pat.cod_patologia) ");
+                sql.Append("WHERE P.nome LIKE @pFilter OR P.cognome LIKE @pFilter OR Pat.nome LIKE @pFilter OR C.tipologia LIKE @pFilter OR C.comune LIKE @pFilter ");
+                sql.Append("OR C.provincia LIKE @pFilter OR C.indirizzo LIKE @pFilter OR C.cap LIKE @pFilter OR C.domicilio LIKE @pFilter OR C.note LIKE @pFilter ");
 
                 SqlCommand cmd = new SqlCommand(sql.ToString(), cn);
-                cmd.Parameters.Add(new SqlParameter("pCodSan", codSan));
+                cmd.Parameters.Add(new SqlParameter("pFilter", filter));
 
-                dr = cmd.ExecuteReader();
+                SqlDataAdapter adapter = new SqlDataAdapter();
+                adapter.SelectCommand = cmd;
 
-                if (dr.Read())
-                {
-                    p.nome = dr.GetString(1);
-                    p.cognome = dr.GetString(2);
-                    p.Sesso = dr.GetString(3);
-                    p.data_nascita = dr.GetDateTime(4).ToString();
-                    p.luogo = dr.GetString(5);
-                    p.cod_fis = dr.GetString(6);
-                    p.residenza = dr.GetString(7);
-                    p.provincia = dr.GetString(8);
-                    p.indirizzo = dr.GetString(9);
-                    p.cap = dr.GetString(10);
-                    p.telefono = dr.GetString(11);
-                    p.mobile = dr.GetString(12);
-                    p.email = dr.GetString(13);
-                    p.cod_sanitario = dr.GetString(14);
-                    p.cod_medico = dr.GetString(15);
-                    p.data_update = dr.GetDateTime(16).ToString();
-                    p.data_inserimento = dr.GetDateTime(17).ToString();
-                }
+                DataTable table = new DataTable();
+                table.Locale = System.Globalization.CultureInfo.InvariantCulture;
+                adapter.Fill(table);
 
-                return p;
+                return table;
             }
             catch (Exception ex)
             {
                 throw new Exception("Impossibile recuperare i pazienti", ex);
             }
             finally { cn.Close(); }
-        }*/
-        /*public static void UpdateCertificato(Certificato p)
+        }
+
+        public static DataTable SearchPazienti(string filter)
         {
             SqlConnection cn = GetConnection();
             StringBuilder sql = new StringBuilder();
 
+            filter = "%" + filter + "%";
+
             try
             {
-                sql.Append("UPDATE certificato SET nome = @pNome, cognome = @pCognome, sesso = @pSesso, data_nascita = @pDataNascita, ");
-                sql.Append("luogo = @pLuogo, cod_fis = @pCodFis, residenza = @pResidenza, provincia = @pProvincia, ");
-                sql.Append("indirizzo = @pIndirizzo, cap = @pCap, telefono = @pTelefono, mobile = @pMobile, email = @pEmail, ");
-                sql.Append("cod_sanitario = @pCodSan, cod_medico = @pCodMed, data_update = @pDataUpdate, data_inserimento = @pDataInserimento ");
-                sql.Append("WHERE cod_sanitario = @pCodSan AND data_update < @pDataUpdate ");
+                sql.Append("SELECT C.id, P.nome + ' ' + P.cognome AS 'Nominativo Paziente', C.data_emissione, Pat.nome, ");
+                sql.Append("C.data_inizio, C.data_fine, C.tipologia AS Tipologia, C.comune AS Comune, ");
+                sql.Append("C.provincia AS Provincia, C.indirizzo AS Indirizzo, C.cap AS Cap, C.domicilio AS Domicilio, C.note ");
+                sql.Append("FROM certificato AS C ");
+                sql.Append("JOIN paziente AS P ON (C.cod_paziente = P.cod_sanitario) ");
+                sql.Append("JOIN patologia AS Pat ON(C.cod_patologia = Pat.cod_patologia) ");
+                sql.Append("WHERE P.nome LIKE @pFilter OR P.cognome LIKE @pFilter OR C.data_emissione LIKE @pFilter OR ");
+                sql.Append("Pat.nome LIKE @pFilter OR C.data_inizio LIKE @pFilter OR C.data_fine LIKE @pFilter OR tipologia LIKE @pFilter OR ");
+                sql.Append("comune LIKE @pFilter OR provincia LIKE @pFilter OR indirizzo LIKE @pFilter OR cap LIKE @pFilter OR domicilio LIKE @pFilter OR C.note LIKE @pFilter ");
 
                 SqlCommand cmd = new SqlCommand(sql.ToString(), cn);
-                cmd.Parameters.Add(new SqlParameter("pNome", p.nome));
-                cmd.Parameters.Add(new SqlParameter("pCognome", p.cognome));
-                cmd.Parameters.Add(new SqlParameter("pSesso", p.Sesso));
-                cmd.Parameters.Add(new SqlParameter("pDataNascita", p.data_nascita));
-                cmd.Parameters.Add(new SqlParameter("pLuogo", p.luogo));
-                cmd.Parameters.Add(new SqlParameter("pCodFis", p.cod_fis));
-                cmd.Parameters.Add(new SqlParameter("pResidenza", p.residenza));
-                cmd.Parameters.Add(new SqlParameter("pProvincia", p.provincia));
-                cmd.Parameters.Add(new SqlParameter("pIndirizzo", p.indirizzo));
-                cmd.Parameters.Add(new SqlParameter("pCap", p.cap));
-                cmd.Parameters.Add(new SqlParameter("pTelefono", p.telefono));
-                cmd.Parameters.Add(new SqlParameter("pMobile", p.mobile));
-                cmd.Parameters.Add(new SqlParameter("pEmail", p.email));
-                cmd.Parameters.Add(new SqlParameter("pCodSan", p.cod_sanitario));
-                cmd.Parameters.Add(new SqlParameter("pCodMed", p.cod_medico));
-                cmd.Parameters.Add(new SqlParameter("pDataUpdate", p.data_update));
-                cmd.Parameters.Add(new SqlParameter("pDataInserimento", p.data_inserimento));
+                cmd.Parameters.Add(new SqlParameter("pFilter", filter));
 
-                cmd.ExecuteNonQuery();
+                SqlDataAdapter adapter = new SqlDataAdapter();
+                adapter.SelectCommand = cmd;
+
+                DataTable table = new DataTable();
+                table.Locale = System.Globalization.CultureInfo.InvariantCulture;
+                adapter.Fill(table);
+
+                return table;
             }
             catch (Exception ex)
             {
-                throw new Exception("Impossibile aggiornare il Certificato", ex);
+                throw new Exception("Impossibile recuperare i certificati", ex);
             }
-        }*/
+            finally { cn.Close(); }
+        }
     }
 }

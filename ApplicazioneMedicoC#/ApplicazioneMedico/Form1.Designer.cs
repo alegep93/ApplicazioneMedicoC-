@@ -45,58 +45,54 @@
             this.grdPazienti = new System.Windows.Forms.DataGridView();
             this.pnlPazientiFiltri = new System.Windows.Forms.Panel();
             this.btnPazientiSearch = new System.Windows.Forms.Button();
-            this.lblCercaPazienti = new System.Windows.Forms.Label();
             this.txtPazientiSearch = new System.Windows.Forms.TextBox();
-            this.cmbPazientiColumns = new System.Windows.Forms.ComboBox();
             this.pnlCertificati = new System.Windows.Forms.Panel();
             this.grdCertificati = new System.Windows.Forms.DataGridView();
             this.lblTitleCertificati = new System.Windows.Forms.Label();
             this.pnlCertificatiSearchContainer = new System.Windows.Forms.Panel();
             this.btnCercaCertificati = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
             this.txtCercaCertificati = new System.Windows.Forms.TextBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.pnlPatologie = new System.Windows.Forms.Panel();
             this.lblTitlePatologie = new System.Windows.Forms.Label();
             this.pnlPatologieSearchContainer = new System.Windows.Forms.Panel();
             this.btnCercaPatologie = new System.Windows.Forms.Button();
-            this.lblCercaInPatologie = new System.Windows.Forms.Label();
             this.txtCercaPatologie = new System.Windows.Forms.TextBox();
-            this.cmbCercaInPatologie = new System.Windows.Forms.ComboBox();
             this.grdPatologie = new System.Windows.Forms.DataGridView();
             this.pnlSingoloPaziente = new System.Windows.Forms.Panel();
-            this.btnNuovoCertificato = new System.Windows.Forms.Button();
-            this.grdCertificatiPaziente = new System.Windows.Forms.DataGridView();
+            this.btnDettagliPazienti = new System.Windows.Forms.Button();
             this.pnlSchedaPazCont = new System.Windows.Forms.Panel();
             this.tblSchedaPaziente = new System.Windows.Forms.TableLayoutPanel();
             this.lblNomePaz = new System.Windows.Forms.Label();
-            this.txtCodiceSanitarioPaziente = new System.Windows.Forms.TextBox();
             this.txtNomePaziente = new System.Windows.Forms.TextBox();
-            this.lblCodiceSanitarioPaz = new System.Windows.Forms.Label();
             this.lblCognomePaz = new System.Windows.Forms.Label();
-            this.txtEmailPaziente = new System.Windows.Forms.TextBox();
             this.txtCognomePaziente = new System.Windows.Forms.TextBox();
-            this.lblEmailPaz = new System.Windows.Forms.Label();
             this.lblSessoPaz = new System.Windows.Forms.Label();
-            this.txtCellularePaziente = new System.Windows.Forms.TextBox();
             this.txtSessoPaziente = new System.Windows.Forms.TextBox();
-            this.lblCellularePaz = new System.Windows.Forms.Label();
             this.lblDataNascitaPaz = new System.Windows.Forms.Label();
-            this.txtTelefonoPaziente = new System.Windows.Forms.TextBox();
             this.txtDataNascitaPaziente = new System.Windows.Forms.TextBox();
-            this.lblTelefonoPaz = new System.Windows.Forms.Label();
             this.lblLuogoNascitaPaz = new System.Windows.Forms.Label();
-            this.txtCapPaziente = new System.Windows.Forms.TextBox();
             this.txtLuogoNascitaPaziente = new System.Windows.Forms.TextBox();
-            this.lblCapPaz = new System.Windows.Forms.Label();
             this.lblCodiceFiscalePaz = new System.Windows.Forms.Label();
-            this.txtIndirizzoPaziente = new System.Windows.Forms.TextBox();
             this.txtCodiceFiscalePaziente = new System.Windows.Forms.TextBox();
-            this.lblIndirizzoPaz = new System.Windows.Forms.Label();
             this.lblComunePaz = new System.Windows.Forms.Label();
-            this.txtProvinciaPaziente = new System.Windows.Forms.TextBox();
             this.txtComunePaziente = new System.Windows.Forms.TextBox();
             this.lblProvinciaPaz = new System.Windows.Forms.Label();
+            this.lblIndirizzoPaz = new System.Windows.Forms.Label();
+            this.lblCapPaz = new System.Windows.Forms.Label();
+            this.lblTelefonoPaz = new System.Windows.Forms.Label();
+            this.lblCellularePaz = new System.Windows.Forms.Label();
+            this.lblEmailPaz = new System.Windows.Forms.Label();
+            this.lblCodiceSanitarioPaz = new System.Windows.Forms.Label();
+            this.txtProvinciaPaziente = new System.Windows.Forms.TextBox();
+            this.txtIndirizzoPaziente = new System.Windows.Forms.TextBox();
+            this.txtCapPaziente = new System.Windows.Forms.TextBox();
+            this.txtTelefonoPaziente = new System.Windows.Forms.TextBox();
+            this.txtCellularePaziente = new System.Windows.Forms.TextBox();
+            this.txtEmailPaziente = new System.Windows.Forms.TextBox();
+            this.txtCodiceSanitarioPaziente = new System.Windows.Forms.TextBox();
+            this.lblTitleCertSingolopaziente = new System.Windows.Forms.Label();
+            this.btnNuovoCertificato = new System.Windows.Forms.Button();
+            this.grdCertificatiPaziente = new System.Windows.Forms.DataGridView();
             this.pnlNuovoCertificato = new System.Windows.Forms.Panel();
             this.pnlImgCertificato = new System.Windows.Forms.Panel();
             this.lblCodSanNuovoCert = new System.Windows.Forms.Label();
@@ -117,8 +113,6 @@
             this.txtNoteNuovoCert = new System.Windows.Forms.TextBox();
             this.lblCertCodSan = new System.Windows.Forms.Label();
             this.lblServerDate = new System.Windows.Forms.Label();
-            this.lblTitleCertSingolopaziente = new System.Windows.Forms.Label();
-            this.btnDettagliPazienti = new System.Windows.Forms.Button();
             this.mainNav.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picBox)).BeginInit();
             this.pnlAggiornamento.SuspendLayout();
@@ -132,9 +126,9 @@
             this.pnlPatologieSearchContainer.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grdPatologie)).BeginInit();
             this.pnlSingoloPaziente.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.grdCertificatiPaziente)).BeginInit();
             this.pnlSchedaPazCont.SuspendLayout();
             this.tblSchedaPaziente.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.grdCertificatiPaziente)).BeginInit();
             this.pnlNuovoCertificato.SuspendLayout();
             this.pnlImgCertificato.SuspendLayout();
             this.SuspendLayout();
@@ -287,9 +281,7 @@
             // pnlPazientiFiltri
             // 
             this.pnlPazientiFiltri.Controls.Add(this.btnPazientiSearch);
-            this.pnlPazientiFiltri.Controls.Add(this.lblCercaPazienti);
             this.pnlPazientiFiltri.Controls.Add(this.txtPazientiSearch);
-            this.pnlPazientiFiltri.Controls.Add(this.cmbPazientiColumns);
             this.pnlPazientiFiltri.Location = new System.Drawing.Point(13, 37);
             this.pnlPazientiFiltri.Name = "pnlPazientiFiltri";
             this.pnlPazientiFiltri.Size = new System.Drawing.Size(1460, 99);
@@ -308,17 +300,6 @@
             this.btnPazientiSearch.UseVisualStyleBackColor = true;
             this.btnPazientiSearch.Click += new System.EventHandler(this.btnPazientiSearch_Click);
             // 
-            // lblCercaPazienti
-            // 
-            this.lblCercaPazienti.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblCercaPazienti.AutoSize = true;
-            this.lblCercaPazienti.Location = new System.Drawing.Point(708, 82);
-            this.lblCercaPazienti.Name = "lblCercaPazienti";
-            this.lblCercaPazienti.Size = new System.Drawing.Size(59, 14);
-            this.lblCercaPazienti.TabIndex = 2;
-            this.lblCercaPazienti.Text = "Cerca in:";
-            this.lblCercaPazienti.Visible = false;
-            // 
             // txtPazientiSearch
             // 
             this.txtPazientiSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
@@ -327,16 +308,6 @@
             this.txtPazientiSearch.Size = new System.Drawing.Size(295, 20);
             this.txtPazientiSearch.TabIndex = 1;
             this.txtPazientiSearch.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtPazientiSearch_KeyUp);
-            // 
-            // cmbPazientiColumns
-            // 
-            this.cmbPazientiColumns.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmbPazientiColumns.FormattingEnabled = true;
-            this.cmbPazientiColumns.Location = new System.Drawing.Point(773, 79);
-            this.cmbPazientiColumns.Name = "cmbPazientiColumns";
-            this.cmbPazientiColumns.Size = new System.Drawing.Size(302, 22);
-            this.cmbPazientiColumns.TabIndex = 0;
-            this.cmbPazientiColumns.Visible = false;
             // 
             // pnlCertificati
             // 
@@ -374,9 +345,7 @@
             // pnlCertificatiSearchContainer
             // 
             this.pnlCertificatiSearchContainer.Controls.Add(this.btnCercaCertificati);
-            this.pnlCertificatiSearchContainer.Controls.Add(this.label1);
             this.pnlCertificatiSearchContainer.Controls.Add(this.txtCercaCertificati);
-            this.pnlCertificatiSearchContainer.Controls.Add(this.comboBox1);
             this.pnlCertificatiSearchContainer.Location = new System.Drawing.Point(13, 149);
             this.pnlCertificatiSearchContainer.Name = "pnlCertificatiSearchContainer";
             this.pnlCertificatiSearchContainer.Size = new System.Drawing.Size(1460, 99);
@@ -393,17 +362,7 @@
             this.btnCercaCertificati.TabIndex = 3;
             this.btnCercaCertificati.Text = "Cerca";
             this.btnCercaCertificati.UseVisualStyleBackColor = true;
-            // 
-            // label1
-            // 
-            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(708, 82);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(59, 14);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "Cerca in:";
-            this.label1.Visible = false;
+            this.btnCercaCertificati.Click += new System.EventHandler(this.btnCercaCertificati_Click);
             // 
             // txtCercaCertificati
             // 
@@ -412,16 +371,7 @@
             this.txtCercaCertificati.Name = "txtCercaCertificati";
             this.txtCercaCertificati.Size = new System.Drawing.Size(295, 20);
             this.txtCercaCertificati.TabIndex = 1;
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(773, 79);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(302, 22);
-            this.comboBox1.TabIndex = 0;
-            this.comboBox1.Visible = false;
+            this.txtCercaCertificati.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtCercaCertificati_KeyUp);
             // 
             // pnlPatologie
             // 
@@ -447,9 +397,7 @@
             // pnlPatologieSearchContainer
             // 
             this.pnlPatologieSearchContainer.Controls.Add(this.btnCercaPatologie);
-            this.pnlPatologieSearchContainer.Controls.Add(this.lblCercaInPatologie);
             this.pnlPatologieSearchContainer.Controls.Add(this.txtCercaPatologie);
-            this.pnlPatologieSearchContainer.Controls.Add(this.cmbCercaInPatologie);
             this.pnlPatologieSearchContainer.Location = new System.Drawing.Point(13, 151);
             this.pnlPatologieSearchContainer.Name = "pnlPatologieSearchContainer";
             this.pnlPatologieSearchContainer.Size = new System.Drawing.Size(1460, 99);
@@ -466,17 +414,7 @@
             this.btnCercaPatologie.TabIndex = 3;
             this.btnCercaPatologie.Text = "Cerca";
             this.btnCercaPatologie.UseVisualStyleBackColor = true;
-            // 
-            // lblCercaInPatologie
-            // 
-            this.lblCercaInPatologie.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblCercaInPatologie.AutoSize = true;
-            this.lblCercaInPatologie.Location = new System.Drawing.Point(708, 82);
-            this.lblCercaInPatologie.Name = "lblCercaInPatologie";
-            this.lblCercaInPatologie.Size = new System.Drawing.Size(59, 14);
-            this.lblCercaInPatologie.TabIndex = 2;
-            this.lblCercaInPatologie.Text = "Cerca in:";
-            this.lblCercaInPatologie.Visible = false;
+            this.btnCercaPatologie.Click += new System.EventHandler(this.btnCercaPatologie_Click);
             // 
             // txtCercaPatologie
             // 
@@ -485,16 +423,7 @@
             this.txtCercaPatologie.Name = "txtCercaPatologie";
             this.txtCercaPatologie.Size = new System.Drawing.Size(295, 20);
             this.txtCercaPatologie.TabIndex = 1;
-            // 
-            // cmbCercaInPatologie
-            // 
-            this.cmbCercaInPatologie.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmbCercaInPatologie.FormattingEnabled = true;
-            this.cmbCercaInPatologie.Location = new System.Drawing.Point(773, 79);
-            this.cmbCercaInPatologie.Name = "cmbCercaInPatologie";
-            this.cmbCercaInPatologie.Size = new System.Drawing.Size(302, 22);
-            this.cmbCercaInPatologie.TabIndex = 0;
-            this.cmbCercaInPatologie.Visible = false;
+            this.txtCercaPatologie.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtCercaPatologie_KeyUp);
             // 
             // grdPatologie
             // 
@@ -522,27 +451,17 @@
             this.pnlSingoloPaziente.Size = new System.Drawing.Size(1495, 716);
             this.pnlSingoloPaziente.TabIndex = 11;
             // 
-            // btnNuovoCertificato
+            // btnDettagliPazienti
             // 
-            this.btnNuovoCertificato.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnNuovoCertificato.Font = new System.Drawing.Font("Georgia", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnNuovoCertificato.Location = new System.Drawing.Point(1281, 665);
-            this.btnNuovoCertificato.Name = "btnNuovoCertificato";
-            this.btnNuovoCertificato.Size = new System.Drawing.Size(195, 39);
-            this.btnNuovoCertificato.TabIndex = 31;
-            this.btnNuovoCertificato.Text = "Nuovo certificato";
-            this.btnNuovoCertificato.UseVisualStyleBackColor = true;
-            this.btnNuovoCertificato.Click += new System.EventHandler(this.btnNuovoCertificato_Click);
-            // 
-            // grdCertificatiPaziente
-            // 
-            this.grdCertificatiPaziente.AllowUserToAddRows = false;
-            this.grdCertificatiPaziente.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.grdCertificatiPaziente.Location = new System.Drawing.Point(16, 242);
-            this.grdCertificatiPaziente.Name = "grdCertificatiPaziente";
-            this.grdCertificatiPaziente.ReadOnly = true;
-            this.grdCertificatiPaziente.Size = new System.Drawing.Size(1464, 423);
-            this.grdCertificatiPaziente.TabIndex = 29;
+            this.btnDettagliPazienti.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnDettagliPazienti.Font = new System.Drawing.Font("Georgia", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDettagliPazienti.Location = new System.Drawing.Point(186, 19);
+            this.btnDettagliPazienti.Name = "btnDettagliPazienti";
+            this.btnDettagliPazienti.Size = new System.Drawing.Size(195, 39);
+            this.btnDettagliPazienti.TabIndex = 58;
+            this.btnDettagliPazienti.Text = "DETTAGLI PAZIENTE";
+            this.btnDettagliPazienti.UseVisualStyleBackColor = true;
+            this.btnDettagliPazienti.Click += new System.EventHandler(this.btnDettagliPazienti_Click);
             // 
             // pnlSchedaPazCont
             // 
@@ -556,7 +475,9 @@
             // 
             // tblSchedaPaziente
             // 
-            this.tblSchedaPaziente.BackColor = System.Drawing.Color.Transparent;
+            this.tblSchedaPaziente.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.tblSchedaPaziente.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.tblSchedaPaziente.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
             this.tblSchedaPaziente.ColumnCount = 2;
             this.tblSchedaPaziente.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
             this.tblSchedaPaziente.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 70F));
@@ -612,254 +533,131 @@
             // 
             this.lblNomePaz.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.lblNomePaz.AutoSize = true;
-            this.lblNomePaz.Location = new System.Drawing.Point(119, 8);
+            this.lblNomePaz.Location = new System.Drawing.Point(119, 9);
             this.lblNomePaz.Name = "lblNomePaz";
             this.lblNomePaz.Size = new System.Drawing.Size(40, 14);
             this.lblNomePaz.TabIndex = 29;
             this.lblNomePaz.Text = "Nome";
             // 
-            // txtCodiceSanitarioPaziente
-            // 
-            this.txtCodiceSanitarioPaziente.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.txtCodiceSanitarioPaziente.Enabled = false;
-            this.txtCodiceSanitarioPaziente.Location = new System.Drawing.Point(165, 395);
-            this.txtCodiceSanitarioPaziente.Name = "txtCodiceSanitarioPaziente";
-            this.txtCodiceSanitarioPaziente.Size = new System.Drawing.Size(100, 20);
-            this.txtCodiceSanitarioPaziente.TabIndex = 56;
-            // 
             // txtNomePaziente
             // 
             this.txtNomePaziente.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.txtNomePaziente.Enabled = false;
-            this.txtNomePaziente.Location = new System.Drawing.Point(165, 5);
+            this.txtNomePaziente.Location = new System.Drawing.Point(166, 6);
             this.txtNomePaziente.Name = "txtNomePaziente";
-            this.txtNomePaziente.Size = new System.Drawing.Size(100, 20);
+            this.txtNomePaziente.Size = new System.Drawing.Size(300, 20);
             this.txtNomePaziente.TabIndex = 30;
-            // 
-            // lblCodiceSanitarioPaz
-            // 
-            this.lblCodiceSanitarioPaz.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.lblCodiceSanitarioPaz.AutoSize = true;
-            this.lblCodiceSanitarioPaz.Location = new System.Drawing.Point(58, 398);
-            this.lblCodiceSanitarioPaz.Name = "lblCodiceSanitarioPaz";
-            this.lblCodiceSanitarioPaz.Size = new System.Drawing.Size(101, 14);
-            this.lblCodiceSanitarioPaz.TabIndex = 55;
-            this.lblCodiceSanitarioPaz.Text = "Codice Sanitario";
             // 
             // lblCognomePaz
             // 
             this.lblCognomePaz.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.lblCognomePaz.AutoSize = true;
-            this.lblCognomePaz.Location = new System.Drawing.Point(99, 38);
+            this.lblCognomePaz.Location = new System.Drawing.Point(99, 40);
             this.lblCognomePaz.Name = "lblCognomePaz";
             this.lblCognomePaz.Size = new System.Drawing.Size(60, 14);
             this.lblCognomePaz.TabIndex = 31;
             this.lblCognomePaz.Text = "Cognome";
             // 
-            // txtEmailPaziente
-            // 
-            this.txtEmailPaziente.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.txtEmailPaziente.Enabled = false;
-            this.txtEmailPaziente.Location = new System.Drawing.Point(165, 365);
-            this.txtEmailPaziente.Name = "txtEmailPaziente";
-            this.txtEmailPaziente.Size = new System.Drawing.Size(100, 20);
-            this.txtEmailPaziente.TabIndex = 54;
-            // 
             // txtCognomePaziente
             // 
             this.txtCognomePaziente.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.txtCognomePaziente.Enabled = false;
-            this.txtCognomePaziente.Location = new System.Drawing.Point(165, 35);
+            this.txtCognomePaziente.Location = new System.Drawing.Point(166, 37);
             this.txtCognomePaziente.Name = "txtCognomePaziente";
             this.txtCognomePaziente.Size = new System.Drawing.Size(100, 20);
             this.txtCognomePaziente.TabIndex = 32;
-            // 
-            // lblEmailPaz
-            // 
-            this.lblEmailPaz.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.lblEmailPaz.AutoSize = true;
-            this.lblEmailPaz.Location = new System.Drawing.Point(118, 368);
-            this.lblEmailPaz.Name = "lblEmailPaz";
-            this.lblEmailPaz.Size = new System.Drawing.Size(41, 14);
-            this.lblEmailPaz.TabIndex = 53;
-            this.lblEmailPaz.Text = "Email";
             // 
             // lblSessoPaz
             // 
             this.lblSessoPaz.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.lblSessoPaz.AutoSize = true;
-            this.lblSessoPaz.Location = new System.Drawing.Point(123, 68);
+            this.lblSessoPaz.Location = new System.Drawing.Point(123, 71);
             this.lblSessoPaz.Name = "lblSessoPaz";
             this.lblSessoPaz.Size = new System.Drawing.Size(36, 14);
             this.lblSessoPaz.TabIndex = 33;
             this.lblSessoPaz.Text = "Sesso";
             // 
-            // txtCellularePaziente
-            // 
-            this.txtCellularePaziente.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.txtCellularePaziente.Enabled = false;
-            this.txtCellularePaziente.Location = new System.Drawing.Point(165, 335);
-            this.txtCellularePaziente.Name = "txtCellularePaziente";
-            this.txtCellularePaziente.Size = new System.Drawing.Size(100, 20);
-            this.txtCellularePaziente.TabIndex = 52;
-            // 
             // txtSessoPaziente
             // 
             this.txtSessoPaziente.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.txtSessoPaziente.Enabled = false;
-            this.txtSessoPaziente.Location = new System.Drawing.Point(165, 65);
+            this.txtSessoPaziente.Location = new System.Drawing.Point(166, 68);
             this.txtSessoPaziente.Name = "txtSessoPaziente";
             this.txtSessoPaziente.Size = new System.Drawing.Size(100, 20);
             this.txtSessoPaziente.TabIndex = 34;
-            // 
-            // lblCellularePaz
-            // 
-            this.lblCellularePaz.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.lblCellularePaz.AutoSize = true;
-            this.lblCellularePaz.Location = new System.Drawing.Point(99, 338);
-            this.lblCellularePaz.Name = "lblCellularePaz";
-            this.lblCellularePaz.Size = new System.Drawing.Size(60, 14);
-            this.lblCellularePaz.TabIndex = 51;
-            this.lblCellularePaz.Text = "Cellulare";
             // 
             // lblDataNascitaPaz
             // 
             this.lblDataNascitaPaz.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.lblDataNascitaPaz.AutoSize = true;
-            this.lblDataNascitaPaz.Location = new System.Drawing.Point(66, 98);
+            this.lblDataNascitaPaz.Location = new System.Drawing.Point(66, 102);
             this.lblDataNascitaPaz.Name = "lblDataNascitaPaz";
             this.lblDataNascitaPaz.Size = new System.Drawing.Size(93, 14);
             this.lblDataNascitaPaz.TabIndex = 35;
             this.lblDataNascitaPaz.Text = "Data di nascita";
             // 
-            // txtTelefonoPaziente
-            // 
-            this.txtTelefonoPaziente.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.txtTelefonoPaziente.Enabled = false;
-            this.txtTelefonoPaziente.Location = new System.Drawing.Point(165, 305);
-            this.txtTelefonoPaziente.Name = "txtTelefonoPaziente";
-            this.txtTelefonoPaziente.Size = new System.Drawing.Size(100, 20);
-            this.txtTelefonoPaziente.TabIndex = 50;
-            // 
             // txtDataNascitaPaziente
             // 
             this.txtDataNascitaPaziente.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.txtDataNascitaPaziente.Enabled = false;
-            this.txtDataNascitaPaziente.Location = new System.Drawing.Point(165, 95);
+            this.txtDataNascitaPaziente.Location = new System.Drawing.Point(166, 99);
             this.txtDataNascitaPaziente.Name = "txtDataNascitaPaziente";
             this.txtDataNascitaPaziente.Size = new System.Drawing.Size(100, 20);
             this.txtDataNascitaPaziente.TabIndex = 36;
-            // 
-            // lblTelefonoPaz
-            // 
-            this.lblTelefonoPaz.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.lblTelefonoPaz.AutoSize = true;
-            this.lblTelefonoPaz.Location = new System.Drawing.Point(104, 308);
-            this.lblTelefonoPaz.Name = "lblTelefonoPaz";
-            this.lblTelefonoPaz.Size = new System.Drawing.Size(55, 14);
-            this.lblTelefonoPaz.TabIndex = 49;
-            this.lblTelefonoPaz.Text = "Telefono";
             // 
             // lblLuogoNascitaPaz
             // 
             this.lblLuogoNascitaPaz.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.lblLuogoNascitaPaz.AutoSize = true;
-            this.lblLuogoNascitaPaz.Location = new System.Drawing.Point(59, 128);
+            this.lblLuogoNascitaPaz.Location = new System.Drawing.Point(59, 133);
             this.lblLuogoNascitaPaz.Name = "lblLuogoNascitaPaz";
             this.lblLuogoNascitaPaz.Size = new System.Drawing.Size(100, 14);
             this.lblLuogoNascitaPaz.TabIndex = 37;
             this.lblLuogoNascitaPaz.Text = "Luogo di nascita";
             // 
-            // txtCapPaziente
-            // 
-            this.txtCapPaziente.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.txtCapPaziente.Enabled = false;
-            this.txtCapPaziente.Location = new System.Drawing.Point(165, 275);
-            this.txtCapPaziente.Name = "txtCapPaziente";
-            this.txtCapPaziente.Size = new System.Drawing.Size(100, 20);
-            this.txtCapPaziente.TabIndex = 48;
-            // 
             // txtLuogoNascitaPaziente
             // 
             this.txtLuogoNascitaPaziente.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.txtLuogoNascitaPaziente.Enabled = false;
-            this.txtLuogoNascitaPaziente.Location = new System.Drawing.Point(165, 125);
+            this.txtLuogoNascitaPaziente.Location = new System.Drawing.Point(166, 130);
             this.txtLuogoNascitaPaziente.Name = "txtLuogoNascitaPaziente";
             this.txtLuogoNascitaPaziente.Size = new System.Drawing.Size(100, 20);
             this.txtLuogoNascitaPaziente.TabIndex = 38;
-            // 
-            // lblCapPaz
-            // 
-            this.lblCapPaz.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.lblCapPaz.AutoSize = true;
-            this.lblCapPaz.Location = new System.Drawing.Point(130, 278);
-            this.lblCapPaz.Name = "lblCapPaz";
-            this.lblCapPaz.Size = new System.Drawing.Size(29, 14);
-            this.lblCapPaz.TabIndex = 47;
-            this.lblCapPaz.Text = "Cap";
             // 
             // lblCodiceFiscalePaz
             // 
             this.lblCodiceFiscalePaz.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.lblCodiceFiscalePaz.AutoSize = true;
-            this.lblCodiceFiscalePaz.Location = new System.Drawing.Point(73, 158);
+            this.lblCodiceFiscalePaz.Location = new System.Drawing.Point(73, 164);
             this.lblCodiceFiscalePaz.Name = "lblCodiceFiscalePaz";
             this.lblCodiceFiscalePaz.Size = new System.Drawing.Size(86, 14);
             this.lblCodiceFiscalePaz.TabIndex = 39;
             this.lblCodiceFiscalePaz.Text = "Codice Fiscale";
             // 
-            // txtIndirizzoPaziente
-            // 
-            this.txtIndirizzoPaziente.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.txtIndirizzoPaziente.Enabled = false;
-            this.txtIndirizzoPaziente.Location = new System.Drawing.Point(165, 245);
-            this.txtIndirizzoPaziente.Name = "txtIndirizzoPaziente";
-            this.txtIndirizzoPaziente.Size = new System.Drawing.Size(100, 20);
-            this.txtIndirizzoPaziente.TabIndex = 46;
-            // 
             // txtCodiceFiscalePaziente
             // 
             this.txtCodiceFiscalePaziente.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.txtCodiceFiscalePaziente.Enabled = false;
-            this.txtCodiceFiscalePaziente.Location = new System.Drawing.Point(165, 155);
+            this.txtCodiceFiscalePaziente.Location = new System.Drawing.Point(166, 161);
             this.txtCodiceFiscalePaziente.Name = "txtCodiceFiscalePaziente";
             this.txtCodiceFiscalePaziente.Size = new System.Drawing.Size(100, 20);
             this.txtCodiceFiscalePaziente.TabIndex = 40;
-            // 
-            // lblIndirizzoPaz
-            // 
-            this.lblIndirizzoPaz.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.lblIndirizzoPaz.AutoSize = true;
-            this.lblIndirizzoPaz.Location = new System.Drawing.Point(103, 248);
-            this.lblIndirizzoPaz.Name = "lblIndirizzoPaz";
-            this.lblIndirizzoPaz.Size = new System.Drawing.Size(56, 14);
-            this.lblIndirizzoPaz.TabIndex = 45;
-            this.lblIndirizzoPaz.Text = "Indirizzo";
             // 
             // lblComunePaz
             // 
             this.lblComunePaz.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.lblComunePaz.AutoSize = true;
-            this.lblComunePaz.Location = new System.Drawing.Point(104, 188);
+            this.lblComunePaz.Location = new System.Drawing.Point(104, 195);
             this.lblComunePaz.Name = "lblComunePaz";
             this.lblComunePaz.Size = new System.Drawing.Size(55, 14);
             this.lblComunePaz.TabIndex = 41;
             this.lblComunePaz.Text = "Comune";
             // 
-            // txtProvinciaPaziente
-            // 
-            this.txtProvinciaPaziente.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.txtProvinciaPaziente.Enabled = false;
-            this.txtProvinciaPaziente.Location = new System.Drawing.Point(165, 215);
-            this.txtProvinciaPaziente.Name = "txtProvinciaPaziente";
-            this.txtProvinciaPaziente.Size = new System.Drawing.Size(100, 20);
-            this.txtProvinciaPaziente.TabIndex = 44;
-            // 
             // txtComunePaziente
             // 
             this.txtComunePaziente.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.txtComunePaziente.Enabled = false;
-            this.txtComunePaziente.Location = new System.Drawing.Point(165, 185);
+            this.txtComunePaziente.Location = new System.Drawing.Point(166, 192);
             this.txtComunePaziente.Name = "txtComunePaziente";
             this.txtComunePaziente.Size = new System.Drawing.Size(100, 20);
             this.txtComunePaziente.TabIndex = 42;
@@ -868,11 +666,166 @@
             // 
             this.lblProvinciaPaz.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.lblProvinciaPaz.AutoSize = true;
-            this.lblProvinciaPaz.Location = new System.Drawing.Point(96, 218);
+            this.lblProvinciaPaz.Location = new System.Drawing.Point(96, 226);
             this.lblProvinciaPaz.Name = "lblProvinciaPaz";
             this.lblProvinciaPaz.Size = new System.Drawing.Size(63, 14);
             this.lblProvinciaPaz.TabIndex = 43;
             this.lblProvinciaPaz.Text = "Provincia";
+            // 
+            // lblIndirizzoPaz
+            // 
+            this.lblIndirizzoPaz.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.lblIndirizzoPaz.AutoSize = true;
+            this.lblIndirizzoPaz.Location = new System.Drawing.Point(103, 257);
+            this.lblIndirizzoPaz.Name = "lblIndirizzoPaz";
+            this.lblIndirizzoPaz.Size = new System.Drawing.Size(56, 14);
+            this.lblIndirizzoPaz.TabIndex = 45;
+            this.lblIndirizzoPaz.Text = "Indirizzo";
+            // 
+            // lblCapPaz
+            // 
+            this.lblCapPaz.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.lblCapPaz.AutoSize = true;
+            this.lblCapPaz.Location = new System.Drawing.Point(130, 288);
+            this.lblCapPaz.Name = "lblCapPaz";
+            this.lblCapPaz.Size = new System.Drawing.Size(29, 14);
+            this.lblCapPaz.TabIndex = 47;
+            this.lblCapPaz.Text = "Cap";
+            // 
+            // lblTelefonoPaz
+            // 
+            this.lblTelefonoPaz.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.lblTelefonoPaz.AutoSize = true;
+            this.lblTelefonoPaz.Location = new System.Drawing.Point(104, 319);
+            this.lblTelefonoPaz.Name = "lblTelefonoPaz";
+            this.lblTelefonoPaz.Size = new System.Drawing.Size(55, 14);
+            this.lblTelefonoPaz.TabIndex = 49;
+            this.lblTelefonoPaz.Text = "Telefono";
+            // 
+            // lblCellularePaz
+            // 
+            this.lblCellularePaz.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.lblCellularePaz.AutoSize = true;
+            this.lblCellularePaz.Location = new System.Drawing.Point(99, 350);
+            this.lblCellularePaz.Name = "lblCellularePaz";
+            this.lblCellularePaz.Size = new System.Drawing.Size(60, 14);
+            this.lblCellularePaz.TabIndex = 51;
+            this.lblCellularePaz.Text = "Cellulare";
+            // 
+            // lblEmailPaz
+            // 
+            this.lblEmailPaz.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.lblEmailPaz.AutoSize = true;
+            this.lblEmailPaz.Location = new System.Drawing.Point(118, 381);
+            this.lblEmailPaz.Name = "lblEmailPaz";
+            this.lblEmailPaz.Size = new System.Drawing.Size(41, 14);
+            this.lblEmailPaz.TabIndex = 53;
+            this.lblEmailPaz.Text = "Email";
+            // 
+            // lblCodiceSanitarioPaz
+            // 
+            this.lblCodiceSanitarioPaz.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.lblCodiceSanitarioPaz.AutoSize = true;
+            this.lblCodiceSanitarioPaz.Location = new System.Drawing.Point(58, 412);
+            this.lblCodiceSanitarioPaz.Name = "lblCodiceSanitarioPaz";
+            this.lblCodiceSanitarioPaz.Size = new System.Drawing.Size(101, 14);
+            this.lblCodiceSanitarioPaz.TabIndex = 55;
+            this.lblCodiceSanitarioPaz.Text = "Codice Sanitario";
+            // 
+            // txtProvinciaPaziente
+            // 
+            this.txtProvinciaPaziente.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.txtProvinciaPaziente.Enabled = false;
+            this.txtProvinciaPaziente.Location = new System.Drawing.Point(166, 223);
+            this.txtProvinciaPaziente.Name = "txtProvinciaPaziente";
+            this.txtProvinciaPaziente.Size = new System.Drawing.Size(100, 20);
+            this.txtProvinciaPaziente.TabIndex = 44;
+            // 
+            // txtIndirizzoPaziente
+            // 
+            this.txtIndirizzoPaziente.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.txtIndirizzoPaziente.Enabled = false;
+            this.txtIndirizzoPaziente.Location = new System.Drawing.Point(166, 254);
+            this.txtIndirizzoPaziente.Name = "txtIndirizzoPaziente";
+            this.txtIndirizzoPaziente.Size = new System.Drawing.Size(100, 20);
+            this.txtIndirizzoPaziente.TabIndex = 46;
+            // 
+            // txtCapPaziente
+            // 
+            this.txtCapPaziente.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.txtCapPaziente.Enabled = false;
+            this.txtCapPaziente.Location = new System.Drawing.Point(166, 285);
+            this.txtCapPaziente.Name = "txtCapPaziente";
+            this.txtCapPaziente.Size = new System.Drawing.Size(100, 20);
+            this.txtCapPaziente.TabIndex = 48;
+            // 
+            // txtTelefonoPaziente
+            // 
+            this.txtTelefonoPaziente.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.txtTelefonoPaziente.Enabled = false;
+            this.txtTelefonoPaziente.Location = new System.Drawing.Point(166, 316);
+            this.txtTelefonoPaziente.Name = "txtTelefonoPaziente";
+            this.txtTelefonoPaziente.Size = new System.Drawing.Size(100, 20);
+            this.txtTelefonoPaziente.TabIndex = 50;
+            // 
+            // txtCellularePaziente
+            // 
+            this.txtCellularePaziente.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.txtCellularePaziente.Enabled = false;
+            this.txtCellularePaziente.Location = new System.Drawing.Point(166, 347);
+            this.txtCellularePaziente.Name = "txtCellularePaziente";
+            this.txtCellularePaziente.Size = new System.Drawing.Size(100, 20);
+            this.txtCellularePaziente.TabIndex = 52;
+            // 
+            // txtEmailPaziente
+            // 
+            this.txtEmailPaziente.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.txtEmailPaziente.Enabled = false;
+            this.txtEmailPaziente.Location = new System.Drawing.Point(166, 378);
+            this.txtEmailPaziente.Name = "txtEmailPaziente";
+            this.txtEmailPaziente.Size = new System.Drawing.Size(100, 20);
+            this.txtEmailPaziente.TabIndex = 54;
+            // 
+            // txtCodiceSanitarioPaziente
+            // 
+            this.txtCodiceSanitarioPaziente.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.txtCodiceSanitarioPaziente.Enabled = false;
+            this.txtCodiceSanitarioPaziente.Location = new System.Drawing.Point(166, 409);
+            this.txtCodiceSanitarioPaziente.Name = "txtCodiceSanitarioPaziente";
+            this.txtCodiceSanitarioPaziente.Size = new System.Drawing.Size(100, 20);
+            this.txtCodiceSanitarioPaziente.TabIndex = 56;
+            // 
+            // lblTitleCertSingolopaziente
+            // 
+            this.lblTitleCertSingolopaziente.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.lblTitleCertSingolopaziente.AutoSize = true;
+            this.lblTitleCertSingolopaziente.Location = new System.Drawing.Point(748, 211);
+            this.lblTitleCertSingolopaziente.Name = "lblTitleCertSingolopaziente";
+            this.lblTitleCertSingolopaziente.Size = new System.Drawing.Size(66, 14);
+            this.lblTitleCertSingolopaziente.TabIndex = 32;
+            this.lblTitleCertSingolopaziente.Text = "Certificati";
+            // 
+            // btnNuovoCertificato
+            // 
+            this.btnNuovoCertificato.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnNuovoCertificato.Font = new System.Drawing.Font("Georgia", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnNuovoCertificato.Location = new System.Drawing.Point(1281, 665);
+            this.btnNuovoCertificato.Name = "btnNuovoCertificato";
+            this.btnNuovoCertificato.Size = new System.Drawing.Size(195, 39);
+            this.btnNuovoCertificato.TabIndex = 31;
+            this.btnNuovoCertificato.Text = "Nuovo certificato";
+            this.btnNuovoCertificato.UseVisualStyleBackColor = true;
+            this.btnNuovoCertificato.Click += new System.EventHandler(this.btnNuovoCertificato_Click);
+            // 
+            // grdCertificatiPaziente
+            // 
+            this.grdCertificatiPaziente.AllowUserToAddRows = false;
+            this.grdCertificatiPaziente.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.grdCertificatiPaziente.Location = new System.Drawing.Point(16, 242);
+            this.grdCertificatiPaziente.Name = "grdCertificatiPaziente";
+            this.grdCertificatiPaziente.ReadOnly = true;
+            this.grdCertificatiPaziente.Size = new System.Drawing.Size(1464, 423);
+            this.grdCertificatiPaziente.TabIndex = 29;
             // 
             // pnlNuovoCertificato
             // 
@@ -1075,28 +1028,6 @@
             this.lblServerDate.TabIndex = 14;
             this.lblServerDate.Text = "00-00";
             // 
-            // lblTitleCertSingolopaziente
-            // 
-            this.lblTitleCertSingolopaziente.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.lblTitleCertSingolopaziente.AutoSize = true;
-            this.lblTitleCertSingolopaziente.Location = new System.Drawing.Point(748, 211);
-            this.lblTitleCertSingolopaziente.Name = "lblTitleCertSingolopaziente";
-            this.lblTitleCertSingolopaziente.Size = new System.Drawing.Size(66, 14);
-            this.lblTitleCertSingolopaziente.TabIndex = 32;
-            this.lblTitleCertSingolopaziente.Text = "Certificati";
-            // 
-            // btnDettagliPazienti
-            // 
-            this.btnDettagliPazienti.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnDettagliPazienti.Font = new System.Drawing.Font("Georgia", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDettagliPazienti.Location = new System.Drawing.Point(186, 19);
-            this.btnDettagliPazienti.Name = "btnDettagliPazienti";
-            this.btnDettagliPazienti.Size = new System.Drawing.Size(195, 39);
-            this.btnDettagliPazienti.TabIndex = 58;
-            this.btnDettagliPazienti.Text = "DETTAGLI PAZIENTE";
-            this.btnDettagliPazienti.UseVisualStyleBackColor = true;
-            this.btnDettagliPazienti.Click += new System.EventHandler(this.btnDettagliPazienti_Click);
-            // 
             // ApplicazioneMedico
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
@@ -1105,14 +1036,14 @@
             this.BackgroundImage = global::ApplicazioneMedico.Properties.Resources.bgMinimalistBlu;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1506, 784);
+            this.Controls.Add(this.pnlCertificati);
+            this.Controls.Add(this.pnlPatologie);
+            this.Controls.Add(this.pnlAggiornamento);
+            this.Controls.Add(this.pnlPazienti);
             this.Controls.Add(this.pnlSingoloPaziente);
             this.Controls.Add(this.pnlNuovoCertificato);
-            this.Controls.Add(this.pnlPazienti);
-            this.Controls.Add(this.pnlPatologie);
             this.Controls.Add(this.lblServerDate);
-            this.Controls.Add(this.pnlCertificati);
             this.Controls.Add(this.mainNav);
-            this.Controls.Add(this.pnlAggiornamento);
             this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Georgia", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -1144,10 +1075,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.grdPatologie)).EndInit();
             this.pnlSingoloPaziente.ResumeLayout(false);
             this.pnlSingoloPaziente.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.grdCertificatiPaziente)).EndInit();
             this.pnlSchedaPazCont.ResumeLayout(false);
             this.tblSchedaPaziente.ResumeLayout(false);
             this.tblSchedaPaziente.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.grdCertificatiPaziente)).EndInit();
             this.pnlNuovoCertificato.ResumeLayout(false);
             this.pnlImgCertificato.ResumeLayout(false);
             this.pnlImgCertificato.PerformLayout();
@@ -1173,9 +1104,7 @@
         private System.Windows.Forms.Panel pnlPatologie;
         private System.Windows.Forms.DataGridView grdPatologie;
         private System.Windows.Forms.Panel pnlPazientiFiltri;
-        private System.Windows.Forms.Label lblCercaPazienti;
         private System.Windows.Forms.TextBox txtPazientiSearch;
-        private System.Windows.Forms.ComboBox cmbPazientiColumns;
         private System.Windows.Forms.Button btnPazientiSearch;
         private System.Windows.Forms.Panel pnlSingoloPaziente;
         private System.Windows.Forms.Panel pnlSchedaPazCont;
@@ -1223,17 +1152,13 @@
         private System.Windows.Forms.Label lblTitleCertificati;
         private System.Windows.Forms.Panel pnlCertificatiSearchContainer;
         private System.Windows.Forms.Button btnCercaCertificati;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtCercaCertificati;
-        private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Label lblTitlePazienti;
         private System.Windows.Forms.DataGridView grdPazienti;
         private System.Windows.Forms.Label lblTitlePatologie;
         private System.Windows.Forms.Panel pnlPatologieSearchContainer;
         private System.Windows.Forms.Button btnCercaPatologie;
-        private System.Windows.Forms.Label lblCercaInPatologie;
         private System.Windows.Forms.TextBox txtCercaPatologie;
-        private System.Windows.Forms.ComboBox cmbCercaInPatologie;
         private System.Windows.Forms.ToolStripMenuItem subMenuSincronizza;
         private System.Windows.Forms.DateTimePicker dtpDataInizioNuovoCert;
         private System.Windows.Forms.DateTimePicker dtpDataFineNuovoCert;

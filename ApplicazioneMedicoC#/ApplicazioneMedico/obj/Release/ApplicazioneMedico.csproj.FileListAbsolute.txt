@@ -1,0 +1,10 @@
+C:\Users\admin\Documents\Alessandro\ProjectWork\ApplicazioneMedicoC#\ApplicazioneMedico\bin\Release\ApplicazioneMedico.exe.config
+C:\Users\admin\Documents\Alessandro\ProjectWork\ApplicazioneMedicoC#\ApplicazioneMedico\bin\Release\ApplicazioneMedico.exe
+C:\Users\admin\Documents\Alessandro\ProjectWork\ApplicazioneMedicoC#\ApplicazioneMedico\bin\Release\ApplicazioneMedico.pdb
+C:\Users\admin\Documents\Alessandro\ProjectWork\ApplicazioneMedicoC#\ApplicazioneMedico\bin\Release\Newtonsoft.Json.dll
+C:\Users\admin\Documents\Alessandro\ProjectWork\ApplicazioneMedicoC#\ApplicazioneMedico\bin\Release\Newtonsoft.Json.xml
+C:\Users\admin\Documents\Alessandro\ProjectWork\ApplicazioneMedicoC#\ApplicazioneMedico\obj\Release\ApplicazioneMedico.ApplicazioneMedico.resources
+C:\Users\admin\Documents\Alessandro\ProjectWork\ApplicazioneMedicoC#\ApplicazioneMedico\obj\Release\ApplicazioneMedico.Properties.Resources.resources
+C:\Users\admin\Documents\Alessandro\ProjectWork\ApplicazioneMedicoC#\ApplicazioneMedico\obj\Release\ApplicazioneMedico.csproj.GenerateResource.Cache
+C:\Users\admin\Documents\Alessandro\ProjectWork\ApplicazioneMedicoC#\ApplicazioneMedico\obj\Release\ApplicazioneMedico.exe
+C:\Users\admin\Documents\Alessandro\ProjectWork\ApplicazioneMedicoC#\ApplicazioneMedico\obj\Release\ApplicazioneMedico.pdb

@@ -73,6 +73,14 @@ namespace ApplicazioneMedico
         {
             BindGridPazientiWithSearch();
         }
+        private void btnCercaPatologie_Click(object sender, EventArgs e)
+        {
+            BindGridPatologieWithSearch();
+        }
+        private void btnCercaCertificati_Click(object sender, EventArgs e)
+        {
+            BindGridCertificatiWithSearch();
+        }
         private void btnNuovoCertificato_Click(object sender, EventArgs e)
         {
             BringPanelToFront(false, false, false, false, true);
@@ -117,6 +125,13 @@ namespace ApplicazioneMedico
             BringPanelToFront(false, false, false, true, false);
             SvuotaTextBox();
         }
+        private void btnDettagliPazienti_Click(object sender, EventArgs e)
+        {
+            if (pnlSchedaPazCont.Visible)
+                pnlSchedaPazCont.Visible = false;
+            else
+                pnlSchedaPazCont.Visible = true;
+        }
 
         /* HELPERS */
         /* Inizio metodi per il bind delle gridview */
@@ -151,10 +166,27 @@ namespace ApplicazioneMedico
             grdCertificati.Columns[2].Visible = false;
             grdCertificati.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
+        protected void BindGridCertificatiWithSearch()
+        {
+            BindingSource bs = new BindingSource();
+            bs.DataSource = CertificatiDAO.SearchCertificati(txtCercaCertificati.Text);
+            grdCertificati.DataSource = bs;
+            grdCertificati.Columns[0].Visible = false;
+            grdCertificati.Columns[2].Visible = false;
+            grdCertificati.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+        }
         protected void BindGridPatologie()
         {
             BindingSource bs = new BindingSource();
             bs.DataSource = PatologieDAO.GetDataTablePatologie();
+            grdPatologie.DataSource = bs;
+            grdPatologie.Columns[0].Visible = false;
+            grdPatologie.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+        }
+        protected void BindGridPatologieWithSearch()
+        {
+            BindingSource bs = new BindingSource();
+            bs.DataSource = PatologieDAO.SearchPatologie(txtCercaPatologie.Text);
             grdPatologie.DataSource = bs;
             grdPatologie.Columns[0].Visible = false;
             grdPatologie.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
@@ -173,7 +205,9 @@ namespace ApplicazioneMedico
             BindGridPazienti();
             BindGridPazientiWithSearch();
             BindGridCertificati();
+            BindGridCertificatiWithSearch();
             BindGridPatologie();
+            BindGridPatologieWithSearch();
             BindGridCertificatiSingoloPaziente();
         }
         /* Fine metodi per il bind delle gridview */
@@ -205,9 +239,18 @@ namespace ApplicazioneMedico
         }
         protected void SetItemsWidthAndHeight()
         {
+            //Loader
+            picBox.Width = picBox.Image.Width;
+            picBox.Height = picBox.Image.Height;
+
             //Larghezza Pannelli Container
             pnlAggiornamento.Width = pnlPazienti.Width = pnlCertificati.Width = pnlPatologie.Width =
-                pnlSingoloPaziente.Width = pnlSchedaPazCont.Width = pnlNuovoCertificato.Width = ClientRectangle.Width;
+                pnlSingoloPaziente.Width = pnlNuovoCertificato.Width = ClientRectangle.Width;
+
+            //Pannello dettagli scheda paziente
+            pnlSchedaPazCont.Width = ClientRectangle.Width / 3;
+            pnlSchedaPazCont.Height = 438;
+            pnlSchedaPazCont.BorderStyle = BorderStyle.FixedSingle;
 
             //Altezza Pannelli Container
             pnlAggiornamento.Height = pnlAggiornamento.Parent.ClientSize.Height;
@@ -233,16 +276,16 @@ namespace ApplicazioneMedico
             mainNav.Width = ClientRectangle.Width - 20;
 
             //Tabella scheda paziente
-            tblSchedaPaziente.Width = pnlSchedaPazCont.Width / 2;
-            tblSchedaPaziente.Height = pnlSchedaPazCont.Height - 20;
+            tblSchedaPaziente.Width = pnlSchedaPazCont.Width;
+            tblSchedaPaziente.Height = pnlSchedaPazCont.Height - 2;
 
-            //Colonne Scheda paziente
-            for (int i = 0; i < tblSchedaPaziente.RowCount; i++)
-                tblSchedaPaziente.RowStyles[i].Height = tblSchedaPaziente.Height / tblSchedaPaziente.RowCount;
+            //Colonne tabell ascheda paziente
+            tblSchedaPaziente.ColumnStyles[0].Width = lblLuogoNascitaPaz.Width + 10;
+            tblSchedaPaziente.ColumnStyles[1].Width = 350;
 
-            //Righe Scheda paziente
-            for (int i = 0; i < tblSchedaPaziente.ColumnCount; i++)
-                tblSchedaPaziente.ColumnStyles[i].Width = tblSchedaPaziente.Width / tblSchedaPaziente.ColumnCount;
+            //Larghezza campi testo dettagli scheda paziente
+            foreach (TextBox tb in tblSchedaPaziente.Controls.OfType<TextBox>().ToList())
+                tb.Width = 350;
 
             //Larghezza campi di testo all'interno della scheda del singolo paziente
             foreach (Control c in tblSchedaPaziente.Controls)
@@ -271,8 +314,17 @@ namespace ApplicazioneMedico
             mainNav.Left = rientroLeft;
             lblServerDate.Left = mainNav.Width - (lblServerDate.Width + rientroLeft);
 
+            //Bottone dettagli paziente
+            btnDettagliPazienti.Top = mainNav.Bottom + 10;
+            btnDettagliPazienti.Left = rientroLeft;
+
+            //Pannello scheda paziente
+            pnlSchedaPazCont.Top = btnDettagliPazienti.Bottom + 10;
+            pnlSchedaPazCont.Left = rientroLeft;
+
             //Tabella scheda paziente
-            tblSchedaPaziente.Left = (pnlSingoloPaziente.Width - tblSchedaPaziente.Width) / 2;
+            tblSchedaPaziente.Left = (pnlSchedaPazCont.Width - tblSchedaPaziente.Width) / 2;
+            tblSchedaPaziente.Top = 0;
 
             //Titoli
             lblTitlePazienti.Left = (pnlPazienti.Width - lblTitlePazienti.Width) / 2;
@@ -283,7 +335,7 @@ namespace ApplicazioneMedico
 
             //GridView
             grdPazienti.Top = grdCertificati.Top = grdPatologie.Top = mainNav.Height + lblTitlePazienti.Height + pnlPazientiFiltri.Height + 5;
-            grdCertificatiPaziente.Top = mainNav.Height + lblTitleCertSingolopaziente.Height + 5;
+            grdCertificatiPaziente.Top = lblTitleCertSingolopaziente.Bottom + 10;
             grdPazienti.Left = grdCertificati.Left = grdPatologie.Left = grdCertificatiPaziente.Left = (pnlPazienti.Width - grdPazienti.Width) / 2;
             btnNuovoCertificato.Top = grdCertificatiPaziente.Bottom + 10;
             btnNuovoCertificato.Left = grdCertificatiPaziente.Right - btnNuovoCertificato.Width;
@@ -306,8 +358,6 @@ namespace ApplicazioneMedico
             //Pannello Immagine nuovo certificato
             pnlImgCertificato.Left = (ClientRectangle.Width - pnlImgCertificato.Width) / 2;
             pnlImgCertificato.Top = (ClientRectangle.Height - pnlImgCertificato.Height) / 2;
-
-            //
         }
         protected void PlaceItems()
         {
@@ -335,7 +385,7 @@ namespace ApplicazioneMedico
             foreach (Label l in tblSchedaPaziente.Controls.OfType<Label>().ToList())
             {
                 l.Font = new Font("Segoe UI", 10, FontStyle.Bold);
-                l.ForeColor = Color.White;
+                l.ForeColor = Color.Black;
             }
 
             //Bottoni di ricerca
@@ -380,7 +430,7 @@ namespace ApplicazioneMedico
                 //Aggiornamento iniziale
                 pnlAggiornamento.Visible = true;
                 pnlAggiornamento.BringToFront();
-
+                Wait2Seconds();
                 SetNewSyncDate();
             }
 
@@ -395,7 +445,7 @@ namespace ApplicazioneMedico
         //Metodo che consente di compilare i campi della scheda paziente a partire dal paziente selezionato sulla gridView
         protected void FillSchedaPaziente(Paziente p)
         {
-            lblTitleCertSingolopaziente.Text += " " + p.nome + " " + p.cognome;
+            lblTitleCertSingolopaziente.Text = "Certificati " + p.nome + " " + p.cognome;
 
             txtNomePaziente.Text = p.nome;
             txtCognomePaziente.Text = p.cognome;
@@ -489,18 +539,18 @@ namespace ApplicazioneMedico
             this.Visible = true;
         }
 
-        //Ricerca dinamica alla pressione di un pulsante
+        //Ricerca dinamica alla pressione di un carattere della tastiera
         private void txtPazientiSearch_KeyUp(object sender, KeyEventArgs e)
         {
             BindGridPazientiWithSearch();
         }
-
-        private void btnDettagliPazienti_Click(object sender, EventArgs e)
+        private void txtCercaCertificati_KeyUp(object sender, KeyEventArgs e)
         {
-            if (pnlSchedaPazCont.Visible)
-                pnlSchedaPazCont.Visible = false;
-            else
-                pnlSchedaPazCont.Visible = true;
+            BindGridCertificatiWithSearch();
+        }
+        private void txtCercaPatologie_KeyUp(object sender, KeyEventArgs e)
+        {
+            BindGridPatologieWithSearch();
         }
     }
 }

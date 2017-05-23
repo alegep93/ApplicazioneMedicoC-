@@ -55,7 +55,7 @@ namespace ApplicazioneMedico.API
         }
         public static RootObject<Certificato> GetCertificatiDataFromServer()
         {
-            string url = serverAddr + "/ApiServer/Certificato/get/" + codMed;
+            string url = serverAddr + "/ApiServer/Certificato/all/" + codMed;
             string jsonCertificati = "";
 
             try
