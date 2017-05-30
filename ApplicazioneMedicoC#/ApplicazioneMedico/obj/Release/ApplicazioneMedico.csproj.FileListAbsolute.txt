@@ -8,3 +8,14 @@ C:\Users\admin\Documents\Alessandro\ProjectWork\ApplicazioneMedicoC#\Applicazion
 C:\Users\admin\Documents\Alessandro\ProjectWork\ApplicazioneMedicoC#\ApplicazioneMedico\obj\Release\ApplicazioneMedico.csproj.GenerateResource.Cache
 C:\Users\admin\Documents\Alessandro\ProjectWork\ApplicazioneMedicoC#\ApplicazioneMedico\obj\Release\ApplicazioneMedico.exe
 C:\Users\admin\Documents\Alessandro\ProjectWork\ApplicazioneMedicoC#\ApplicazioneMedico\obj\Release\ApplicazioneMedico.pdb
+C:\Users\AlessandroGeppi\Documents\Visual Studio 2015\Projects\ApplicazioneMedicoC-\ApplicazioneMedicoC#\ApplicazioneMedico\bin\Release\ApplicazioneMedico.exe.config
+C:\Users\AlessandroGeppi\Documents\Visual Studio 2015\Projects\ApplicazioneMedicoC-\ApplicazioneMedicoC#\ApplicazioneMedico\obj\Release\ApplicazioneMedico.exe
+C:\Users\AlessandroGeppi\Documents\Visual Studio 2015\Projects\ApplicazioneMedicoC-\ApplicazioneMedicoC#\ApplicazioneMedico\obj\Release\ApplicazioneMedico.pdb
+C:\Users\AlessandroGeppi\Documents\Visual Studio 2015\Projects\ApplicazioneMedicoC-\ApplicazioneMedicoC#\ApplicazioneMedico\bin\Release\ApplicazioneMedico.exe
+C:\Users\AlessandroGeppi\Documents\Visual Studio 2015\Projects\ApplicazioneMedicoC-\ApplicazioneMedicoC#\ApplicazioneMedico\bin\Release\ApplicazioneMedico.pdb
+C:\Users\AlessandroGeppi\Documents\Visual Studio 2015\Projects\ApplicazioneMedicoC-\ApplicazioneMedicoC#\ApplicazioneMedico\bin\Release\Newtonsoft.Json.dll
+C:\Users\AlessandroGeppi\Documents\Visual Studio 2015\Projects\ApplicazioneMedicoC-\ApplicazioneMedicoC#\ApplicazioneMedico\bin\Release\Newtonsoft.Json.xml
+C:\Users\AlessandroGeppi\Documents\Visual Studio 2015\Projects\ApplicazioneMedicoC-\ApplicazioneMedicoC#\ApplicazioneMedico\obj\Release\ApplicazioneMedico.csprojResolveAssemblyReference.cache
+C:\Users\AlessandroGeppi\Documents\Visual Studio 2015\Projects\ApplicazioneMedicoC-\ApplicazioneMedicoC#\ApplicazioneMedico\obj\Release\ApplicazioneMedico.ApplicazioneMedico.resources
+C:\Users\AlessandroGeppi\Documents\Visual Studio 2015\Projects\ApplicazioneMedicoC-\ApplicazioneMedicoC#\ApplicazioneMedico\obj\Release\ApplicazioneMedico.Properties.Resources.resources
+C:\Users\AlessandroGeppi\Documents\Visual Studio 2015\Projects\ApplicazioneMedicoC-\ApplicazioneMedicoC#\ApplicazioneMedico\obj\Release\ApplicazioneMedico.csproj.GenerateResource.Cache

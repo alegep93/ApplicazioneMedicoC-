@@ -42,10 +42,9 @@ namespace ApplicazioneMedico
             CreateInfoColumn();     //Crea la colonna delle "info" per la griglia dei pazienti
             BindGridPazienti();     //Esegue la visualizzazione dei dati sulla griglia dei pazienti
 
-            //I due metodi che seguono specificano rispettivamente la grandezza e la posizione dei controlli nella form
+            //I due metodi che seguono spmecificano rispettivamente la grandezza e la posizione dei controlli nella form
             this.Visible = false;
             PlaceItems();
-
             this.Visible = true;
         }
 
