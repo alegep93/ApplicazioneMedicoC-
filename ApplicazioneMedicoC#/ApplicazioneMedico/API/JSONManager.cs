@@ -29,22 +29,6 @@ namespace ApplicazioneMedico
             MemoryStream ms = new MemoryStream();
             serializer.WriteObject(ms, c);
             return Encoding.UTF8.GetString(ms.ToArray());
-
-
-            /*string json = "{\"idCertificato\":\"" + c.idCertificato + "\"," +
-                           "\"cod_sanitario\":\"" + c.cod_sanitario + "\"," +
-                           "\"cod_medico\":\"" + c.cod_medico + "\"," +
-                           "\"data_emissione\":\"" + c.data_emissione + "\"," +
-                           "\"cod_patologia\":\"" + c.cod_patologia + "\"," +
-                           "\"data_inizio\":\"" + c.data_inizio + "\"," +
-                           "\"data_fine\":\"" + c.data_fine + "\"," +
-                           "\"tipologia\":\"" + c.tipologia + "\"," +
-                           "\"comune\":\"" + c.comune + "\"," +
-                           "\"provincia\":\"" + c.provincia + "\"," +
-                           "\"indirizzo\":\"" + c.indirizzo + "\"," +
-                           "\"CAP\":\"" + c.CAP + "\"," +
-                           "\"domicilio\":\"" + c.domicilio + "\"," +
-                           "\"note\":\"" + c.note + "\"}";*/
         }
     }
 }
