@@ -21,7 +21,8 @@ namespace ApplicazioneMedico
         DateTime syncDate = new DateTime();     //Inizializza la variabile che conterrà e aggiornerà la data di ultima sincronizzazione
         bool response = false;                  //Contiene la risposta dell'invio dei certificati al server remoto
 
-        //Istanze che verranno popolate con i dati provenienti dalle richieste al server remoto (Formato JSON)
+        //Istanze che verranno popolate con i dati provenienti dalle
+        //richieste al server remoto (Formato JSON)
         RootObject<Paziente> roPaz = null;
         RootObject<Patologia> roPat = null;
         RootObject<Certificato> roCert = null;
@@ -392,7 +393,7 @@ namespace ApplicazioneMedico
 
             //Titoli
             lblTitleCertificati.Font = lblTitlePazienti.Font = lblTitlePatologie.Font = lblTitleCertSingolopaziente.Font = new Font("Segoe UI", 40, FontStyle.Bold);
-            lblServerDate.ForeColor = lblTitleCertificati.ForeColor = lblTitlePazienti.ForeColor = lblTitlePatologie.ForeColor = lblTitleCertSingolopaziente.ForeColor = Color.White;
+            lblAggiornamento.ForeColor = lblServerDate.ForeColor = lblTitleCertificati.ForeColor = lblTitlePazienti.ForeColor = lblTitlePatologie.ForeColor = lblTitleCertSingolopaziente.ForeColor = Color.White;
             lblServerDate.Text = "";
         }
         protected void GetOrSendData()
